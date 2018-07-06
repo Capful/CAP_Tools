@@ -1,2 +1,2 @@
-# NX_Tool
-NX 工具
+# NX_Tool_Template
+基于ModernUI模板制作的WPF软件

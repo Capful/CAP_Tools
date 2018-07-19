@@ -8,11 +8,11 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
         <!-- TODO: set @SelectedSource -->
-        <mui:ModernTab SelectedSource="/Pages/List/ControlsModernDialog.xaml" FontFamily="Microsoft YaHei UI Light" Layout="List">
+        <mui:ModernTab SelectedSource="/Pages/List/CheckInstalled.xaml" FontFamily="Microsoft YaHei UI Light" Layout="List">
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
+                <mui:Link DisplayName="检测NX是否安装" Source="/Pages/List/CheckInstalled.xaml" />
                 <mui:Link DisplayName="Item 1" Source="/Pages/List/ControlsModernDialog.xaml" />
-                <mui:Link DisplayName="Item 2" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

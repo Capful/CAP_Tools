@@ -13,7 +13,6 @@
             <RadioButton x:Name="yesno" Content="确定, 否" Margin="0,0,0,2"/>
             <RadioButton x:Name="yesnocancel" Content="确定, 否, 取消" Margin="0,0,0,2"/>
         </StackPanel>
-        
         <Button Content="对话框" Click="MessageDialog_Click" Margin="0,0,0,8"/>
         <TextBlock>
             <Run Text="对话框选项:" />

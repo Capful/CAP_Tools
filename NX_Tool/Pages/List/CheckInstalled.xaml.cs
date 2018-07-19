@@ -21,7 +21,6 @@ namespace NX_Tool.Pages.List
     /// </summary>
     public partial class CheckInstalled : UserControl
     {
-        private const string NX12 = @"D:\Program Files\Siemens\NX 12.0";
 
         public CheckInstalled()
         {
@@ -29,7 +28,7 @@ namespace NX_Tool.Pages.List
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start(@NX12);
+            System.Diagnostics.Process.Start(@"D:\Program Files\Siemens\NX 12.0");
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -37,25 +36,18 @@ namespace NX_Tool.Pages.List
             RegistryKey driverKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
             string result = (String)driverKey.GetValue("Unigraphics V30.0");
             ///System.Diagnostics.Process.Start("explorer.exe", result);
-            ///MessageBox.Show(result);
+            MessageBox.Show(result);
             NewMethod(result);
         }
 
         private void NewMethod(string result)
         {
-            msgboxResult.Text = result.ToString();
+            ///msgboxResult.Text = result.ToString();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(ReadRegistry(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications"));
-        }
-
-        private string ReadRegistry(string p)
-        {
-            RegistryKey rk = Registry.LocalMachine.OpenSubKey(p, true);
-            if (rk == null) return "";
-            return (string)rk.GetValue("Unigraphics V30.0");
+            
         }
     }
 }

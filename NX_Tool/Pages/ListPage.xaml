@@ -12,6 +12,7 @@
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
                 <mui:Link DisplayName="检测NX是否安装" Source="/Pages/List/CheckInstalled.xaml" />
+                <mui:Link DisplayName="检测NX是否安装2" Source="/Pages/List/BasicPage1.xaml" />
                 <mui:Link DisplayName="Item 1" Source="/Pages/List/ControlsModernDialog.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>

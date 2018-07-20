@@ -28,16 +28,12 @@ namespace NX_Tool.Pages.List
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start(@"D:\Program Files\Siemens\NX 12.0");
+            ///System.Diagnostics.Process.Start(@"D:\Program Files\Siemens\NX 12.0");
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            RegistryKey driverKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
-            string result = (String)driverKey.GetValue("Unigraphics V30.0");
-            ///System.Diagnostics.Process.Start("explorer.exe", result);
-            MessageBox.Show(result);
-            NewMethod(result);
+
         }
 
         private void NewMethod(string result)
@@ -47,7 +43,13 @@ namespace NX_Tool.Pages.List
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            
+            ///获取NX安装路径
+            RegistryKey driverKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
+            string NX12EXE = (String)driverKey.GetValue("Unigraphics V30.0");
+            string NX12 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX12EXE)));
+            ///
+            ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+            System.Diagnostics.Process.Start(@NX12);
         }
     }
 }

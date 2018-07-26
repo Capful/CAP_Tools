@@ -51,6 +51,7 @@
   <ItemGroup>
     <Reference Include="FirstFloor.ModernUI, Version=1.0.9.0, Culture=neutral, PublicKeyToken=bc9b0c37bf06c6a9, processorArchitecture=MSIL">
       <HintPath>..\packages\ModernUI.WPF.1.0.9\lib\net45\FirstFloor.ModernUI.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -87,6 +88,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\List\InstallNX.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -105,6 +110,9 @@
     </Page>
     <Compile Include="Pages\BasicPage.xaml.cs">
       <DependentUpon>BasicPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\List\InstallNX.xaml.cs">
+      <DependentUpon>InstallNX.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ListPage.xaml.cs">
       <DependentUpon>ListPage.xaml</DependentUpon>

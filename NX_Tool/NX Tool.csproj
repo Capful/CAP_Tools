@@ -88,6 +88,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\List\Collection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\List\InstallNX.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,6 +114,9 @@
     </Page>
     <Compile Include="Pages\BasicPage.xaml.cs">
       <DependentUpon>BasicPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\List\Collection.xaml.cs">
+      <DependentUpon>Collection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\List\InstallNX.xaml.cs">
       <DependentUpon>InstallNX.xaml</DependentUpon>

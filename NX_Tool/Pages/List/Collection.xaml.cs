@@ -33,7 +33,7 @@ namespace NX_Tool.Pages.List
             return Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
         }
 
-        private void ModernButton_Click(object sender, RoutedEventArgs e)
+        private void ModernButton_Click_1(object sender, RoutedEventArgs e)
         {
             if (CheckNX12() == true)
             {
@@ -66,7 +66,7 @@ namespace NX_Tool.Pages.List
                     string path2 = "ugshext.dll";
                     string newPath = System.IO.Path.Combine(path1, path2); // newPath = "D:\temp\result.txt";
                     string newPath1 = "\"" + @newPath + "\""; //"\"" + path + "\""（path为原来的路径）
-                                                              ///注册DLL
+                    ///注册DLL
                     System.Diagnostics.Process p = new System.Diagnostics.Process();
                     p.StartInfo.FileName = "Regsvr32.exe";
                     p.StartInfo.Arguments ="/s @newPath1";
@@ -135,6 +135,31 @@ namespace NX_Tool.Pages.List
                 return true;
             }
             return false;
+        }
+
+        private void ModernButton_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ModernButton_Click_3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ModernButton_Click_6(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ModernButton_Click_5(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ModernButton_Click_4(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

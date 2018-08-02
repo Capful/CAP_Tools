@@ -11,6 +11,9 @@
         <TextBlock Text="NX快捷安装"  Margin="0,0,0,8" FontWeight="Bold" FontSize="14" />
         <Button x:Name="LL" Content="浏览" Width="61" Height="25"   Margin="80,20,0,0" Click="Button_Click" FontSize="10.5" />
         <Label Content="选择NX安装包解压目录" Height="20" Width="140" Margin="0,-25,0,0" HorizontalAlignment="Left" />
-        <Label Content="暂时只支持NX10以上版本检测，点击按钮打开软件所在目录" Margin="15,50,0,20" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="290" FontSize="10"/>
+        <TextBlock Width="307">
+            <Run Text="安装包路径:" />
+            <Run x:Name="anzhuangbao" Text="请点击'浏览'按钮选择安装包文件夹"  />
+        </TextBlock>
     </StackPanel>
 </UserControl>

@@ -13,13 +13,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace NX_Tool.Pages
 {
     /// <summary>
     /// Interaction logic for InstallNX.xaml
     /// </summary>
-    public partial class InstallNX : UserControl
+    public partial class InstallNX : System.Windows.Controls.UserControl
     {
         public InstallNX()
         {
@@ -30,17 +31,15 @@ namespace NX_Tool.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fdlg = new OpenFileDialog();
+            FolderBrowserDialog m_Dialog = new FolderBrowserDialog();
+            DialogResult result = m_Dialog.ShowDialog();
 
-            fdlg.Title = "C# Corner Open File Dialog";
-
-            fdlg.InitialDirectory = @"c:/";
-
-            fdlg.Filter = "All files (*.*)|*.*|All files (*.*)|*.*";
-
-            fdlg.FilterIndex = 2;
-
-            fdlg.RestoreDirectory = true;
+            if (result == System.Windows.Forms.DialogResult.Cancel)
+            {
+                return;
+            }
+            string m_Dir = m_Dialog.SelectedPath.Trim();
+            this.anzhuangbao.Text = m_Dir;
         }
 
     }

@@ -66,6 +66,16 @@ namespace NX_Tool.Pages
                     System.Diagnostics.Process.Start(file.FullName);
             }
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 

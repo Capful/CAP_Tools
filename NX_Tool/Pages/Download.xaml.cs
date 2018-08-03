@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FirstFloor.ModernUI.Windows.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,25 @@ namespace NX_Tool.Pages
         public Download()
         {
             InitializeComponent();
+        }
+
+        private void ModernButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText("7t1i");
+            System.Diagnostics.Process.Start("https://pan.baidu.com/s/1hYtNW-0blxtdLdSoDDKeuQ");
+            ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
+        }
+
+        private void ModernButton_Click_2(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText("51py");
+            System.Diagnostics.Process.Start("https://pan.baidu.com/s/18G9oj8SLNiXd3Kxj8SE50w");
+            ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
+        }
+
+        private void ModernButton_Click_3(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -143,7 +143,7 @@ namespace NX_Tool.Pages.List
             RegistryKey rkvalue = rk.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Session Manager\Environment", true);
             //当如果表中存在该键值会直接覆盖之前的键值。
             rkvalue.SetValue("UGII_LANG", "simpl_chinese");
-            ModernDialog.ShowMessage("更改成功", "消息弹窗", MessageBoxButton.OK);
+            ModernDialog.ShowMessage("更改成功，重启电脑生效", "消息弹窗", MessageBoxButton.OK);
         }
 
         private void ModernButton_Click_3(object sender, RoutedEventArgs e)
@@ -152,22 +152,7 @@ namespace NX_Tool.Pages.List
             RegistryKey rkvalue = rk.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Session Manager\Environment", true);
             //当如果表中存在该键值会直接覆盖之前的键值。
             rkvalue.SetValue("UGII_LANG", "english");
-            ModernDialog.ShowMessage("更改成功", "消息弹窗", MessageBoxButton.OK);
-        }
-
-        private void ModernButton_Click_6(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ModernButton_Click_5(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ModernButton_Click_4(object sender, RoutedEventArgs e)
-        {
-
+            ModernDialog.ShowMessage("更改成功，重启电脑生效", "消息弹窗", MessageBoxButton.OK);
         }
     }
 }

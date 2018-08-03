@@ -33,7 +33,7 @@ namespace NX_Tool
         {
             // 弹窗提示是否确定要退出
             MessageBoxButton btn = MessageBoxButton.YesNo;
-            MessageBoxResult result = ModernDialog.ShowMessage("确定要退出NX Tool 吗？", "警告", btn);
+            MessageBoxResult result = ModernDialog.ShowMessage("确定要退出NX 工具箱 吗？", "警告", btn);
             System.Console.WriteLine(result);
             if (result == MessageBoxResult.No)
             {

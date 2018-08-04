@@ -5,21 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="450">
-    <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" Width="450">
+             d:DesignHeight="300" d:DesignWidth="550">
+    <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" Width="550">
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="80" Margin="0,50,0,20" Width="450">
             <StackPanel Width="88"  Margin="15,0,0,0">
-                <mui:ModernButton  EllipseDiameter="48" IconWidth="30" IconHeight="30" IconData="F1 M 36.7467,50.2917L 33.1002,50.2917L 21.5858,32.184C 21.26,31.6729 20.9981,31.1665 20.8,30.665L 20.709,30.665C 20.7697,31.1857 20.8,32.2734 20.8,33.9281L 20.8,50.2917L 17.7333,50.2917L 17.7333,26.985L 21.72,26.985L 32.8319,44.7046C 33.359,45.5415 33.672,46.075 33.771,46.305L 33.8333,46.305C 33.7311,45.6469 33.68,44.5193 33.68,42.9221L 33.68,26.985L 36.7467,26.985L 36.7467,50.2917 59.1333,50.2917L 55.4533,50.2917L 50.1537,41.5613C 50.0324,41.3632 49.8535,40.9639 49.6171,40.3633L 49.5404,40.3633C 49.5181,40.4432 49.3328,40.8473 48.9846,41.5756L 43.4933,50.2917L 39.8133,50.2917L 47.734,38.5856L 40.4267,26.985L 44.1067,26.985L 48.8025,35.0111C 49.0804,35.4806 49.3567,36.0301 49.6315,36.6594L 49.6938,36.6594C 49.9525,36.1195 50.2672,35.5461 50.6377,34.9392L 55.76,26.985L 59.1333,26.985L 51.5481,38.5425L 59.1333,50.2917 Z" Margin="18,0,0,0" Click="ModernButton_Click_1" Height="50" Width="50" HorizontalAlignment="Left"  />
+                <mui:ModernButton  EllipseDiameter="48" IconWidth="30" IconHeight="30" IconData="F1 M 37.2083,42.75L 28.5,31.6667L 33.25,31.6667L 33.25,19L 42.75,19L 42.75,31.6667L 47.5,31.6667L 38.7917,42.75L 37.2083,42.75 Z M 19,38L 23.75,26.9167L 29.6875,26.9167L 29.6875,30.0833L 26.125,30.0833L 22.9583,38L 30.875,38C 30.875,41.935 34.065,45.125 38,45.125C 41.935,45.125 45.125,41.935 45.125,38L 53.0417,38L 49.875,30.0833L 46.3125,30.0833L 46.3125,26.9167L 52.25,26.9167L 57,38L 57,53.8333L 19,53.8333L 19,38 Z" Margin="18,0,0,0" Click="ModernButton_Click_1" Height="50" Width="50" HorizontalAlignment="Left"  />
                 <Label Content="NX12" ToolTip="Siemens.NX.12.0.1" Width="34" HorizontalAlignment="Center" Margin="20,10,20,0" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Width="88"  Margin="15,0,0,0">
-                <mui:ModernButton  EllipseDiameter="48" IconWidth="30" IconHeight="30" IconData="F1 M 37.2083,42.75L 28.5,31.6667L 33.25,31.6667L 33.25,19L 42.75,19L 42.75,31.6667L 47.5,31.6667L 38.7917,42.75L 37.2083,42.75 Z M 19,38L 23.75,26.9167L 29.6875,26.9167L 29.6875,30.0833L 26.125,30.0833L 22.9583,38L 30.875,38C 30.875,41.935 34.065,45.125 38,45.125C 41.935,45.125 45.125,41.935 45.125,38L 53.0417,38L 49.875,30.0833L 46.3125,30.0833L 46.3125,26.9167L 52.25,26.9167L 57,38L 57,53.8333L 19,53.8333L 19,38 Z" Margin="0,0,20,0" Click="ModernButton_Click_2" Height="50" Width="50" HorizontalAlignment="Right"  />
-                <Label Content="NX许可证" Width="60" HorizontalAlignment="Left" Margin="18,10,0,0"/>
+                <mui:ModernButton  EllipseDiameter="48" IconWidth="30" IconHeight="30" IconData="F1 M 37.2083,42.75L 28.5,31.6667L 33.25,31.6667L 33.25,19L 42.75,19L 42.75,31.6667L 47.5,31.6667L 38.7917,42.75L 37.2083,42.75 Z M 19,38L 23.75,26.9167L 29.6875,26.9167L 29.6875,30.0833L 26.125,30.0833L 22.9583,38L 30.875,38C 30.875,41.935 34.065,45.125 38,45.125C 41.935,45.125 45.125,41.935 45.125,38L 53.0417,38L 49.875,30.0833L 46.3125,30.0833L 46.3125,26.9167L 52.25,26.9167L 57,38L 57,53.8333L 19,53.8333L 19,38 Z" Margin="18,0,0,0" Click="ModernButton_Click_2" Height="50" Width="50" HorizontalAlignment="Left"  />
+                <Label Content="NX11" ToolTip="Siemens.NX.12.0.1" Width="34" HorizontalAlignment="Center" Margin="20,10,20,0" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Width="88"  Margin="15,0,0,0">
-                <mui:ModernButton  EllipseDiameter="48" IconWidth="30" IconHeight="30" IconData="F1 M 33.6585,44.381L 24.397,44.381L 22.0936,52.9919L 14.5596,52.9919L 24.397,21L 33.9944,21L 42.31,47.4041L 47.7438,29.9832L 54.7237,29.9832L 62.0513,53L 56.2942,53L 54.4794,46.7375L 47.7438,46.7375L 46.0686,53L 36.1538,52.9919L 33.6585,44.381 Z M 25.4527,39.1786L 32.6028,39.1786L 30.5873,32.3811L 29.7355,29.2915L 28.9557,26.2024L 28.8598,26.2024L 28.134,29.3193L 27.3722,32.4615L 25.4527,39.1786 Z M 48.5116,42.954L 53.7116,42.954L 52.2458,38.0104L 51.6264,35.7634L 51.0592,33.5168L 50.9894,33.5168L 50.4616,35.7836L 49.9075,38.0688L 48.5116,42.954 Z M 45,21L 57,21L 51,27L 45,21 Z" Margin="0,0,20,0" Click="ModernButton_Click_3" Height="50" Width="50" HorizontalAlignment="Right"  />
-                <Label Content="修改英文语言" Width="88" HorizontalAlignment="Left" Margin="5,10,0,0"/>
+                <mui:ModernButton  EllipseDiameter="48" IconWidth="30" IconHeight="30" IconData="F1 M 37.2083,42.75L 28.5,31.6667L 33.25,31.6667L 33.25,19L 42.75,19L 42.75,31.6667L 47.5,31.6667L 38.7917,42.75L 37.2083,42.75 Z M 19,38L 23.75,26.9167L 29.6875,26.9167L 29.6875,30.0833L 26.125,30.0833L 22.9583,38L 30.875,38C 30.875,41.935 34.065,45.125 38,45.125C 41.935,45.125 45.125,41.935 45.125,38L 53.0417,38L 49.875,30.0833L 46.3125,30.0833L 46.3125,26.9167L 52.25,26.9167L 57,38L 57,53.8333L 19,53.8333L 19,38 Z" Margin="18,0,0,0" Click="ModernButton_Click_3" Height="50" Width="50" HorizontalAlignment="Left"  />
+                <Label Content="NX10" ToolTip="Siemens.NX.12.0.1" Width="34" HorizontalAlignment="Center" Margin="20,10,20,0" VerticalAlignment="Center"/>
             </StackPanel>
+            <StackPanel Width="88"  Margin="15,0,0,0">
+                <mui:ModernButton  EllipseDiameter="48" IconWidth="30" IconHeight="30" IconData="F1 M 37.2083,42.75L 28.5,31.6667L 33.25,31.6667L 33.25,19L 42.75,19L 42.75,31.6667L 47.5,31.6667L 38.7917,42.75L 37.2083,42.75 Z M 19,38L 23.75,26.9167L 29.6875,26.9167L 29.6875,30.0833L 26.125,30.0833L 22.9583,38L 30.875,38C 30.875,41.935 34.065,45.125 38,45.125C 41.935,45.125 45.125,41.935 45.125,38L 53.0417,38L 49.875,30.0833L 46.3125,30.0833L 46.3125,26.9167L 52.25,26.9167L 57,38L 57,53.8333L 19,53.8333L 19,38 Z" Margin="0,0,20,0" Click="ModernButton_Click_4" Height="50" Width="50" HorizontalAlignment="Right"  />
+                <Label Content="NX许可证" ToolTip="NX10版本以上通用许可证" Width="60" HorizontalAlignment="Left" Margin="18,10,0,0"/>
+            </StackPanel>
+
         </StackPanel>
     </StackPanel>
 </UserControl>

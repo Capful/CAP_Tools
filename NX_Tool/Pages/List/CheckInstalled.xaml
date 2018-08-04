@@ -18,7 +18,7 @@
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,20" Width="299">
             <Label Content="NX12:" Height="20" Width="38" Margin="10,0,10,0" />
-            <Button Name="NX12"  ToolTip="单击打开NX12目录" Width="234" Height="25"   Margin="0,0,0,0" Click="Button_Click_1" FontSize="10.5"/>
+            <Button Name="NX12"  ToolTip="单击打开NX12目录" Width="234" Height="25"   Margin="0,0,0,0" Click="Button_Click_2" FontSize="10.5"/>
         </StackPanel>
         <Label Content="暂时只支持NX10以上版本检测，点击按钮打开软件所在目录" Margin="10,20,0,20" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="290" FontSize="10"/>
     </StackPanel>

@@ -35,14 +35,19 @@ namespace NX_Tool.Pages
 
         private void ModernButton_Click_2(object sender, RoutedEventArgs e)
         {
-            Clipboard.SetText("51py");
-            System.Diagnostics.Process.Start("https://pan.baidu.com/s/18G9oj8SLNiXd3Kxj8SE50w");
-            ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
+            
         }
 
         private void ModernButton_Click_3(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ModernButton_Click_4(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText("51py");
+            System.Diagnostics.Process.Start("https://pan.baidu.com/s/18G9oj8SLNiXd3Kxj8SE50w");
+            ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
         }
     }
 }

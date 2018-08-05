@@ -6,7 +6,7 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="320">
-    <StackPanel HorizontalAlignment="Left" Margin="0,0,-20,0" Width="320">
+    <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" Width="320">
         <TextBlock Text="工具合集"  Margin="0,0,0,8" FontWeight="Bold" FontSize="14" Width="300" />
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="80" Margin="0,20,0,20" Width="320">
             <StackPanel Width="88"  Margin="15,0,0,0">

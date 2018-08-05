@@ -23,7 +23,6 @@ namespace NX_Tool.Pages.List
         public OpenNXFolder()
         {
             InitializeComponent();
-            this.
         }
     }
 }

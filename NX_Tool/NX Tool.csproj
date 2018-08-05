@@ -151,10 +151,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\List\TabPage1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\Settings\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,9 +175,6 @@
     </Compile>
     <Compile Include="Pages\List\ControlsModernDialog.xaml.cs">
       <DependentUpon>ControlsModernDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\List\TabPage1.xaml.cs">
-      <DependentUpon>TabPage1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>

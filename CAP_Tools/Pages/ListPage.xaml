@@ -12,8 +12,8 @@
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
                 <mui:Link DisplayName="工具合集" Source="/Pages/List/Collection.xaml" />
-                <mui:Link DisplayName="检测NX是否安装" Source="/Pages/List/CheckInstalled.xaml" />
-                <mui:Link DisplayName="NX安装" Source="/Pages/List/InstallNX.xaml" />
+                <mui:Link DisplayName="检测NX" Source="/Pages/List/CheckInstalled.xaml" />
+                <mui:Link DisplayName="安装NX" Source="/Pages/List/InstallNX.xaml" />
                 <mui:Link DisplayName="打开目录" Source="/Pages/List/OpenNXFolder.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>

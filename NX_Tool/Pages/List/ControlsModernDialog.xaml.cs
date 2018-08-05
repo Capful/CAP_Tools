@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NX_Tool.Content
+namespace CAP_Tools.Content
 {
     /// <summary>
     /// Interaction logic for ControlsModernDialog.xaml

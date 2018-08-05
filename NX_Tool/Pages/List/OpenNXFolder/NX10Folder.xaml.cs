@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NX_Tool.Pages.List.OpenFolder
+namespace CAP_Tools.Pages.List.OpenFolder
 {
     /// <summary>
     /// Interaction logic for NX10Folder.xaml

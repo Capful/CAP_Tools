@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:local="clr-namespace:NX_Tool.Pages" x:Class="NX_Tool.Pages.InstallNX"
+             xmlns:local="clr-namespace:CAP_Tools.Pages" x:Class="CAP_Tools.Pages.InstallNX"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel HorizontalAlignment="Left">

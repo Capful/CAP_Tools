@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NX_Tool.Pages.List
+namespace CAP_Tools.Pages.List
 {
     /// <summary>
     /// Interaction logic for OpenNXFolder.xaml

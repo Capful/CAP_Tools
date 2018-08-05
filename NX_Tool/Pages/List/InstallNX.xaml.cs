@@ -17,7 +17,7 @@ using System.Windows.Forms;
 using System.IO;
 using FirstFloor.ModernUI.Windows.Controls;
 
-namespace NX_Tool.Pages
+namespace CAP_Tools.Pages
 {
     /// <summary>
     /// Interaction logic for InstallNX.xaml

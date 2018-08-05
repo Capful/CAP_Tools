@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 
-namespace NX_Tool.Pages.List
+namespace CAP_Tools.Pages.List
 {
     /// <summary>
     /// Interaction logic for CheckInstalled.xaml

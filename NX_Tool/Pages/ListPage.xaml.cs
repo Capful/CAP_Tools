@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NX_Tool.Pages
+namespace CAP_Tools.Pages
 {
     /// <summary>
     /// Interaction logic for ListPage1.xaml

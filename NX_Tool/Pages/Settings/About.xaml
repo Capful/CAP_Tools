@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="NX_Tool.Pages.Settings.About"
+﻿<UserControl x:Class="CAP_Tools.Pages.Settings.About"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,7 @@
         <ScrollViewer>
             <StackPanel MinWidth="200">
                 <TextBlock Text="关于" Style="{StaticResource Heading2}" FontFamily="Microsoft YaHei"  />
-                <TextBlock Text="本工具用于NX软件" Margin="0,0,0,8" TextWrapping="Wrap" />
+                <TextBlock Text="本工具用于NX软件的一些便捷操作，后续将添加更多功能" Margin="0,0,0,8" TextWrapping="Wrap" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

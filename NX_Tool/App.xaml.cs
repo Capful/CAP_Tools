@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace NX_Tool_V1._0
+namespace CAP_Tools
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -127,10 +127,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\List\ControlsModernDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Pages\List\OpenNXFolder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -165,9 +161,6 @@
     </Compile>
     <Compile Include="Pages\List\CheckInstalled.xaml.cs">
       <DependentUpon>CheckInstalled.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\List\ControlsModernDialog.xaml.cs">
-      <DependentUpon>ControlsModernDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>

@@ -51,7 +51,7 @@ namespace CAP_Tools.Pages.List
                 p.StartInfo.FileName = "Regsvr32.exe";
                 p.StartInfo.Arguments = "/s @newPath1";
                 p.Start();
-                ModernDialog.ShowMessage("修复NX12缩略图成功", "消息弹窗", MessageBoxButton.OK);
+                ModernDialog.ShowMessage("修复NX12缩略图成功", "提示", MessageBoxButton.OK);
             }
             else
             {
@@ -71,7 +71,7 @@ namespace CAP_Tools.Pages.List
                     p.StartInfo.FileName = "Regsvr32.exe";
                     p.StartInfo.Arguments ="/s @newPath1";
                     p.Start();
-                    ModernDialog.ShowMessage("修复NX11缩略图成功", "消息弹窗", MessageBoxButton.OK);
+                    ModernDialog.ShowMessage("修复NX11缩略图成功", "提示", MessageBoxButton.OK);
                 }
                 else
                 {
@@ -91,11 +91,11 @@ namespace CAP_Tools.Pages.List
                         p.StartInfo.FileName = "Regsvr32.exe";
                         p.StartInfo.Arguments = "/s @newPath1";
                         p.Start();
-                        ModernDialog.ShowMessage("修复NX10缩略图成功", "消息弹窗", MessageBoxButton.OK);
+                        ModernDialog.ShowMessage("修复NX10缩略图成功", "提示", MessageBoxButton.OK);
                     }
                     else
                     {
-                        ModernDialog.ShowMessage("您未安装NX软件", "消息弹窗", MessageBoxButton.OK);
+                        ModernDialog.ShowMessage("您未安装NX软件", "警告", MessageBoxButton.OK);
                     }
                 }
             }
@@ -143,7 +143,7 @@ namespace CAP_Tools.Pages.List
             RegistryKey rkvalue = rk.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Session Manager\Environment", true);
             //当如果表中存在该键值会直接覆盖之前的键值。
             rkvalue.SetValue("UGII_LANG", "simpl_chinese");
-            ModernDialog.ShowMessage("更改成功，重启电脑生效", "消息弹窗", MessageBoxButton.OK);
+            ModernDialog.ShowMessage("更改成功，重启电脑生效", "提示", MessageBoxButton.OK);
         }
 
         private void ModernButton_Click_3(object sender, RoutedEventArgs e)
@@ -152,7 +152,7 @@ namespace CAP_Tools.Pages.List
             RegistryKey rkvalue = rk.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Session Manager\Environment", true);
             //当如果表中存在该键值会直接覆盖之前的键值。
             rkvalue.SetValue("UGII_LANG", "english");
-            ModernDialog.ShowMessage("更改成功，重启电脑生效", "消息弹窗", MessageBoxButton.OK);
+            ModernDialog.ShowMessage("更改成功，重启电脑生效", "提示", MessageBoxButton.OK);
         }
     }
 }

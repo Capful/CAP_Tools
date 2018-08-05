@@ -24,7 +24,6 @@
                 <mui:ModernButton  EllipseDiameter="48" IconWidth="30" IconHeight="30" IconData="F1 M 37.2083,42.75L 28.5,31.6667L 33.25,31.6667L 33.25,19L 42.75,19L 42.75,31.6667L 47.5,31.6667L 38.7917,42.75L 37.2083,42.75 Z M 19,38L 23.75,26.9167L 29.6875,26.9167L 29.6875,30.0833L 26.125,30.0833L 22.9583,38L 30.875,38C 30.875,41.935 34.065,45.125 38,45.125C 41.935,45.125 45.125,41.935 45.125,38L 53.0417,38L 49.875,30.0833L 46.3125,30.0833L 46.3125,26.9167L 52.25,26.9167L 57,38L 57,53.8333L 19,53.8333L 19,38 Z" Margin="0,0,20,0" Click="ModernButton_Click_4" Height="50" Width="50" HorizontalAlignment="Right"  />
                 <Label Content="NX许可证" ToolTip="NX10版本以上通用许可证" Width="60" HorizontalAlignment="Left" Margin="18,10,0,0"/>
             </StackPanel>
-
         </StackPanel>
     </StackPanel>
 </UserControl>

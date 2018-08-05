@@ -58,7 +58,7 @@ namespace NX_Tool.Pages.List.OpenFolder
                 this.Template_Part.IsEnabled = false;
                 this.Postprocessor.IsEnabled = false;
                 ///定义提示文字
-                this.Tip.Text = "抱歉，您未安装NX10";
+                this.Tip.Text = "抱歉，您未安装NX12";
             }
         }
 

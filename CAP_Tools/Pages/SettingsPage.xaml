@@ -13,5 +13,6 @@
                 <mui:Link DisplayName="关于" Source="/Pages/Settings/About.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
+        <mui:BBCodeBlock BBCode="Powered by [url=https://weibo.com/u/2355029701]Capful[/url]" Margin="-35,247,-16,-24" Foreground="{DynamicResource WindowTextReadOnly}" />
     </Grid>
 </UserControl>

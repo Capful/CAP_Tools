@@ -18,8 +18,8 @@
         </TextBlock>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,20,0,0" Width="298" >
             <TextBlock Text="将" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  />
-            <TextBlock x:Name="WCS" Text="G54" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="35"  />
-            <TextBlock Text="替换为" Height="20" Margin="0,2,0,5" HorizontalAlignment="Center" VerticalAlignment="Top"  />
+            <TextBlock x:Name="WCS" Text="G54" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="36"  />
+            <TextBlock Text="替换为" Height="20" Margin="0,2,5,5" HorizontalAlignment="Center" VerticalAlignment="Top"  />
             <TextBox x:Name="AWCS" Text="G55" Margin="0,0,30,0" Width="50" />
             <Button x:Name="Th" Content="替换" Width="76" Margin="0,0,0,0" Click="Th_Click" FontSize="10.5" IsEnabled="False" />
         </StackPanel>

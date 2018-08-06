@@ -15,6 +15,7 @@
                 <mui:Link DisplayName="检测NX" Source="/Pages/List/CheckInstalled.xaml" />
                 <mui:Link DisplayName="安装NX" Source="/Pages/List/InstallNX.xaml" />
                 <mui:Link DisplayName="打开目录" Source="/Pages/List/OpenNXFolder.xaml" />
+                <mui:Link DisplayName="NC程序串联" Source="/Pages/List/NcProgram.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

@@ -87,6 +87,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Pages\List\NcProgram.xaml.cs">
+      <DependentUpon>NcProgram.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\List\OpenNXFolder.xaml.cs">
       <DependentUpon>OpenNXFolder.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,10 @@
     <Page Include="Pages\List\ControlsModernDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\List\NcProgram.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\List\OpenNXFolder.xaml">
       <SubType>Designer</SubType>

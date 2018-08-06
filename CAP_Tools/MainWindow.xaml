@@ -11,6 +11,7 @@
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="NX工具" Source="/Pages/ListPage.xaml" />
                 <mui:Link DisplayName="软件下载" Source="/Pages/Download.xaml" />
+                <mui:Link DisplayName="NC程序串联" Source="/Pages/NcProgramMerge.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="设置" GroupKey="settings">

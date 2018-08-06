@@ -23,5 +23,8 @@
             <TextBox x:Name="AWCS" Text="G55" Margin="0,0,30,0" Width="50" />
             <Button x:Name="Th" Content="替换" Width="76" Margin="0,0,0,0" Click="Th_Click" FontSize="10.5" IsEnabled="False" />
         </StackPanel>
+        <Button Content="Button" Width="75" Click="Button_Click"/>
+        <Button Content="Button" Width="75" Click="Button_Click_1"/>
+        <ListBox x:Name="list" HorizontalAlignment="Left" Width="296.716" Height="128.358"/>
     </StackPanel>
 </UserControl>

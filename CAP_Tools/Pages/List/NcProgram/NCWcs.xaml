@@ -13,18 +13,17 @@
             <Run Text="文件路径:" />
             <Run x:Name="NXRoute" Text="请点击'浏览'按钮选择NC程序文件夹"  />
         </TextBlock>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="26" Margin="0,5,0,0" Width="167" >
-            <TextBlock Text="将" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  />
-            <TextBlock x:Name="WCS" Text="G54" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="36"  />
-            <TextBlock Text="替换为" Height="20" Margin="0,2,5,5" HorizontalAlignment="Center" VerticalAlignment="Top"  />
-            <TextBox x:Name="AWCS" Text="G55" Margin="0,0,30,0" Width="50" />
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="21" Margin="0,5,0,0" Width="167"  >
+            <TextBlock Text="将" Height="20" Margin="0,3,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />
+            <TextBlock x:Name="WCS" Text="G54" Height="20" Margin="0,3,0,-2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="32"  FontSize="10.5" />
+            <TextBlock Text="替换为" Height="18" Margin="0,3,5,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />
+            <TextBox x:Name="AWCS" Text="G55" Margin="0,0,30,0" Width="42"  FontSize="10.5" />
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="131" Margin="0,0,0,0" Width="228" >
-            <ListBox x:Name="list" HorizontalAlignment="Left" Width="142" Margin="0,10,0,0" />
-            <Button x:Name="LL" Content="浏览" Click="Xz_Click"  Margin="10,10,0,96" Width="60" Height="25" FontSize="10.5" />
-            <Button x:Name="Th" Content="替换" Margin="-60,47,0,59" Click="Th_Click" Width="60" Height="25" FontSize="10.5" IsEnabled="False" />
-            <Button Content="A" Click="Button_Click" Margin="-60,77,0,28" Width="60"/>
-            <Button Content="B" Click="Button_Click_1" Margin="-60,108,0,0" Width="60"/>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="122" Margin="0,3,0,0" Width="218" >
+            <Rectangle Fill="#00000000" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Width="143" HorizontalAlignment="Left" Height="119" VerticalAlignment="Top" Margin="0,1,0,0"/>
+            <ListBox x:Name="list" HorizontalAlignment="Left" Width="142" Margin="-142,1,0,2" />
+            <Button x:Name="LL" Content="浏览" Click="Xz_Click"  Margin="10,25,0,74" Width="60" FontSize="10.5" />
+            <Button x:Name="Th" Content="替换" Margin="-60,74,0,25" Click="Th_Click" Width="60" FontSize="10.5" IsEnabled="False" />
         </StackPanel>
     </StackPanel>
 </UserControl>

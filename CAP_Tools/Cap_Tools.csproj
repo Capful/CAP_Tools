@@ -87,8 +87,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Pages\List\NcProgram.xaml.cs">
-      <DependentUpon>NcProgram.xaml</DependentUpon>
+    <Compile Include="Pages\List\NcProgram\NCWcs.xaml.cs">
+      <DependentUpon>NCWcs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\List\NcTabPage.xaml.cs">
+      <DependentUpon>NcTabPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\List\OpenNXFolder.xaml.cs">
       <DependentUpon>OpenNXFolder.xaml</DependentUpon>
@@ -122,15 +125,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ListPage.xaml">
+    <Page Include="Pages\List\NcProgram\NCWcs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\List\NcTabPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\NCListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\List\CheckInstalled.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\List\NcProgram.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,7 +157,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\NcProgramMerge.xaml">
+    <Page Include="Pages\NXListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -167,14 +174,14 @@
     <Compile Include="Pages\List\InstallNX.xaml.cs">
       <DependentUpon>InstallNX.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ListPage.xaml.cs">
-      <DependentUpon>ListPage.xaml</DependentUpon>
+    <Compile Include="Pages\NCListPage.xaml.cs">
+      <DependentUpon>NCListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\List\CheckInstalled.xaml.cs">
       <DependentUpon>CheckInstalled.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\NcProgramMerge.xaml.cs">
-      <DependentUpon>NcProgramMerge.xaml</DependentUpon>
+    <Compile Include="Pages\NXListPage.xaml.cs">
+      <DependentUpon>NXListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>

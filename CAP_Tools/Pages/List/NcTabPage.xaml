@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="CAP_Tools.Pages.List.NcTabPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Style="{StaticResource ContentRoot}">
+        <!-- TODO: set @SelectedSource -->
+        <mui:ModernTab SelectedSource="/Pages/List/NcProgram/NCWcs.xaml" Layout="Tab">
+            <mui:ModernTab.Links>
+                <!-- TODO: set @Source -->
+                <mui:Link DisplayName="更改坐标" Source="/Pages/List/NcProgram/NCWcs.xaml" />
+                <mui:Link DisplayName="串联程序" Source="/Pages/List/NcProgram/NcProgramB.xaml" />
+            </mui:ModernTab.Links>
+        </mui:ModernTab>
+    </Grid>
+</UserControl>

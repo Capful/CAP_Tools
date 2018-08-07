@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace CAP_Tools.Pages
 {
     /// <summary>
-    /// Interaction logic for ListPage1.xaml
+    /// Interaction logic for NXListPage.xaml
     /// </summary>
-    public partial class ListPage : UserControl
+    public partial class NXListPage : UserControl
     {
-        public ListPage()
+        public NXListPage()
         {
             InitializeComponent();
         }

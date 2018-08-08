@@ -181,7 +181,15 @@ namespace CAP_Tools.Pages.List.NcProgram
             lines.Remove("%");
             lines.Remove("%");
             lines.Remove("%");
-            File.WriteAllLines(a, lines.ToArray(), encoding: Encoding.Default);
+            File.WriteAllLines(a, lines.ToArray(), Encoding.Default);
+            FileStream fs = new FileStream(a, FileMode.Append);
+            StreamWriter sw = new StreamWriter(fs, Encoding.Default);
+            sw.WriteLine("M05");
+            sw.WriteLine("M09");
+            sw.WriteLine("M30");
+            sw.WriteLine("%");
+            sw.Close();
+            fs.Close();
             ModernDialog.ShowMessage("串联成功", "警告", MessageBoxButton.OK);
             ///打开文件夹并选中生成的文件
             Process.Start("Explorer.exe", b);

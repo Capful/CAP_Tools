@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel MinWidth="200">
-        <TextBlock x:Name="abc" Text="多程序串联" Style="{StaticResource Heading2}" Width="99" HorizontalAlignment="Left" />
+        <TextBlock x:Name="str2" Text="多程序串联" Style="{StaticResource Heading2}" Width="99" HorizontalAlignment="Left" />
         <Label Content="请把要串联的程序放在一个文件夹" Height="17" Width="274" Margin="0,2,0,3" HorizontalAlignment="Left" />
         <TextBlock Width="300" FontSize="10" HorizontalAlignment="Left" Margin="0">
             <Run Text="文件路径:" />

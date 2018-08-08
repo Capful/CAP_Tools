@@ -84,7 +84,8 @@ namespace CAP_Tools.Pages.List.NcProgram
             ///获取文件夹名字
             string SongName = str.Substring(str.LastIndexOf('\\') + 1);
             string a = str + "\\" + SongName + ".nc";
-            string b = "/select," + @a;
+            string b = str + "\\" + "Temp" + ".txt";
+            string c = "/select," + @a;
             ///合并文件夹内的文本，将值存在ALLText
             var builder = new StringBuilder();
             var files = System.IO.Directory.GetFiles(str, "*.nc");
@@ -93,13 +94,13 @@ namespace CAP_Tools.Pages.List.NcProgram
                 builder.Append(System.IO.File.ReadAllText(file));
             }
             var AllText = builder.ToString();
-            using (StreamWriter writer = new StreamWriter(a))
+            using (StreamWriter writer = new StreamWriter(b))
             {
                 ///合并文件
                 writer.Write(AllText, Encoding.Default);
             }
             ///删除指定字符
-            List<string> lines = new List<string>(File.ReadAllLines(a));
+            List<string> lines = new List<string>(File.ReadAllLines(b));
             ///删除G28 Y0.0
             lines.Remove("G28 Y0.0");
             lines.Remove("G28 Y0.0");
@@ -113,7 +114,24 @@ namespace CAP_Tools.Pages.List.NcProgram
             lines.Remove("G28 Y0.0");
             lines.Remove("G28 Y0.0");
             lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
             ///删除M30
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
             lines.Remove("M30");
             lines.Remove("M30");
             lines.Remove("M30");
@@ -141,7 +159,32 @@ namespace CAP_Tools.Pages.List.NcProgram
             lines.Remove("M09");
             lines.Remove("M09");
             lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
             ///删除M05
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
             lines.Remove("M05");
             lines.Remove("M05");
             lines.Remove("M05");
@@ -181,19 +224,41 @@ namespace CAP_Tools.Pages.List.NcProgram
             lines.Remove("%");
             lines.Remove("%");
             lines.Remove("%");
-            File.WriteAllLines(a, lines.ToArray(), Encoding.Default);
-            FileStream fs = new FileStream(a, FileMode.Append);
-            StreamWriter sw = new StreamWriter(fs, Encoding.Default);
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            File.WriteAllLines(b, lines.ToArray(), Encoding.Default);
+            FileStream fs = new FileStream(b, FileMode.Open);
+            StreamReader sr = new StreamReader(fs);
+            string line = sr.ReadToEnd();//直接读取一行
+            sr.Close();
+            fs.Close();
+            FileStream fs2 = new FileStream(a, FileMode.Append);
+            StreamWriter sw = new StreamWriter(fs2, Encoding.Default);
+            sw.WriteLine("%");
+            sw.Write(line);
             sw.WriteLine("M05");
             sw.WriteLine("M09");
+            sw.WriteLine("G28 Y0.0");
             sw.WriteLine("M30");
             sw.WriteLine("%");
             sw.Close();
-            fs.Close();
-            ModernDialog.ShowMessage("串联成功", "警告", MessageBoxButton.OK);
-            ///打开文件夹并选中生成的文件
-            Process.Start("Explorer.exe", b);
+            fs2.Close();
+            File.Delete(b);
+            MessageBoxResult result = ModernDialog.ShowMessage("串联成功，是否打开文件所在目录？", "提示", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                Process.Start("Explorer.exe", c);
+            }
         }
-
     }
 }

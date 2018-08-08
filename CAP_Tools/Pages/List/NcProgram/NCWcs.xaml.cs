@@ -262,9 +262,13 @@ namespace CAP_Tools.Pages.List.NcProgram
                     sw.Close();
                     fs2.Close();
                 }
-                ModernDialog.ShowMessage("替换成功", "提示", MessageBoxButton.OK);
-                ///完成后打开文件夹
-                Process.Start("Explorer.exe", path);
+                MessageBoxResult result = ModernDialog.ShowMessage("替换成功，是否打开文件夹？", "提示", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    ///完成后打开文件夹
+                    Process.Start("Explorer.exe", path);
+                }
+                
                 ///完成后检测文件夹中的值，并返回
                 string s = null;
                 DirectoryInfo d = new DirectoryInfo(path);

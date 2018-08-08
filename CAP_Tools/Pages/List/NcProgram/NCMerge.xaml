@@ -11,7 +11,7 @@
         <Label Content="请把要串联的程序放在一个文件夹" Height="17" Width="274" Margin="0,2,0,3" HorizontalAlignment="Left" />
         <TextBlock Width="300" FontSize="10" HorizontalAlignment="Left" Margin="0">
             <Run Text="文件路径:" />
-            <Run x:Name="NXRoute" Text="请点击'浏览'按钮选择需要串联的NC程序文件夹"  />
+            <Run x:Name="Route" Text="请点击'浏览'按钮选择需要串联的NC程序文件夹"  />
         </TextBlock>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="122" Margin="0,3,0,0" Width="218" >
             <Rectangle Fill="#00000000" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Width="143" HorizontalAlignment="Left" Height="119" VerticalAlignment="Top" Margin="0,1,0,0"/>

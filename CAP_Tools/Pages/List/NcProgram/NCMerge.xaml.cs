@@ -1,6 +1,7 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -39,7 +40,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                 return;
             }
             string m_Dir = m_Dialog.SelectedPath.Trim();
-            this.NXRoute.Text = m_Dir;
+            this.Route.Text = m_Dir;
             ///判断选择的文件夹中是否含有后缀名为NC的文件
             if (System.IO.Directory.GetFiles(m_Dir, "*.nc").Length > 0)
             {
@@ -78,7 +79,112 @@ namespace CAP_Tools.Pages.List.NcProgram
 
         private void CL_Click(object sender, RoutedEventArgs e)
         {
-
+            ///获取选择的路径
+            string str = Route.Text;
+            ///获取文件夹名字
+            string SongName = str.Substring(str.LastIndexOf('\\') + 1);
+            string a = str + "\\" + SongName + ".nc";
+            string b = "/select," + @a;
+            ///合并文件夹内的文本，将值存在ALLText
+            var builder = new StringBuilder();
+            var files = System.IO.Directory.GetFiles(str, "*.nc");
+            foreach (var file in files)
+            {
+                builder.Append(System.IO.File.ReadAllText(file));
+            }
+            var AllText = builder.ToString();
+            using (StreamWriter writer = new StreamWriter(a))
+            {
+                ///合并文件
+                writer.Write(AllText, Encoding.Default);
+            }
+            ///删除指定字符
+            List<string> lines = new List<string>(File.ReadAllLines(a));
+            ///删除G28 Y0.0
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            ///删除M30
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            ///删除M09
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            ///删除M05
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            lines.Remove("M05");
+            ///删除%
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            lines.Remove("%");
+            File.WriteAllLines(a, lines.ToArray(), encoding: Encoding.Default);
+            ModernDialog.ShowMessage("串联成功", "警告", MessageBoxButton.OK);
+            ///打开文件夹并选中生成的文件
+            Process.Start("Explorer.exe", b);
         }
 
     }

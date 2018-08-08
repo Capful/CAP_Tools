@@ -1,6 +1,7 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -262,6 +263,8 @@ namespace CAP_Tools.Pages.List.NcProgram
                     fs2.Close();
                 }
                 ModernDialog.ShowMessage("替换成功", "提示", MessageBoxButton.OK);
+                ///完成后打开文件夹
+                Process.Start("Explorer.exe", path);
                 ///完成后检测文件夹中的值，并返回
                 string s = null;
                 DirectoryInfo d = new DirectoryInfo(path);
@@ -426,53 +429,6 @@ namespace CAP_Tools.Pages.List.NcProgram
                     }
                 }
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            string Path = @"C:\Users\Administrator\Desktop\1KP-固定块\CS-01.nc";
-            //定义一个变量用来存读到的东西
-            string text = "";
-            //用一个读出流去读里面的数据
-
-            using (StreamReader reader = new StreamReader(Path, Encoding.Default))
-            {
-                //读一行
-                string line = reader.ReadLine();
-                while (line != null)
-                {
-                    //如果这一行里面有abe这三个字符，就不加入到text中，如果没有就加入
-                    if (line.IndexOf("M30") >= 0)
-                    {
-
-                    }
-                    else
-                    {
-                        text += line + "\r\n";
-
-                    }
-                    //一行一行读
-                    line = reader.ReadLine();
-                }
-            }
-            //定义一个写入流，将值写入到里面去 
-            using (StreamWriter writer = new StreamWriter(@"C:\Users\Administrator\Desktop\1KP-固定块\CS-27.nc"))
-            {
-                writer.Write(text);
-            }
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            string Path = @"C:\Users\Administrator\Desktop\1KP-固定块\CS-01.nc";
-            List<string> lines = new List<string>(File.ReadAllLines(Path));
-            lines.Remove("M30");
-            lines.Remove("M09");
-            lines.Remove("M05");
-            lines.Remove("%");
-            lines.Remove("T1 M06");
-            lines.Remove("G43 H01");
-            File.WriteAllLines(@"C:\Users\Administrator\Desktop\1KP-固定块\CS-28.nc", lines.ToArray(), encoding: Encoding.Default);
         }
     }
 }

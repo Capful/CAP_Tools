@@ -19,7 +19,6 @@
             <Button x:Name="Xz" Content="浏览" Click="Xz_Click"  Margin="10,25,0,74" Width="60" FontSize="10.5" />
             <Button x:Name="CL" Content="串联" Margin="-60,74,0,25" Click="CL_Click" Width="60" FontSize="10.5" IsEnabled="False" />
         </StackPanel>
-        <Label Content="请把要串联的程序放在一个文件夹" Height="17" Width="274" Margin="0,0,0,0"  FontSize="9.5" HorizontalAlignment="Left" />
-        <Label Content="并将文件夹名字改为您需要的名字,新文件将采用文件夹名字命名" Height="17" Width="300" Margin="0,0,0,0"  FontSize="9.5" HorizontalAlignment="Left" />
+        <Label Content="将文件夹名字改为您需要的名字,新文件将采用文件夹名字命名" Height="17" Width="300" Margin="0,10,0,0"  FontSize="9.5" HorizontalAlignment="Left" />
     </StackPanel>
 </UserControl>

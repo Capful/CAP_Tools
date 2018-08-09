@@ -53,15 +53,10 @@ namespace CAP_Tools.Pages.List.NcProgram
                 DirectoryInfo d = new DirectoryInfo(m_Dir);
                 FileInfo[] Files = d.GetFiles("*.nc");
                 List<string> lstr = new List<string>();
-                ///获取文件夹下文件全路径
-                foreach (FileInfo file in Files)
-                {
-                    s = file.FullName;
-                    lstr.Add(s);
-                }
                 ///获取文件夹下文件名，将路径显示到ListBox
                 foreach (FileInfo file in Files)
                 {
+                    /// a = file.FullName; 路径名称在文件名
                     a = file.Name;
                     list.Items.Add(a);
                 }
@@ -73,11 +68,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                 var filest = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite);
                 using (var sr = new StreamReader(filest))
                 {
-                    string Line1 = sr.ReadLine(); //读取文件中的一行
-                    string Line2 = sr.ReadLine();
-                    string Line3 = sr.ReadLine();
-                    string Line4 = sr.ReadLine();
-                    string Line = System.IO.Path.Combine(Line1, Line2, Line3, Line4);
+                    string Line = sr.ReadToEnd();//直接读取全部
                     sr.Close(); //关闭流
                     filest.Close();
                     ///判断文件中是否含有G54,如果没有，继续查找，直到查找到G59.9
@@ -288,11 +279,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                 var filest = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite);
                 using (var sr = new StreamReader(filest))
                 {
-                    string Line1 = sr.ReadLine(); //读取文件中的一行
-                    string Line2 = sr.ReadLine();
-                    string Line3 = sr.ReadLine();
-                    string Line4 = sr.ReadLine();
-                    string Line = System.IO.Path.Combine(Line1, Line2, Line3, Line4);
+                    string Line = sr.ReadToEnd();//直接读取全部
                     sr.Close(); //关闭流
                     filest.Close();
                     string t54 = Line;

@@ -49,22 +49,19 @@ namespace CAP_Tools.Pages.List.NcProgram
                 ///读取选择的文件夹中NC文件
                 ///清空ListBox
                 list.Items.Clear();
-                string s = null;
                 string a = null;
                 DirectoryInfo d = new DirectoryInfo(m_Dir);
                 FileInfo[] Files = d.GetFiles("*.nc");
                 List<string> lstr = new List<string>();
-                ///获取文件夹下文件全路径
-                foreach (FileInfo file in Files)
-                {
-                    s = file.FullName;
-                    lstr.Add(s);
-                }
                 ///获取文件夹下文件名，将路径显示到ListBox
                 foreach (FileInfo file in Files)
                 {
+                    /// a = file.FullName; 路径名称在文件名
                     a = file.Name;
                     list.Items.Add(a);
+                    string sc = list.Items[0].ToString();
+                    list.Items[0] = sc + "更改后的2";
+                    ModernDialog.ShowMessage(sc, "警告", MessageBoxButton.OK);
                 }
                 }
                 else
@@ -75,6 +72,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                 list.Items.Clear();
                 ModernDialog.ShowMessage("您选择的文件夹不存在.NC文件程序", "警告", MessageBoxButton.OK);
                 }
+                
         }
 
         private void CL_Click(object sender, RoutedEventArgs e)
@@ -239,7 +237,7 @@ namespace CAP_Tools.Pages.List.NcProgram
             File.WriteAllLines(b, lines.ToArray(), Encoding.Default);
             FileStream fs = new FileStream(b, FileMode.Open);
             StreamReader sr = new StreamReader(fs);
-            string line = sr.ReadToEnd();//直接读取一行
+            string line = sr.ReadToEnd();//直接读取全部
             sr.Close();
             fs.Close();
             FileStream fs2 = new FileStream(a, FileMode.Append);

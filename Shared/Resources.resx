@@ -117,8 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logo.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Back" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Maximize" xml:space="preserve">
+    <value>最大化</value>
+  </data>
+  <data name="Minimize" xml:space="preserve">
+    <value>最小化</value>
+  </data>
+  <data name="NavigateLink" xml:space="preserve">
+    <value>Navigate link</value>
+  </data>
+  <data name="NavigationFailed" xml:space="preserve">
+    <value>Navigation failed</value>
+  </data>
+  <data name="NavigationFailedFrameNotFound" xml:space="preserve">
+    <value>Unable to navigate to {0}, could not find a ModernFrame target '{1}'</value>
+  </data>
+  <data name="NavigationFailedSourceNotSpecified" xml:space="preserve">
+    <value>Unable to navigate to {0}, no source specified</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="UIThreadRequired" xml:space="preserve">
+    <value>Operation requires the UI thread</value>
+  </data>
+  <data name="UnexpectedToken" xml:space="preserve">
+    <value>Unexpected token</value>
+  </data>
+  <data name="UnknownOS" xml:space="preserve">
+    <value>Unknown operating system</value>
+  </data>
+  <data name="UnknownTokenType" xml:space="preserve">
+    <value>Unknown token type</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>确定</value>
   </data>
 </root>

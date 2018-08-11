@@ -19,7 +19,7 @@
         </TextBlock>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,20,0,0">
             <Button Name="Install" Content="安装主程序" Width="90" Margin="0,0,15,0"  Click="Button_Click_1" IsEnabled="False" FontSize="10.5" />
-            <Button Name="Install1" Content="破解文件" Width="90" Margin="0,0,15,0"  Click="Button_Click_2" IsEnabled="False" FontSize="10.5" />
+            <Button Name="Install1" Content="破解文件" Width="90" Margin="0,0,15,0"  Click="Button_Click_2" IsEnabled="True" FontSize="10.5" />
             <Button Name="Install2" Content="安装许可证" Width="90" Margin="0,0,20,0"  Click="Button_Click_3" IsEnabled="False" FontSize="10.5" />
         </StackPanel>
     </StackPanel>

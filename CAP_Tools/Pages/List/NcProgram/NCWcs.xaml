@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel MinWidth="200">
-        <TextBlock x:Name="abc" Text="批量坐标替换" Style="{StaticResource Heading2}" Width="99" HorizontalAlignment="Left" />
+        <TextBlock Text="批量坐标替换" Style="{StaticResource Heading2}" Width="99" HorizontalAlignment="Left" />
         <Label Content="选择需要替换坐标的程序文件夹" Height="20" Width="228" Margin="0,2,0,3" HorizontalAlignment="Left" />
         <TextBlock Width="300" FontSize="10" HorizontalAlignment="Left" Margin="0">
             <Run Text="文件路径:" />
-            <Run x:Name="NXRoute" Text="请点击'浏览'按钮选择NC程序文件夹"  />
+            <Run x:Name="FileRoute" Text="请点击'浏览'按钮选择NC程序文件夹"  />
         </TextBlock>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="21" Margin="0,5,0,0" Width="167"  >
             <TextBlock Text="将" Height="20" Margin="0,3,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />

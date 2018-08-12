@@ -11,16 +11,16 @@
         <TextBlock Text="NX快捷安装"  Margin="0,0,0,8" FontWeight="Bold" FontSize="14" />
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,8" Width="267">
             <Label Content="选择NX安装包解压路径" Height="20" Width="140" Margin="0,0,0,0" HorizontalAlignment="Left" />
-            <Button x:Name="LL" Content="浏览" Click="Button_Click" FontSize="10.5" Margin="15,0,0,0" />
+            <Button x:Name="LL" Content="浏览" Click="NXInstall_Click" FontSize="10.5" Margin="15,0,0,0" />
         </StackPanel>
         <TextBlock Width="300" FontSize="10" HorizontalAlignment="Left">
             <Run Text="已选择路径:" />
             <Run x:Name="NXRoute" Text="请点击'浏览'按钮选择安装包文件夹"  />
         </TextBlock>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,20,0,0">
-            <Button Name="Install" Content="安装主程序" Width="90" Margin="0,0,15,0"  Click="Button_Click_1" IsEnabled="False" FontSize="10.5" />
-            <Button Name="Install1" Content="破解文件" Width="90" Margin="0,0,15,0"  Click="Button_Click_2" IsEnabled="True" FontSize="10.5" />
-            <Button Name="Install2" Content="安装许可证" Width="90" Margin="0,0,20,0"  Click="Button_Click_3" IsEnabled="False" FontSize="10.5" />
+            <Button Name="NXInstall" Content="安装主程序" Width="90" Margin="0,0,15,0"  Click="NXInstall_Click" IsEnabled="False" FontSize="10.5" />
+            <Button Name="NXCrack" Content="破解文件" Width="90" Margin="0,0,15,0"  Click="NXCrack_Click" IsEnabled="False" FontSize="10.5" />
+            <Button Name="NXLicence" Content="安装许可证" Width="90" Margin="0,0,20,0"  Click="NXLicence_Click" IsEnabled="True" FontSize="10.5" />
         </StackPanel>
     </StackPanel>
 </UserControl>

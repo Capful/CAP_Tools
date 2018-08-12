@@ -28,7 +28,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                 return;
             }
             string m_Dir = m_Dialog.SelectedPath.Trim();
-            this.NXRoute.Text = m_Dir;
+            this.FileRoute.Text = m_Dir;
             ///判断选择的文件夹中是否含有后缀名为NC的文件
             if (System.IO.Directory.GetFiles(m_Dir, "*.nc").Length > 0)
             {
@@ -37,145 +37,129 @@ namespace CAP_Tools.Pages.List.NcProgram
                 ///读取选择的文件夹中NC文件
                 ///清空ListBox
                 list.Items.Clear();
-                string s = null;
-                string a = null;
+                string FilePath = null;
+                string FileName = null;
                 DirectoryInfo d = new DirectoryInfo(m_Dir);
                 FileInfo[] Files = d.GetFiles("*.nc");
                 List<string> lstr = new List<string>();
                 ///获取文件夹下文件名，将路径显示到ListBox
                 foreach (FileInfo file in Files)
                 {
-                    /// a = file.FullName; 路径名称在文件名
-                    a = file.Name;
-                    list.Items.Add(a);
+                    FilePath = file.FullName;
+                    FileName = file.Name;
+                    list.Items.Add(FileName);
                 }
-                string filePath = s;
-                if (!File.Exists(filePath))
+                if (!File.Exists(FilePath))
                 {
                     return;
                 }
-                var filest = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite);
+                var filest = new FileStream(FilePath, FileMode.Open, FileAccess.ReadWrite);
                 using (var sr = new StreamReader(filest))
                 {
-                    string Line = sr.ReadToEnd();//直接读取全部
+                    string NC = sr.ReadToEnd();//直接读取全部
                     sr.Close(); //关闭流
                     filest.Close();
                     ///判断文件中是否含有G54,如果没有，继续查找，直到查找到G59.9
-                    string t54 = Line;
                     string G54 = "G54";
-                    if (t54.Contains(G54))
+                    if (NC.Contains(G54))              //判断NC值中是否含有G54字符
                     {
                         this.WCS.Text = "G54";
                     }
                     else
                     {
-                        string t55 = Line;
                         string G55 = "G55";
-                        if (t55.Contains(G55))
+                        if (NC.Contains(G55))
                         {
                             this.WCS.Text = "G55";
                         }
                         else
                         {
-                            string t56 = Line;
                             string G56 = "G56";
-                            if (t55.Contains(G56))
+                            if (NC.Contains(G56))
                             {
                                 this.WCS.Text = "G56";
                             }
                             else
                             {
-                                string t57 = Line;
                                 string G57 = "G57";
-                                if (t57.Contains(G57))
+                                if (NC.Contains(G57))
                                 {
                                     this.WCS.Text = "G57";
                                 }
                                 else
                                 {
-                                    string t58 = Line;
                                     string G58 = "G58";
-                                    if (t58.Contains(G58))
+                                    if (NC.Contains(G58))
                                     {
                                         this.WCS.Text = "G58";
                                     }
                                     else
                                     {
-                                        string t100 = Line;
                                         string G100 = "G100";
-                                        if (t100.Contains(G100))
+                                        if (NC.Contains(G100))
                                         {
                                             this.WCS.Text = "G100";
                                         }
                                         else
                                         {
-                                            string t591 = Line;
                                             string G591 = "G59.1";
-                                            if (t591.Contains(G591))
+                                            if (NC.Contains(G591))
                                             {
                                                 this.WCS.Text = "G59.1";
                                             }
                                             else
                                             {
-                                                string t592 = Line;
                                                 string G592 = "G59.2";
-                                                if (t592.Contains(G592))
+                                                if (NC.Contains(G592))
                                                 {
                                                     this.WCS.Text = "G59.2";
                                                 }
                                                 else
                                                 {
-                                                    string t593 = Line;
                                                     string G593 = "G59.3";
-                                                    if (t593.Contains(G593))
+                                                    if (NC.Contains(G593))
                                                     {
                                                         this.WCS.Text = "G59.3";
                                                     }
                                                     else
                                                     {
-                                                        string t594 = Line;
                                                         string G594 = "G59.4 ";
-                                                        if (t594.Contains(G594))
+                                                        if (NC.Contains(G594))
                                                         {
                                                             this.WCS.Text = "G59.4";
                                                         }
                                                         else
                                                         {
-                                                            string t595 = Line;
                                                             string G595 = "G59.5";
-                                                            if (t595.Contains(G595))
+                                                            if (NC.Contains(G595))
                                                             {
                                                                 this.WCS.Text = "G59.5";
                                                             }
                                                             else
                                                             {
-                                                                string t596 = Line;
                                                                 string G596 = "G59.6";
-                                                                if (t596.Contains(G596))
+                                                                if (NC.Contains(G596))
                                                                 {
                                                                     this.WCS.Text = "G59.6";
                                                                 }
                                                                 else
                                                                 {
-                                                                    string t597 = Line;
                                                                     string G597 = "G59.7";
-                                                                    if (t597.Contains(G597))
+                                                                    if (NC.Contains(G597))
                                                                     {
                                                                         this.WCS.Text = "G59.7";
                                                                     }
                                                                     else
                                                                     {
-                                                                        string t598 = Line;
                                                                         string G598 = "G59.8";
-                                                                        if (t598.Contains(G598))
+                                                                        if (NC.Contains(G598))
                                                                         {
                                                                             this.WCS.Text = "G59.8";
                                                                         }
                                                                         else
                                                                         {
-                                                                            string t599 = Line;
                                                                             string G599 = "G59.9";
-                                                                            if (t599.Contains(G599))
+                                                                            if (NC.Contains(G599))
                                                                             {
                                                                                 this.WCS.Text = "G59.9";
                                                                             }
@@ -221,18 +205,18 @@ namespace CAP_Tools.Pages.List.NcProgram
             else
             {
                 ///批量替换文本中的值
-                string path = NXRoute.Text;
-                string path1 = WCS.Text;
-                string path2 = AWCS.Text;
-                string[] pathFile = Directory.GetFiles(path);
+                string Path = FileRoute.Text;
+                string WcsPath = WCS.Text;
+                string AWcsPath = AWCS.Text;
+                string[] pathFile = Directory.GetFiles(Path);
                 string con = "";
                 foreach (string str in pathFile)
                 {
                     FileStream fs = new FileStream(str, FileMode.Open, FileAccess.Read);
                     StreamReader sr = new StreamReader(fs, Encoding.Default);
                     con = sr.ReadToEnd();
-                    ///查找文本中的path1，替换为path2
-                    con = con.Replace(path1, path2);
+                    ///查找文本中的WcsPath，替换为AWcsPath
+                    con = con.Replace(WcsPath, AWcsPath);
                     sr.Close();
                     fs.Close();
                     FileStream fs2 = new FileStream(str, FileMode.Open, FileAccess.Write);
@@ -246,21 +230,21 @@ namespace CAP_Tools.Pages.List.NcProgram
                 if (result == MessageBoxResult.Yes)
                 {
                     ///完成后打开文件夹
-                    Process.Start("Explorer.exe", path);
+                    Process.Start("Explorer.exe", Path);
                 }
-                
+
                 ///完成后检测文件夹中的值，并返回
-                string s = null;
-                DirectoryInfo d = new DirectoryInfo(path);
+                string PathName = null;
+                DirectoryInfo d = new DirectoryInfo(Path);
                 FileInfo[] Files = d.GetFiles("*.nc");
                 List<string> lstr = new List<string>();
 
                 foreach (FileInfo file in Files)
                 {
-                    s = file.FullName;
-                    lstr.Add(s);
+                    PathName = file.FullName;
+                    lstr.Add(PathName);
                 }
-                string filePath = s;
+                string filePath = PathName;
                 if (!File.Exists(filePath))
                 {
                     return;
@@ -268,124 +252,110 @@ namespace CAP_Tools.Pages.List.NcProgram
                 var filest = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite);
                 using (var sr = new StreamReader(filest))
                 {
-                    string Line = sr.ReadToEnd();//直接读取全部
+                    string NC = sr.ReadToEnd();//直接读取全部
                     sr.Close(); //关闭流
                     filest.Close();
-                    string t54 = Line;
+                    ///判断文件中是否含有G54,如果没有，继续查找，直到查找到G59.9
                     string G54 = "G54";
-                    if (t54.Contains(G54))
+                    if (NC.Contains(G54))              //判断NC值中是否含有G54字符
                     {
                         this.WCS.Text = "G54";
                     }
                     else
                     {
-                        string t55 = Line;
                         string G55 = "G55";
-                        if (t55.Contains(G55))
+                        if (NC.Contains(G55))
                         {
                             this.WCS.Text = "G55";
                         }
                         else
                         {
-                            string t56 = Line;
                             string G56 = "G56";
-                            if (t55.Contains(G56))
+                            if (NC.Contains(G56))
                             {
                                 this.WCS.Text = "G56";
                             }
                             else
                             {
-                                string t57 = Line;
                                 string G57 = "G57";
-                                if (t57.Contains(G57))
+                                if (NC.Contains(G57))
                                 {
                                     this.WCS.Text = "G57";
                                 }
                                 else
                                 {
-                                    string t58 = Line;
                                     string G58 = "G58";
-                                    if (t58.Contains(G58))
+                                    if (NC.Contains(G58))
                                     {
                                         this.WCS.Text = "G58";
                                     }
                                     else
                                     {
-                                        string t100 = Line;
                                         string G100 = "G100";
-                                        if (t100.Contains(G100))
+                                        if (NC.Contains(G100))
                                         {
                                             this.WCS.Text = "G100";
                                         }
                                         else
                                         {
-                                            string t591 = Line;
                                             string G591 = "G59.1";
-                                            if (t591.Contains(G591))
+                                            if (NC.Contains(G591))
                                             {
                                                 this.WCS.Text = "G59.1";
                                             }
                                             else
                                             {
-                                                string t592 = Line;
                                                 string G592 = "G59.2";
-                                                if (t592.Contains(G592))
+                                                if (NC.Contains(G592))
                                                 {
                                                     this.WCS.Text = "G59.2";
                                                 }
                                                 else
                                                 {
-                                                    string t593 = Line;
                                                     string G593 = "G59.3";
-                                                    if (t593.Contains(G593))
+                                                    if (NC.Contains(G593))
                                                     {
                                                         this.WCS.Text = "G59.3";
                                                     }
                                                     else
                                                     {
-                                                        string t594 = Line;
                                                         string G594 = "G59.4 ";
-                                                        if (t594.Contains(G594))
+                                                        if (NC.Contains(G594))
                                                         {
                                                             this.WCS.Text = "G59.4";
                                                         }
                                                         else
                                                         {
-                                                            string t595 = Line;
                                                             string G595 = "G59.5";
-                                                            if (t595.Contains(G595))
+                                                            if (NC.Contains(G595))
                                                             {
                                                                 this.WCS.Text = "G59.5";
                                                             }
                                                             else
                                                             {
-                                                                string t596 = Line;
                                                                 string G596 = "G59.6";
-                                                                if (t596.Contains(G596))
+                                                                if (NC.Contains(G596))
                                                                 {
                                                                     this.WCS.Text = "G59.6";
                                                                 }
                                                                 else
                                                                 {
-                                                                    string t597 = Line;
                                                                     string G597 = "G59.7";
-                                                                    if (t597.Contains(G597))
+                                                                    if (NC.Contains(G597))
                                                                     {
                                                                         this.WCS.Text = "G59.7";
                                                                     }
                                                                     else
                                                                     {
-                                                                        string t598 = Line;
                                                                         string G598 = "G59.8";
-                                                                        if (t598.Contains(G598))
+                                                                        if (NC.Contains(G598))
                                                                         {
                                                                             this.WCS.Text = "G59.8";
                                                                         }
                                                                         else
                                                                         {
-                                                                            string t599 = Line;
                                                                             string G599 = "G59.9";
-                                                                            if (t599.Contains(G599))
+                                                                            if (NC.Contains(G599))
                                                                             {
                                                                                 this.WCS.Text = "G59.9";
                                                                             }

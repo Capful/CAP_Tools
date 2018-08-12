@@ -69,7 +69,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
             return false;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Home_Click(object sender, RoutedEventArgs e)
         {
             ///获取NX安装路径
             RegistryKey driverKey = NXregistry();
@@ -80,7 +80,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
             System.Diagnostics.Process.Start(@Home);
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void UGII_Click(object sender, RoutedEventArgs e)
         {
             RegistryKey driverKey = NXregistry();
             string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
@@ -91,7 +91,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
             System.Diagnostics.Process.Start(@Path);
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void ModelTemplates_Click(object sender, RoutedEventArgs e)
         {
             RegistryKey driverKey = NXregistry();
             string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
@@ -102,7 +102,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
             System.Diagnostics.Process.Start(@Path);
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void Template_Part_Click(object sender, RoutedEventArgs e)
         {
             RegistryKey driverKey = NXregistry();
             string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
@@ -113,7 +113,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
             System.Diagnostics.Process.Start(@Path);
         }
 
-        private void Button_Click_5(object sender, RoutedEventArgs e)
+        private void Postprocessor_Click(object sender, RoutedEventArgs e)
         {
             RegistryKey driverKey = NXregistry();
             string EXE = (String)driverKey.GetValue("Unigraphics V28.0");

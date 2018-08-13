@@ -10,19 +10,19 @@
         <TextBlock Text="检测NX是否安装"  Margin="0,0,0,8" FontWeight="Bold" FontSize="14" />
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,20,0,20" Width="299">
             <Label Content="NX8.5:" Height="20" Width="41" Margin="10,2,10,3" />
-            <Button Name="NX85"  ToolTip="单击打开NX8.5目录" Width="234" Height="25"   Margin="0,0,0,0" Click="NX85_Click" FontSize="10.5"/>
+            <Button Name="NX85"  ToolTip="单击运行NX8.5" Width="234" Height="25"   Margin="0,0,0,0" Click="NX85_Click" FontSize="10.5"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,20" Width="299">
             <Label Content="NX10:" Height="20" Width="41" Margin="10,2,10,3" />
-            <Button Name="NX10"  ToolTip="单击打开NX10目录" Width="234" Height="25"   Margin="0,0,0,0" Click="NX10_Click" FontSize="10.5"/>
+            <Button Name="NX10"  ToolTip="单击运行NX10" Width="234" Height="25"   Margin="0,0,0,0" Click="NX10_Click" FontSize="10.5"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,20" Width="299">
             <Label Content="NX11:" Height="20" Width="41" Margin="10,2,10,3" />
-            <Button Name="NX11"  ToolTip="单击打开NX11目录" Width="234" Height="25"   Margin="0,0,0,0" Click="NX11_Click" FontSize="10.5"/>
+            <Button Name="NX11"  ToolTip="单击运行NX11" Width="234" Height="25"   Margin="0,0,0,0" Click="NX11_Click" FontSize="10.5"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,20" Width="299">
             <Label Content="NX12:" Height="20" Width="41" Margin="10,2,10,3" />
-            <Button Name="NX12"  ToolTip="单击打开NX12目录" Width="234" Height="25"   Margin="0,0,0,0" Click="NX12_Click" FontSize="10.5"/>
+            <Button Name="NX12"  ToolTip="单击运行NX12" Width="234" Height="25"   Margin="0,0,0,0" Click="NX12_Click" FontSize="10.5"/>
         </StackPanel>
         <Label Content="暂时只支持NX8.5以上版本检测，点击按钮打开软件所在目录" Margin="10,15,0,20" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="290" FontSize="10"/>
     </StackPanel>

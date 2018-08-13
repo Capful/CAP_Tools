@@ -82,10 +82,7 @@ namespace CAP_Tools.Pages.List
             ///获取NX安装路径
             RegistryKey driverKey = NXregistry();
             string NXEXE = (String)driverKey.GetValue("Unigraphics V26.5");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
-            ///
-            ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-            System.Diagnostics.Process.Start(@NXPath);
+            System.Diagnostics.Process.Start(NXEXE);
         }
 
         private void NX10_Click(object sender, RoutedEventArgs e)
@@ -94,10 +91,7 @@ namespace CAP_Tools.Pages.List
             ///获取NX安装路径
             RegistryKey driverKey = NXregistry();
             string NXEXE = (String)driverKey.GetValue("Unigraphics V28.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
-            ///
-            ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-            System.Diagnostics.Process.Start(@NXPath);
+            System.Diagnostics.Process.Start(NXEXE);
         }
 
         private void NX11_Click(object sender, RoutedEventArgs e)
@@ -105,9 +99,7 @@ namespace CAP_Tools.Pages.List
             ///获取NX安装路径
             RegistryKey driverKey = NXregistry();
             string NXEXE = (String)driverKey.GetValue("Unigraphics V29.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
-            ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-            System.Diagnostics.Process.Start(@NXPath);
+            System.Diagnostics.Process.Start(NXEXE);
         }
 
         private void NX12_Click(object sender, RoutedEventArgs e)
@@ -115,16 +107,14 @@ namespace CAP_Tools.Pages.List
             ///获取NX安装路径
             RegistryKey driverKey = NXregistry();
             string NXEXE = (String)driverKey.GetValue("Unigraphics V30.0");
-            ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
-            System.Diagnostics.Process.Start(@NXPath);
+            System.Diagnostics.Process.Start(NXEXE);
         }
 
         private bool CheckNX12()
         {
             RegistryKey driverKey = NXregistry();
             string NXEXE = (String)driverKey.GetValue("Unigraphics V30.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             if (NXPath != null)
             {
                 return true;
@@ -136,7 +126,7 @@ namespace CAP_Tools.Pages.List
         {
             RegistryKey driverKey = NXregistry();
             string NXEXE = (String)driverKey.GetValue("Unigraphics V29.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             if (NXPath != null)
             {
                 return true;
@@ -148,7 +138,7 @@ namespace CAP_Tools.Pages.List
         {
             RegistryKey driverKey = NXregistry();
             string NXEXE = (String)driverKey.GetValue("Unigraphics V28.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             if (NXPath != null)
             {
                 return true;
@@ -160,7 +150,7 @@ namespace CAP_Tools.Pages.List
         {
             RegistryKey driverKey = NXregistry();
             string NXEXE = (String)driverKey.GetValue("Unigraphics V26.5");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             if (NXPath != null)
             {
                 return true;

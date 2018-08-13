@@ -24,7 +24,7 @@ namespace CAP_Tools.Pages
 
         public object DialogResult { get; private set; }
 
-        private void NXInstall_Click(object sender, RoutedEventArgs e)
+        private void XZ_Click(object sender, RoutedEventArgs e)
         {
             FolderBrowserDialog m_Dialog = new FolderBrowserDialog();
             DialogResult result = m_Dialog.ShowDialog();
@@ -51,7 +51,7 @@ namespace CAP_Tools.Pages
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void NXInstall_Click(object sender, RoutedEventArgs e)
         {
             string path1 = NXRoute.Text;
             DirectoryInfo dir = new DirectoryInfo(@path1);
@@ -64,63 +64,101 @@ namespace CAP_Tools.Pages
 
         private void NXCrack_Click(object sender, RoutedEventArgs e)
         {
-            //调用
             string path1 = NXRoute.Text;
+            string nx85 = path1 + "\\NX_8.5.0_Win64_crack_SSQ";
             string nx10 = path1 + "\\破解文件\\NX 10.0";
             string nx11 = path1 + "\\破解文件\\NX 11.0";
             string nx12 = path1 + "\\破解文件\\NX 12.0";
-            if (Directory.Exists(nx10))//判断是否存在
+            MessageBoxResult result = ModernDialog.ShowMessage("确定要破解NX吗？请确保NX软件都己经关闭。", "提示", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
             {
-                MessageBoxResult result = ModernDialog.ShowMessage("确定要破解NX吗？", "警告", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes)
+                if (Directory.Exists(nx85))//判断是否存在
                 {
-                    ///获取NX安装路径
-                    RegistryKey driverKey = NXregistry();
-                    string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-                    string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                    ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                    ///打开主目录
-                    ///copyDirectory(nx10, Home);
-                    ModernDialog.ShowMessage("破解完成", "提示", MessageBoxButton.OK);
-                    ModernDialog.ShowMessage(nx10 + Home, "提示", MessageBoxButton.OK);
-                }
-                
-            }
-            else
-            {
-                if (Directory.Exists(nx11))//判断是否存在
-                {
-                    ///获取NX安装路径
-                    RegistryKey driverKey = NXregistry();
-                    string EXE = (String)driverKey.GetValue("Unigraphics V29.0");
-                    string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                    ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                    ///打开主目录
-                    ///copyDirectory(nx11, Home);
-                    ModernDialog.ShowMessage("破解完成", "提示", MessageBoxButton.OK);
-                    ModernDialog.ShowMessage(nx11 + Home, "提示", MessageBoxButton.OK);
-                }
-                else
-                {
-                    if (Directory.Exists(nx12))//判断是否存在
+                    if (CheckNX85() == true)
                     {
                         ///获取NX安装路径
                         RegistryKey driverKey = NXregistry();
-                        string EXE = (String)driverKey.GetValue("Unigraphics V30.0");
+                        string EXE = (String)driverKey.GetValue("Unigraphics V26.5");
                         string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
                         ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                        ///copyDirectory(nx12, Home);
-                        ModernDialog.ShowMessage("破解完成", "提示", MessageBoxButton.OK);
-                        ModernDialog.ShowMessage(nx12 + Home, "提示", MessageBoxButton.OK);
+                        ///打开主目录
+                        CopyDirectory(nx85, Home);
+                        ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                     }
                     else
                     {
+                        ModernDialog.ShowMessage("抱歉，您未安装NX8.5！请先安装NX8.5主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                    }
+                }
+                else
+                {
+                    if (Directory.Exists(nx10))//判断是否存在
+                    {
+                        if (CheckNX10() == true)
+                        {
+                            ///获取NX安装路径
+                            RegistryKey driverKey = NXregistry();
+                            string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
+                            string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+                            ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+                            ///打开主目录
+                            CopyDirectory(nx10, Home);
+                            ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
+                        }
+                        else
+                        {
+                            ModernDialog.ShowMessage("抱歉，您未安装NX10！请先安装NX10主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                        }
+                    }
+                    else
+                    {
+                        if (Directory.Exists(nx11))//判断是否存在
+                        {
+                            if (CheckNX11() == true)
+                            {
+                                ///获取NX安装路径
+                                RegistryKey driverKey = NXregistry();
+                                string EXE = (String)driverKey.GetValue("Unigraphics V29.0");
+                                string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+                                ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+                                ///打开主目录
+                                CopyDirectory(nx11, Home);
+                                ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
+                            }
+                            else
+                            {
+                                ModernDialog.ShowMessage("抱歉，您未安装NX11！请先安装NX11主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                            }
+                        }
+                        else
+                        {
+                            if (Directory.Exists(nx12))//判断是否存在
+                            {
+                                if (CheckNX12() == true)
+                                {
+                                    ///获取NX安装路径
+                                    RegistryKey driverKey = NXregistry();
+                                    string EXE = (String)driverKey.GetValue("Unigraphics V30.0");
+                                    string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+                                    ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+                                    ///打开主目录
+                                    CopyDirectory(nx12, Home);
+                                    ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
+                                }
+                                else
+                                {
+                                    ModernDialog.ShowMessage("抱歉，您未安装NX12！请先安装NX12主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                                }
+                            }
+                            else
+                            {
 
-                        ModernDialog.ShowMessage("未在安装目录找到破解文件，请检查安装包是否完整。\n\r或者检查破解文件的目录名称是否为‘破解文件’，如果不是，请更改后重试", "警告", MessageBoxButton.OK);
+                                ModernDialog.ShowMessage("未在安装目录找到破解文件，请检查安装包是否完整。\n\r或者检查破解文件的目录名称是否为‘破解文件’，如果不是，请更改后重试", "警告", MessageBoxButton.OK);
+                            }
+                        }
                     }
                 }
             }
-            //copyDirectory(@"C:\Users\Administrator\Desktop\12", @"C:\Users\Administrator\Desktop\13");
         }
 
         private void NXLicence_Click(object sender, RoutedEventArgs e)
@@ -129,50 +167,85 @@ namespace CAP_Tools.Pages
         }
 
         /// <summary>
-        /// 递归拷贝所有子目录。
+        /// 复制文件夹中的所有内容
         /// </summary>
-        /// <param >源目录</param>
-        /// <param >目的目录</param>
-        private void copyDirectory(string sPath, string dPath)
+        /// <param name="sourceDirPath">源文件夹目录</param>
+        /// <param name="saveDirPath">指定文件夹目录</param>
+        public void CopyDirectory(string sourceDirPath, string saveDirPath)
         {
-            string[] directories = System.IO.Directory.GetDirectories(sPath);
-            if (!System.IO.Directory.Exists(dPath))
-                System.IO.Directory.CreateDirectory(dPath);
-            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(sPath);
-            System.IO.DirectoryInfo[] dirs = dir.GetDirectories();
-            CopyFile(dir, dPath);
-            if (dirs.Length > 0)
+            try
             {
-                foreach (System.IO.DirectoryInfo temDirectoryInfo in dirs)
+                if (!Directory.Exists(saveDirPath))
                 {
-                    string sourceDirectoryFullName = temDirectoryInfo.FullName;
-                    string destDirectoryFullName = sourceDirectoryFullName.Replace(sPath, dPath);
-                    if (!System.IO.Directory.Exists(destDirectoryFullName))
-                    {
-                        System.IO.Directory.CreateDirectory(destDirectoryFullName);
-                    }
-                    CopyFile(temDirectoryInfo, destDirectoryFullName);
-                    copyDirectory(sourceDirectoryFullName, destDirectoryFullName);
+                    Directory.CreateDirectory(saveDirPath);
+                }
+                string[] files = Directory.GetFiles(sourceDirPath);
+                foreach (string file in files)
+                {
+                    string pFilePath = saveDirPath + "\\" + Path.GetFileName(file);
+                    if (File.Exists(pFilePath))
+                        continue;
+                    File.Copy(file, pFilePath, true);
+                }
+
+                string[] dirs = Directory.GetDirectories(sourceDirPath);
+                foreach (string dir in dirs)
+                {
+                    CopyDirectory(dir, saveDirPath + "\\" + Path.GetFileName(dir));
                 }
             }
+            catch (Exception ex)
+            {
 
+            }
         }
 
-        /// <summary>
-        /// 拷贝目录下的所有文件到目的目录。
-        /// </summary>
-        /// <param >源路径</param>
-        /// <param >目的路径</param>
-        private void CopyFile(System.IO.DirectoryInfo path, string desPath)
+        private bool CheckNX12()
         {
-            string sourcePath = path.FullName;
-            System.IO.FileInfo[] files = path.GetFiles();
-            foreach (System.IO.FileInfo file in files)
+            RegistryKey driverKey = NXregistry();
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V30.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            if (NXPath != null)
             {
-                string sourceFileFullName = file.FullName;
-                string destFileFullName = sourceFileFullName.Replace(sourcePath, desPath);
-                file.CopyTo(destFileFullName, true);
+                return true;
             }
+            return false;
+        }
+
+        private bool CheckNX11()
+        {
+            RegistryKey driverKey = NXregistry();
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V29.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            if (NXPath != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool CheckNX10()
+        {
+            RegistryKey driverKey = NXregistry();
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V28.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            if (NXPath != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool CheckNX85()
+        {
+            RegistryKey driverKey = NXregistry();
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V26.5");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            if (NXPath != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

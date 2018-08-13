@@ -56,6 +56,19 @@ namespace CAP_Tools.Pages.List
                 this.NX10.Content = "未安装";
             }
 
+            if (CheckNX85() == true)
+            {
+                RegistryKey driverKey = NXregistry();
+                string NX85EXE = (String)driverKey.GetValue("Unigraphics V26.5");
+                string NX85 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX85EXE)));
+                this.NX85.IsEnabled = true;
+                this.NX85.Content = NX85.ToString();
+            }
+            else
+            {
+                this.NX85.IsEnabled = false;
+                this.NX85.Content = "未安装";
+            }
         }
 
         private static RegistryKey NXregistry()
@@ -63,44 +76,56 @@ namespace CAP_Tools.Pages.List
             return Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void NX85_Click(object sender, RoutedEventArgs e)
         {
             ///System.Diagnostics.Process.Start(@"D:\Program Files\Siemens\NX 12.0");
             ///获取NX安装路径
             RegistryKey driverKey = NXregistry();
-            string NX10EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-            string NX10 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX10EXE)));
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V26.5");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             ///
             ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-            System.Diagnostics.Process.Start(@NX10);
+            System.Diagnostics.Process.Start(@NXPath);
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void NX10_Click(object sender, RoutedEventArgs e)
+        {
+            ///System.Diagnostics.Process.Start(@"D:\Program Files\Siemens\NX 12.0");
+            ///获取NX安装路径
+            RegistryKey driverKey = NXregistry();
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V28.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            ///
+            ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+            System.Diagnostics.Process.Start(@NXPath);
+        }
+
+        private void NX11_Click(object sender, RoutedEventArgs e)
         {
             ///获取NX安装路径
             RegistryKey driverKey = NXregistry();
-            string NX11EXE = (String)driverKey.GetValue("Unigraphics V29.0");
-            string NX11 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX11EXE)));
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V29.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
             ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-            System.Diagnostics.Process.Start(@NX11);
+            System.Diagnostics.Process.Start(@NXPath);
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void NX12_Click(object sender, RoutedEventArgs e)
         {
             ///获取NX安装路径
             RegistryKey driverKey = NXregistry();
-            string NX12EXE = (String)driverKey.GetValue("Unigraphics V30.0");
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V30.0");
             ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-            string NX12 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX12EXE)));
-            System.Diagnostics.Process.Start(@NX12);
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            System.Diagnostics.Process.Start(@NXPath);
         }
 
         private bool CheckNX12()
         {
             RegistryKey driverKey = NXregistry();
-            string NX12EXE = (String)driverKey.GetValue("Unigraphics V30.0");
-            string NX12 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX12EXE)));
-            if (NX12 != null)
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V30.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            if (NXPath != null)
             {
                 return true;
             }
@@ -110,20 +135,33 @@ namespace CAP_Tools.Pages.List
         private bool CheckNX11()
         {
             RegistryKey driverKey = NXregistry();
-            string NX11EXE = (String)driverKey.GetValue("Unigraphics V29.0");
-            string NX11 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX11EXE)));
-            if (NX11 != null)
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V29.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            if (NXPath != null)
             {
                 return true;
             }
             return false;
         }
+
         private bool CheckNX10()
         {
             RegistryKey driverKey = NXregistry();
-            string NX10EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-            string NX10 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX10EXE)));
-            if (NX10 != null)
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V28.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            if (NXPath != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool CheckNX85()
+        {
+            RegistryKey driverKey = NXregistry();
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V26.5");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            if (NXPath != null)
             {
                 return true;
             }

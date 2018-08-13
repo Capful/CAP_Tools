@@ -8,9 +8,10 @@
              d:DesignHeight="300" Width="360">
     <Grid Style="{StaticResource ContentRoot}">
         <!-- TODO: set @SelectedSource -->
-        <mui:ModernTab SelectedSource="/Pages/List/OpenNXFolder/NX10Folder.xaml" Layout="Tab">
+        <mui:ModernTab SelectedSource="/Pages/List/OpenNXFolder/NX85Folder.xaml" Layout="Tab">
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
+                <mui:Link DisplayName="NX8.5" Source="/Pages/List/OpenNXFolder/NX85Folder.xaml" />
                 <mui:Link DisplayName="NX10" Source="/Pages/List/OpenNXFolder/NX10Folder.xaml" />
                 <mui:Link DisplayName="NX11" Source="/Pages/List/OpenNXFolder/NX11Folder.xaml" />
                 <mui:Link DisplayName="NX12" Source="/Pages/List/OpenNXFolder/NX12Folder.xaml" />

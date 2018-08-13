@@ -102,6 +102,9 @@
     <Compile Include="Pages\List\OpenNXFolder.xaml.cs">
       <DependentUpon>OpenNXFolder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\List\OpenNXFolder\NX85Folder.xaml.cs">
+      <DependentUpon>NX85Folder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\List\OpenNXFolder\NX10Folder.xaml.cs">
       <DependentUpon>NX10Folder.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,10 @@
     <Page Include="Pages\List\NcTabPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\List\OpenNXFolder\NX85Folder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\NCListPage.xaml">
       <SubType>Designer</SubType>

@@ -17,6 +17,6 @@
             <Button Name="Template_Part" Content="加工模板"  Width="90" Height="25"   Margin="0,0,20,0" Click="Template_Part_Click" FontSize="10.5" />
             <Button Name="Postprocessor" Content="机床后处理" Height="25"   Margin="0,0,20,0" Click="Postprocessor_Click" FontSize="10.5" Width="90" />
         </StackPanel>
-        <Label Content="暂时只支持打开NX10以上版本目录，点击按钮打开指定目录" Margin="0,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="350" FontSize="10"/>
+        <Label Content="暂时只支持打开NX8.5以上版本目录，点击按钮打开指定目录" Margin="0,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="350" FontSize="10"/>
     </StackPanel>
 </UserControl>

@@ -12,7 +12,6 @@
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
                 <mui:Link DisplayName="NC程序串联" Source="/Pages/List/NcTabPage.xaml" />
-                <mui:Link DisplayName="测试" Source="/Pages/List/BasicPage1.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

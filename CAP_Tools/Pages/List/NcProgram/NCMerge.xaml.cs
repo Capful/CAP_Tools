@@ -33,6 +33,12 @@ namespace CAP_Tools.Pages.List.NcProgram
             ///判断选择的文件夹中是否含有后缀名为NC的文件
             if (System.IO.Directory.GetFiles(m_Dir, "*.nc").Length > 0)
             {
+                string FolderName = m_Dir.Substring(m_Dir.LastIndexOf('\\') + 1);
+                string NewFile = m_Dir + "\\" + FolderName + ".nc";
+                if (File.Exists(NewFile))
+                {
+                    File.Delete(NewFile);
+                }
                 ///如果存在，将替换按钮显示
                 this.CL.IsEnabled = true;
                 ///读取选择的文件夹中NC文件
@@ -69,6 +75,10 @@ namespace CAP_Tools.Pages.List.NcProgram
             string NewFile = Path + "\\" + FolderName + ".nc";                        //将文件夹名字命名为新文件的名字
             string TempFile = Path + "\\" + "Temp" + ".txt";                          //缓存文件
             string SelectFile = "/select," + NewFile;                                 //打开文件夹并选中文件
+            if (File.Exists(NewFile))
+            {
+                File.Delete(NewFile);
+            }
             ///合并文件夹内的文本，将值存在ALLText
             var builder = new StringBuilder();
             var files = System.IO.Directory.GetFiles(Path, "*.nc");

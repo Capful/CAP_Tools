@@ -10,7 +10,7 @@
         <TextBlock Name="Tip" Text="打开NX指定目录"  Margin="0,0,0,8" FontWeight="Bold" FontSize="14" />
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,20,0,20" Width="350">
             <Button Name="Home" Content="主目录"  Width="90" Height="25"   Margin="0,0,20,0" Click="Home_Click" FontSize="10.5" />
-            <Button Name="UGII" Content="UGII"  Width="90" Height="25"   Margin="0,0,20,0" Click="Home_Click" FontSize="10.5" />
+            <Button Name="UGII" Content="UGII"  Width="90" Height="25"   Margin="0,0,20,0" Click="UGII_Click" FontSize="10.5" />
             <Button Name="ModelTemplates" Content="建模模板"  Width="90" Height="25"   Margin="0,0,20,0" Click="ModelTemplates_Click" FontSize="10.5" />
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,20" Width="350">

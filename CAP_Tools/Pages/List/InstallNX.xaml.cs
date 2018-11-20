@@ -82,7 +82,7 @@ namespace CAP_Tools.Pages
                         string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
                         ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
                         ///打开主目录
-                        CopyDirectory(nx85, Home);
+                        Copy(nx85, Home);
                         ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                     }
                     else
@@ -102,7 +102,7 @@ namespace CAP_Tools.Pages
                             string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
                             ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
                             ///打开主目录
-                            CopyDirectory(nx10, Home);
+                            Copy(nx10, Home);
                             ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                         }
                         else
@@ -122,7 +122,7 @@ namespace CAP_Tools.Pages
                                 string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
                                 ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
                                 ///打开主目录
-                                CopyDirectory(nx11, Home);
+                                Copy(nx11, Home);
                                 ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                             }
                             else
@@ -142,7 +142,7 @@ namespace CAP_Tools.Pages
                                     string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
                                     ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
                                     ///打开主目录
-                                    CopyDirectory(nx12, Home);
+                                    Copy(nx12, Home);
                                     ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                                 }
                                 else
@@ -169,34 +169,31 @@ namespace CAP_Tools.Pages
         /// <summary>
         /// 复制文件夹中的所有内容
         /// </summary>
-        /// <param name="sourceDirPath">源文件夹目录</param>
-        /// <param name="saveDirPath">指定文件夹目录</param>
-        public void CopyDirectory(string sourceDirPath, string saveDirPath)
+        public static void Copy(string sourceDirectory, string targetDirectory)
         {
-            try
-            {
-                if (!Directory.Exists(saveDirPath))
-                {
-                    Directory.CreateDirectory(saveDirPath);
-                }
-                string[] files = Directory.GetFiles(sourceDirPath);
-                foreach (string file in files)
-                {
-                    string pFilePath = saveDirPath + "\\" + Path.GetFileName(file);
-                    if (File.Exists(pFilePath))
-                        continue;
-                    File.Copy(file, pFilePath, true);
-                }
+            DirectoryInfo diSource = new DirectoryInfo(sourceDirectory);
+            DirectoryInfo diTarget = new DirectoryInfo(targetDirectory);
 
-                string[] dirs = Directory.GetDirectories(sourceDirPath);
-                foreach (string dir in dirs)
-                {
-                    CopyDirectory(dir, saveDirPath + "\\" + Path.GetFileName(dir));
-                }
+            CopyAll(diSource, diTarget);
+        }
+
+        public static void CopyAll(DirectoryInfo source, DirectoryInfo target)
+        {
+            Directory.CreateDirectory(target.FullName);
+
+            // Copy each file into the new directory.
+            foreach (FileInfo fi in source.GetFiles())
+            {
+                Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
+                fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
             }
-            catch (Exception ex)
-            {
 
+            // Copy each subdirectory using recursion.
+            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+            {
+                DirectoryInfo nextTargetSubDir =
+                    target.CreateSubdirectory(diSourceSubDir.Name);
+                CopyAll(diSourceSubDir, nextTargetSubDir);
             }
         }
 

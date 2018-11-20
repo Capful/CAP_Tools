@@ -55,20 +55,6 @@ namespace CAP_Tools.Pages.List
                 this.NX10.IsEnabled = false;
                 this.NX10.Content = "未安装";
             }
-
-            if (CheckNX85() == true)
-            {
-                RegistryKey driverKey = NXregistry();
-                string NX85EXE = (String)driverKey.GetValue("Unigraphics V26.5");
-                string NX85 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX85EXE)));
-                this.NX85.IsEnabled = true;
-                this.NX85.Content = NX85.ToString();
-            }
-            else
-            {
-                this.NX85.IsEnabled = false;
-                this.NX85.Content = "未安装";
-            }
         }
 
         private static RegistryKey NXregistry()

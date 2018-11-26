@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Forms;
 using System.IO;
+using System.IO.Compression;
 using FirstFloor.ModernUI.Windows.Controls;
 using Microsoft.Win32;
 using System;
@@ -166,16 +167,17 @@ namespace CAP_Tools.Pages
 
         private void NXLicence_Click(object sender, RoutedEventArgs e)
         {
-            if (HttpFileExist("https://www.baidupcs.com/rest/2.0/pcs/file?method=batchdownload&app_id=250528&zipcontent=%7B%22fs_id%22%3A%5B964437538076890%5D%7D&sign=DCb740ccc5511e5e8fedcff06b081203:rMqwYZkjsJrJRi%2FDhPTcaoU47J0%3D&uid=573454139&time=1543207353&dp-logid=7619527912507007655&dp-callid=0&vuk=573454139&zipname=NX_License_Servers.zip"))
+            if (HttpFileExist("https://www.baidupcs.com/rest/2.0/pcs/file?method=batchdownload&app_id=250528&zipcontent=%7B%22fs_id%22%3A%5B132603429003150%5D%7D&sign=DCb740ccc5511e5e8fedcff06b081203:n0hS4J5pfT0o31LI0VL7IAWSucI%3D&uid=573454139&time=1543294950&dp-logid=7643041996455772472&dp-callid=0&vuk=573454139&zipname=NX_License_Servers_v1.0.0.zip"))
             {
                 this.NXLicence.IsEnabled = false;
                 this.Prog.Visibility = Visibility.Visible;
                 this.label1.Visibility = Visibility.Visible;
-                DownloadFile("https://www.baidupcs.com/rest/2.0/pcs/file?method=batchdownload&app_id=250528&zipcontent=%7B%22fs_id%22%3A%5B964437538076890%5D%7D&sign=DCb740ccc5511e5e8fedcff06b081203:rMqwYZkjsJrJRi%2FDhPTcaoU47J0%3D&uid=573454139&time=1543207353&dp-logid=7619527912507007655&dp-callid=0&vuk=573454139&zipname=NX_License_Servers.zip", @"d:\NX_License_Servers.zip", Prog, label1);
-                ModernDialog.ShowMessage("下载完成", "提示", MessageBoxButton.OK);
+                DownloadFile("https://www.baidupcs.com/rest/2.0/pcs/file?method=batchdownload&app_id=250528&zipcontent=%7B%22fs_id%22%3A%5B132603429003150%5D%7D&sign=DCb740ccc5511e5e8fedcff06b081203:n0hS4J5pfT0o31LI0VL7IAWSucI%3D&uid=573454139&time=1543294950&dp-logid=7643041996455772472&dp-callid=0&vuk=573454139&zipname=NX_License_Servers_v1.0.0.zip", @"d:\NX_License_Servers.zip", Prog, label1);
                 this.NXLicence.IsEnabled = true;
                 this.Prog.Visibility = Visibility.Hidden;
                 this.label1.Visibility = Visibility.Hidden;
+                ZipFile.ExtractToDirectory(@"d:\NX_License_Servers.zip", @"d:\");
+                File.Delete(@"d:\NX_License_Servers.zip");
             }
             else
             {
@@ -275,7 +277,7 @@ namespace CAP_Tools.Pages
                 response = WebRequest.Create(http_file_url).GetResponse();
                 result = response == null ? false : true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 result = false;
             }
@@ -336,6 +338,7 @@ namespace CAP_Tools.Pages
                 throw;
             }
         }
+ 
     }
 }
 

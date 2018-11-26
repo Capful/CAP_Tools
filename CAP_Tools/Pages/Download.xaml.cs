@@ -1,4 +1,5 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,8 +17,14 @@ namespace CAP_Tools.Pages
 
         private void ModernButton_Click_1(object sender, RoutedEventArgs e)
         {
-            Clipboard.SetText("7t1i");
             System.Diagnostics.Process.Start("https://pan.baidu.com/s/1hYtNW-0blxtdLdSoDDKeuQ");
+            try
+            {
+                Clipboard.SetText("7t1i");
+                return;
+            }
+            catch { }
+            System.Threading.Thread.Sleep(10);
             ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
         }
 
@@ -33,8 +40,14 @@ namespace CAP_Tools.Pages
 
         private void ModernButton_Click_4(object sender, RoutedEventArgs e)
         {
-            Clipboard.SetText("51py");
             System.Diagnostics.Process.Start("https://pan.baidu.com/s/18G9oj8SLNiXd3Kxj8SE50w");
+            try
+            {
+                Clipboard.SetText("51py");
+                return;
+            }
+            catch { }
+            System.Threading.Thread.Sleep(10);
             ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
         }
     }

@@ -4,6 +4,8 @@ using System.IO;
 using FirstFloor.ModernUI.Windows.Controls;
 using Microsoft.Win32;
 using System;
+using System.Net;
+using System.Threading;
 
 namespace CAP_Tools.Pages
 {
@@ -163,7 +165,11 @@ namespace CAP_Tools.Pages
 
         private void NXLicence_Click(object sender, RoutedEventArgs e)
         {
-
+            if (HttpFileExist("https://www.baidupcs.com/rest/2.0/pcs/file?method=batchdownload&app_id=250528&zipcontent=%7B%22fs_id%22%3A%5B964437538076890%5D%7D&sign=DCb740ccc5511e5e8fedcff06b081203:rMqwYZkjsJrJRi%2FDhPTcaoU47J0%3D&uid=573454139&time=1543207353&dp-logid=7619527912507007655&dp-callid=0&vuk=573454139&zipname=NX_License_Servers.zip"))
+            {
+                DownloadHttpFile("https://www.baidupcs.com/rest/2.0/pcs/file?method=batchdownload&app_id=250528&zipcontent=%7B%22fs_id%22%3A%5B964437538076890%5D%7D&sign=DCb740ccc5511e5e8fedcff06b081203:rMqwYZkjsJrJRi%2FDhPTcaoU47J0%3D&uid=573454139&time=1543207353&dp-logid=7619527912507007655&dp-callid=0&vuk=573454139&zipname=NX_License_Servers.zip", @"d:\NX_License_Servers.zip");
+            }
+            this.NXLicence.IsEnabled = false;
         }
 
         /// <summary>
@@ -243,6 +249,71 @@ namespace CAP_Tools.Pages
                 return true;
             }
             return false;
+        }
+        public void DownloadHttpFile(String http_url, String save_url)
+        {
+            WebResponse response = null;
+            //获取远程文件
+            WebRequest request = WebRequest.Create(http_url);
+            response = request.GetResponse();
+            if (response == null) return;
+            //读远程文件的大小
+            pbDown.Maximum = response.ContentLength;
+            //下载远程文件
+            ThreadPool.QueueUserWorkItem((obj) =>
+            {
+                Stream netStream = response.GetResponseStream();
+                Stream fileStream = new FileStream(save_url, FileMode.Create);
+                byte[] read = new byte[1024];
+                long progressBarValue = 0;
+                int realReadLen = netStream.Read(read, 0, read.Length);
+                while (realReadLen > 0)
+                {
+                    fileStream.Write(read, 0, realReadLen);
+                    progressBarValue += realReadLen;
+                    pbDown.Dispatcher.BeginInvoke(new ProgressBarSetter(SetProgressBar), progressBarValue);
+                    realReadLen = netStream.Read(read, 0, read.Length);
+                }
+                netStream.Close();
+                fileStream.Close();
+            }, null);
+        }
+        /// <summary>
+        ///  判断远程文件是否存在
+        /// </summary>
+        /// <param name="fileUrl">文件URL</param>
+        /// <returns>存在-true，不存在-false</returns>
+        private bool HttpFileExist(string http_file_url)
+        {
+            WebResponse response = null;
+            bool result = false;//下载结果
+            try
+            {
+                response = WebRequest.Create(http_file_url).GetResponse();
+                result = response == null ? false : true;
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+            finally
+            {
+                if (response != null)
+                {
+                    response.Close();
+                }
+            }
+            return result;
+        }
+        public delegate void ProgressBarSetter(double value);
+        public double Bai { get; private set; }
+        public void SetProgressBar(double value)
+        {
+            //显示进度条
+            pbDown.Value = value;
+            //显示百分比
+            Bai = (value / pbDown.Maximum) * 100.00;
+            label1.Content = "许可证下载进度:" + Bai.ToString("0.00") + "%"; 
         }
     }
 }

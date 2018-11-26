@@ -22,7 +22,7 @@
             <Button Name="NXCrack" Content="破解文件" Width="90" Margin="0,0,15,0"  Click="NXCrack_Click" IsEnabled="False" FontSize="10.5" />
             <Button Name="NXLicence" Content="安装许可证" Width="90" Margin="0,0,20,0"  Click="NXLicence_Click" IsEnabled="True" FontSize="10.5" />
         </StackPanel>
-        <ProgressBar Name="pbDown" Minimum="0" Maximum="1" Value=".7" Height="16" IsIndeterminate="False" HorizontalAlignment="Left" Width="300" Margin="0,20,0,0" />
-        <Label Name="label1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0"/>
+        <ProgressBar Name="Prog" Minimum="0" Maximum="1" Value="0.0" Height="16" HorizontalAlignment="Left" Width="300" Margin="0,20,0,0" Visibility="Hidden" />
+        <Label Content="许可证下载进度：0%" Name="label1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Visibility="Hidden" />
     </StackPanel>
 </UserControl>

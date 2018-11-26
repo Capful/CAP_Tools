@@ -6,6 +6,7 @@ using Microsoft.Win32;
 using System;
 using System.Net;
 using System.Threading;
+using System.Windows.Controls;
 
 namespace CAP_Tools.Pages
 {
@@ -167,9 +168,19 @@ namespace CAP_Tools.Pages
         {
             if (HttpFileExist("https://www.baidupcs.com/rest/2.0/pcs/file?method=batchdownload&app_id=250528&zipcontent=%7B%22fs_id%22%3A%5B964437538076890%5D%7D&sign=DCb740ccc5511e5e8fedcff06b081203:rMqwYZkjsJrJRi%2FDhPTcaoU47J0%3D&uid=573454139&time=1543207353&dp-logid=7619527912507007655&dp-callid=0&vuk=573454139&zipname=NX_License_Servers.zip"))
             {
-                DownloadHttpFile("https://www.baidupcs.com/rest/2.0/pcs/file?method=batchdownload&app_id=250528&zipcontent=%7B%22fs_id%22%3A%5B964437538076890%5D%7D&sign=DCb740ccc5511e5e8fedcff06b081203:rMqwYZkjsJrJRi%2FDhPTcaoU47J0%3D&uid=573454139&time=1543207353&dp-logid=7619527912507007655&dp-callid=0&vuk=573454139&zipname=NX_License_Servers.zip", @"d:\NX_License_Servers.zip");
+                this.NXLicence.IsEnabled = false;
+                this.Prog.Visibility = Visibility.Visible;
+                this.label1.Visibility = Visibility.Visible;
+                DownloadFile("https://www.baidupcs.com/rest/2.0/pcs/file?method=batchdownload&app_id=250528&zipcontent=%7B%22fs_id%22%3A%5B964437538076890%5D%7D&sign=DCb740ccc5511e5e8fedcff06b081203:rMqwYZkjsJrJRi%2FDhPTcaoU47J0%3D&uid=573454139&time=1543207353&dp-logid=7619527912507007655&dp-callid=0&vuk=573454139&zipname=NX_License_Servers.zip", @"d:\NX_License_Servers.zip", Prog, label1);
+                ModernDialog.ShowMessage("下载完成", "提示", MessageBoxButton.OK);
+                this.NXLicence.IsEnabled = true;
+                this.Prog.Visibility = Visibility.Hidden;
+                this.label1.Visibility = Visibility.Hidden;
             }
-            this.NXLicence.IsEnabled = false;
+            else
+            {
+                ModernDialog.ShowMessage("抱歉，许可证下载失败，请检查网络或者联系Capful", "警告", MessageBoxButton.OK);
+            }
         }
 
         /// <summary>
@@ -250,34 +261,6 @@ namespace CAP_Tools.Pages
             }
             return false;
         }
-        public void DownloadHttpFile(String http_url, String save_url)
-        {
-            WebResponse response = null;
-            //获取远程文件
-            WebRequest request = WebRequest.Create(http_url);
-            response = request.GetResponse();
-            if (response == null) return;
-            //读远程文件的大小
-            pbDown.Maximum = response.ContentLength;
-            //下载远程文件
-            ThreadPool.QueueUserWorkItem((obj) =>
-            {
-                Stream netStream = response.GetResponseStream();
-                Stream fileStream = new FileStream(save_url, FileMode.Create);
-                byte[] read = new byte[1024];
-                long progressBarValue = 0;
-                int realReadLen = netStream.Read(read, 0, read.Length);
-                while (realReadLen > 0)
-                {
-                    fileStream.Write(read, 0, realReadLen);
-                    progressBarValue += realReadLen;
-                    pbDown.Dispatcher.BeginInvoke(new ProgressBarSetter(SetProgressBar), progressBarValue);
-                    realReadLen = netStream.Read(read, 0, read.Length);
-                }
-                netStream.Close();
-                fileStream.Close();
-            }, null);
-        }
         /// <summary>
         ///  判断远程文件是否存在
         /// </summary>
@@ -292,7 +275,7 @@ namespace CAP_Tools.Pages
                 response = WebRequest.Create(http_file_url).GetResponse();
                 result = response == null ? false : true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 result = false;
             }
@@ -305,15 +288,53 @@ namespace CAP_Tools.Pages
             }
             return result;
         }
-        public delegate void ProgressBarSetter(double value);
-        public double Bai { get; private set; }
-        public void SetProgressBar(double value)
+        /// <summary>  
+        /// c#,.net 下载文件  
+        /// </summary>  
+        /// <param name="URL">下载文件地址</param>  
+        /// 
+        /// <param name="Filename">下载后的存放地址</param>  
+        /// <param name="Prog">用于显示的进度条</param>  
+        /// 
+        public void DownloadFile(string URL, string filename, System.Windows.Controls.ProgressBar prog, System.Windows.Controls.Label label1)
         {
-            //显示进度条
-            pbDown.Value = value;
-            //显示百分比
-            Bai = (value / pbDown.Maximum) * 100.00;
-            label1.Content = "许可证下载进度:" + Bai.ToString("0.00") + "%"; 
+            float percent = 0;
+            try
+            {
+                System.Net.HttpWebRequest Myrq = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(URL);
+                System.Net.HttpWebResponse myrp = (System.Net.HttpWebResponse)Myrq.GetResponse();
+                long totalBytes = myrp.ContentLength;
+                if (Prog != null)
+                {
+                    Prog.Maximum = (int)totalBytes;
+                }
+                System.IO.Stream st = myrp.GetResponseStream();
+                System.IO.Stream so = new System.IO.FileStream(filename, System.IO.FileMode.Create);
+                long totalDownloadedByte = 0;
+                byte[] by = new byte[1024];
+                int osize = st.Read(by, 0, (int)by.Length);
+                while (osize > 0)
+                {
+                    totalDownloadedByte = osize + totalDownloadedByte;
+                    System.Windows.Forms.Application.DoEvents();
+                    so.Write(by, 0, osize);
+                    if (Prog != null)
+                    {
+                        Prog.Value = (int)totalDownloadedByte;
+                    }
+                    osize = st.Read(by, 0, (int)by.Length);
+
+                    percent = (float)totalDownloadedByte / (float)totalBytes * 100;
+                    label1.Content = "许可证下载进度: " + percent.ToString("0.00") + "%";
+                    System.Windows.Forms.Application.DoEvents(); //必须加注这句代码，否则label1将因为循环执行太快而来不及显示信息
+                }
+                so.Close();
+                st.Close();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
         }
     }
 }

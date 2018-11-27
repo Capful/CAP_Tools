@@ -8,6 +8,7 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Windows.Controls;
+using System.ComponentModel;
 
 namespace CAP_Tools.Pages
 {
@@ -16,9 +17,21 @@ namespace CAP_Tools.Pages
     /// </summary>
     public partial class InstallNX : System.Windows.Controls.UserControl
     {
+        //下载文件
+        private string _saveDir;
+        internal class FileMessage
+        {
+            public string FileName { get; set; }
+            public string RelativeUrl { get; set; }
+            public string Url { get; set; }
+            public bool IsDownLoad { get; set; }
+            public string SavePath { get; set; }
+        }
         public InstallNX()
         {
             InitializeComponent();
+            //在程序所在路径新建文件夹
+            _saveDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NX License Servers");
         }
 
         private static RegistryKey NXregistry()
@@ -165,26 +178,6 @@ namespace CAP_Tools.Pages
             }
         }
 
-        private void NXLicence_Click(object sender, RoutedEventArgs e)
-        {
-            if (HttpFileExist("https://www.baidupcs.com/rest/2.0/pcs/file?method=batchdownload&app_id=250528&zipcontent=%7B%22fs_id%22%3A%5B132603429003150%5D%7D&sign=DCb740ccc5511e5e8fedcff06b081203:n0hS4J5pfT0o31LI0VL7IAWSucI%3D&uid=573454139&time=1543294950&dp-logid=7643041996455772472&dp-callid=0&vuk=573454139&zipname=NX_License_Servers_v1.0.0.zip"))
-            {
-                this.NXLicence.IsEnabled = false;
-                this.Prog.Visibility = Visibility.Visible;
-                this.label1.Visibility = Visibility.Visible;
-                DownloadFile("https://www.baidupcs.com/rest/2.0/pcs/file?method=batchdownload&app_id=250528&zipcontent=%7B%22fs_id%22%3A%5B132603429003150%5D%7D&sign=DCb740ccc5511e5e8fedcff06b081203:n0hS4J5pfT0o31LI0VL7IAWSucI%3D&uid=573454139&time=1543294950&dp-logid=7643041996455772472&dp-callid=0&vuk=573454139&zipname=NX_License_Servers_v1.0.0.zip", @"d:\NX_License_Servers.zip", Prog, label1);
-                this.NXLicence.IsEnabled = true;
-                this.Prog.Visibility = Visibility.Hidden;
-                this.label1.Visibility = Visibility.Hidden;
-                ZipFile.ExtractToDirectory(@"d:\NX_License_Servers.zip", @"d:\");
-                File.Delete(@"d:\NX_License_Servers.zip");
-            }
-            else
-            {
-                ModernDialog.ShowMessage("抱歉，许可证下载失败，请检查网络或者联系Capful", "警告", MessageBoxButton.OK);
-            }
-        }
-
         /// <summary>
         /// 复制文件夹中的所有内容
         /// </summary>
@@ -263,82 +256,93 @@ namespace CAP_Tools.Pages
             }
             return false;
         }
-        /// <summary>
-        ///  判断远程文件是否存在
-        /// </summary>
-        /// <param name="fileUrl">文件URL</param>
-        /// <returns>存在-true，不存在-false</returns>
-        private bool HttpFileExist(string http_file_url)
-        {
-            WebResponse response = null;
-            bool result = false;//下载结果
-            try
-            {
-                response = WebRequest.Create(http_file_url).GetResponse();
-                result = response == null ? false : true;
-            }
-            catch (Exception ex)
-            {
-                result = false;
-            }
-            finally
-            {
-                if (response != null)
-                {
-                    response.Close();
-                }
-            }
-            return result;
-        }
-        /// <summary>  
-        /// c#,.net 下载文件  
-        /// </summary>  
-        /// <param name="URL">下载文件地址</param>  
-        /// 
-        /// <param name="Filename">下载后的存放地址</param>  
-        /// <param name="Prog">用于显示的进度条</param>  
-        /// 
-        public void DownloadFile(string URL, string filename, System.Windows.Controls.ProgressBar prog, System.Windows.Controls.Label label1)
-        {
-            float percent = 0;
-            try
-            {
-                System.Net.HttpWebRequest Myrq = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(URL);
-                System.Net.HttpWebResponse myrp = (System.Net.HttpWebResponse)Myrq.GetResponse();
-                long totalBytes = myrp.ContentLength;
-                if (Prog != null)
-                {
-                    Prog.Maximum = (int)totalBytes;
-                }
-                System.IO.Stream st = myrp.GetResponseStream();
-                System.IO.Stream so = new System.IO.FileStream(filename, System.IO.FileMode.Create);
-                long totalDownloadedByte = 0;
-                byte[] by = new byte[1024];
-                int osize = st.Read(by, 0, (int)by.Length);
-                while (osize > 0)
-                {
-                    totalDownloadedByte = osize + totalDownloadedByte;
-                    System.Windows.Forms.Application.DoEvents();
-                    so.Write(by, 0, osize);
-                    if (Prog != null)
-                    {
-                        Prog.Value = (int)totalDownloadedByte;
-                    }
-                    osize = st.Read(by, 0, (int)by.Length);
 
-                    percent = (float)totalDownloadedByte / (float)totalBytes * 100;
-                    label1.Content = "许可证下载进度: " + percent.ToString("0.00") + "%";
-                    System.Windows.Forms.Application.DoEvents(); //必须加注这句代码，否则label1将因为循环执行太快而来不及显示信息
-                }
-                so.Close();
-                st.Close();
-            }
-            catch (System.Exception)
+        private void NXLicence_Click(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX_License_Servers_v1.0.0.exe"))
             {
-                throw;
+                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX_License_Servers_v1.0.0.exe");
+            }
+            else
+            {
+                //许可证不存在是下载许可证
+                //按钮不可用
+                this.NXLicence.IsEnabled = false;
+                //进度条显示
+                this.Prog.Visibility = Visibility.Visible;
+                //进度条百分比显示
+                this.label1.Visibility = Visibility.Visible;
+                this.label2.Visibility = Visibility.Visible;
+                //远程文件路径
+                string imageUrl = "https://www.baidupcs.com/rest/2.0/pcs/file?method=batchdownload&app_id=250528&zipcontent=%7B%22fs_id%22%3A%5B132603429003150%5D%7D&sign=DCb740ccc5511e5e8fedcff06b081203:n0hS4J5pfT0o31LI0VL7IAWSucI%3D&uid=573454139&time=1543294950&dp-logid=7643041996455772472&dp-callid=0&vuk=573454139&zipname=NX_License_Servers_v1.0.0.zip";
+                string fileExt = Path.GetExtension(imageUrl);
+                string fileNewName = Guid.NewGuid() + fileExt;
+                bool isDownLoad = false;
+                string filePath = Path.Combine(_saveDir, fileNewName);
+                if (File.Exists(filePath))
+                {
+                    isDownLoad = true;
+                }
+                var file = new FileMessage
+                {
+                    FileName = fileNewName,
+                    RelativeUrl = "NX License Servers.zip",
+                    Url = imageUrl,
+                    IsDownLoad = isDownLoad,
+                    SavePath = filePath
+                };
+                if (!file.IsDownLoad)
+                {
+                    string fileDirPath = Path.GetDirectoryName(file.SavePath);
+                    if (!Directory.Exists(fileDirPath))
+                    {
+                        Directory.CreateDirectory(fileDirPath);
+                    }
+                    try
+                    {
+                        WebClient client = new WebClient();
+                        client.DownloadFileCompleted += client_DownloadFileCompleted;
+                        client.DownloadProgressChanged += client_DownloadProgressChanged;
+                        client.DownloadFileAsync(new Uri(file.Url), file.SavePath, file.FileName);
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            
+        }
+
+        void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.UserState != null)
+            {
+                //下载完成
+                this.label1.Content = "许可证下载完成";
+                //解压文件
+                ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\");
+                //删除ZIP文件
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString());
+                //按钮可用
+                this.NXLicence.IsEnabled = true;
+                //运行许可证文件
+                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX_License_Servers_v1.0.0.exe");
+                //进度条隐藏
+                this.Prog.Visibility = Visibility.Hidden;
+                //百分比隐藏
+                this.label1.Visibility = Visibility.Hidden;
+                this.label2.Visibility = Visibility.Hidden;
             }
         }
- 
+
+        void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            this.Prog.Minimum = 0;
+            this.Prog.Maximum = (int)e.TotalBytesToReceive;
+            this.Prog.Value = (int)e.BytesReceived;
+            this.label1.Content = "许可证下载进度 : " + e.ProgressPercentage + "%"; 
+            this.label2.Content = String.Format("{0}M/{1}M", Math.Round((double)e.BytesReceived / 1024 / 1024, 2), Math.Round((double)e.TotalBytesToReceive / 1024 / 1024, 2));
+        }
     }
 }
 

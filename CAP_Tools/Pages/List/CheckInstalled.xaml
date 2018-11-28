@@ -5,21 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel HorizontalAlignment="Left">
+             d:DesignHeight="300" d:DesignWidth="320">
+    <StackPanel HorizontalAlignment="Left" Width="320">
         <TextBlock Text="检测NX是否安装  单击运行"  Margin="0,0,0,8" FontWeight="Bold" FontSize="14" />
 
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,20,0,20" Width="299">
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,20,0,20" Width="320">
             <Label Content="NX10:" Height="20" Width="41" Margin="10,2,10,3" />
-            <Button Name="NX10"  ToolTip="单击运行NX10" Width="234" Height="25"   Margin="0,0,0,0" Click="NX10_Click" FontSize="10.5"/>
+            <Button Name="NX10"  ToolTip="单击运行NX10" Width="249" Height="25"   Margin="0,0,0,0" Click="NX10_Click" FontSize="10.5"/>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,20" Width="299">
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,20" Width="320">
             <Label Content="NX11:" Height="20" Width="41" Margin="10,2,10,3" />
-            <Button Name="NX11"  ToolTip="单击运行NX11" Width="234" Height="25"   Margin="0,0,0,0" Click="NX11_Click" FontSize="10.5"/>
+            <Button Name="NX11"  ToolTip="单击运行NX11" Width="249" Height="25"   Margin="0,0,0,0" Click="NX11_Click" FontSize="10.5"/>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,20" Width="299">
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,20" Width="320">
             <Label Content="NX12:" Height="20" Width="41" Margin="10,2,10,3" />
-            <Button Name="NX12"  ToolTip="单击运行NX12" Width="234" Height="25"   Margin="0,0,0,0" Click="NX12_Click" FontSize="10.5"/>
+            <Button Name="NX12"  ToolTip="单击运行NX12" Width="249" Height="25"   Margin="0,0,0,0" Click="NX12_Click" FontSize="10.5"/>
         </StackPanel>
         <Label Content="暂时只支持NX10.0以上版本检测，点击按钮运行软件" Margin="10,15,0,20" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="290" FontSize="10"/>
     </StackPanel>

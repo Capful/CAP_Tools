@@ -6,24 +6,25 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:local="clr-namespace:CAP_Tools.Pages" x:Class="CAP_Tools.Pages.InstallNX"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel HorizontalAlignment="Left">
+             d:DesignHeight="300" d:DesignWidth="320">
+    <StackPanel HorizontalAlignment="Left" Margin="0,0,-10,0" Width="320">
         <TextBlock Text="NX快捷安装"  Margin="0,0,0,8" FontWeight="Bold" FontSize="14" />
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,8" Width="267">
             <Label Content="选择NX安装包解压路径" Height="20" Width="140" Margin="0,0,0,0" HorizontalAlignment="Left" />
-            <Button x:Name="Xz" Content="浏览" Click="XZ_Click" FontSize="10.5" Margin="15,0,0,0" />
+            <Button x:Name="Xz" Content="浏览" Click="XZ_Click" FontSize="10.5" Margin="15,0,0,0" FontFamily="Microsoft YaHei" />
         </StackPanel>
         <TextBlock Width="300" FontSize="10" HorizontalAlignment="Left">
-            <Run Text="已选择路径:" />
-            <Run x:Name="NXRoute" Text="请点击'浏览'按钮选择安装包文件夹"  />
+            <Run Text="已选择路径:" FontFamily="Microsoft YaHei" />
+            <Run x:Name="NXRoute" Text="请点击'浏览'按钮选择安装包文件夹" FontFamily="Microsoft YaHei"  />
         </TextBlock>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,20,0,0">
-            <Button Name="NXInstall" Content="安装主程序" Width="90" Margin="0,0,15,0"  Click="NXInstall_Click" IsEnabled="False" FontSize="10.5" />
-            <Button Name="NXCrack" Content="破解文件" Width="90" Margin="0,0,15,0"  Click="NXCrack_Click" IsEnabled="False" FontSize="10.5" />
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,20,0,0" Width="320">
+            <Button Name="NXInstall" Content="安装主程序" Width="90" Margin="0,0,25,0"  Click="NXInstall_Click" IsEnabled="False" FontSize="10.5" />
+            <Button Name="NXCrack" Content="破解文件" Width="90" Margin="0,0,25,0"  Click="NXCrack_Click" IsEnabled="False" FontSize="10.5" />
             <Button Name="NXLicence" Content="安装许可证" ToolTip="在线下载许可证文件" Width="90" Margin="0,0,20,0"  Click="NXLicence_Click" IsEnabled="True" FontSize="10.5" />
         </StackPanel>
         <ProgressBar Name="Prog" Minimum="0" Maximum="1" Value="0.0" Height="16" HorizontalAlignment="Left" Width="300" Margin="0,20,0,0" Visibility="Hidden" />
-        <Label Content="进度：00.00%" Name="label1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Visibility="Hidden" FontSize="10.5" />
+        <Label Content="许可证下载进度：00.00%" Name="label1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Visibility="Hidden" FontSize="10.5" />
         <Label Content="00.00M/00.00M" Name="label2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,-17.5,0,0" Visibility="Hidden" FontSize="10.5" />
+        <mui:BBCodeBlock BBCode="第一步安装主程序；第二步替换破解文件；第三步安装许可证文件，如果本地无许可证文件时需要联网在线下载。最后 [url=/Pages/List/CheckInstalled.xaml]运行NX[/url] 检测是否安装成功。" Margin="0,20,0,32" FontSize="10.5" FontFamily="Microsoft YaHei" />
     </StackPanel>
 </UserControl>

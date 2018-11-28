@@ -315,7 +315,7 @@ namespace CAP_Tools.Pages
             }
             else
             {
-                ModernDialog.ShowMessage("抱歉，许可证下载失败，可能是下载链接已失效！请检查网络或者联系Capful", "警告", MessageBoxButton.OK);
+                ModernDialog.ShowMessage("网络连接失败，可能是下载链接已失效！请检查网络或者联系Capful", "警告", MessageBoxButton.OK);
             }
         }
 
@@ -333,7 +333,7 @@ namespace CAP_Tools.Pages
                 response = WebRequest.Create(http_file_url).GetResponse();
                 result = response == null ? false : true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 result = false;
             }

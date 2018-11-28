@@ -259,58 +259,92 @@ namespace CAP_Tools.Pages
 
         private void NXLicence_Click(object sender, RoutedEventArgs e)
         {
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX_License_Servers_v1.0.0.exe"))
+            if (HttpFileExist("https://capful.oss-cn-beijing.aliyuncs.com/NX/NX_License_Servers_v1.0.0.exe"))
             {
-                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX_License_Servers_v1.0.0.exe");
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX_License_Servers_v1.0.0.exe"))
+                {
+                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX_License_Servers_v1.0.0.exe");
+                }
+                else
+                {
+                    //许可证不存在是下载许可证
+                    //按钮不可用
+                    this.NXLicence.IsEnabled = false;
+                    //进度条显示
+                    this.Prog.Visibility = Visibility.Visible;
+                    //进度条百分比显示
+                    this.label1.Visibility = Visibility.Visible;
+                    this.label2.Visibility = Visibility.Visible;
+                    //远程文件路径
+                    string imageUrl = "https://capful.oss-cn-beijing.aliyuncs.com/NX/NX_License_Servers_v1.0.0.exe";
+                    string fileExt = Path.GetExtension(imageUrl);
+                    string fileNewName = Guid.NewGuid() + fileExt;
+                    bool isDownLoad = false;
+                    string filePath = Path.Combine(_saveDir, fileNewName);
+                    if (File.Exists(filePath))
+                    {
+                        isDownLoad = true;
+                    }
+                    var file = new FileMessage
+                    {
+                        FileName = fileNewName,
+                        RelativeUrl = "NX License Servers.zip",
+                        Url = imageUrl,
+                        IsDownLoad = isDownLoad,
+                        SavePath = filePath
+                    };
+                    if (!file.IsDownLoad)
+                    {
+                        string fileDirPath = Path.GetDirectoryName(file.SavePath);
+                        if (!Directory.Exists(fileDirPath))
+                        {
+                            Directory.CreateDirectory(fileDirPath);
+                        }
+                        try
+                        {
+                            WebClient client = new WebClient();
+                            client.DownloadFileCompleted += client_DownloadFileCompleted;
+                            client.DownloadProgressChanged += client_DownloadProgressChanged;
+                            client.DownloadFileAsync(new Uri(file.Url), file.SavePath, file.FileName);
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
             }
             else
             {
-                //许可证不存在是下载许可证
-                //按钮不可用
-                this.NXLicence.IsEnabled = false;
-                //进度条显示
-                this.Prog.Visibility = Visibility.Visible;
-                //进度条百分比显示
-                this.label1.Visibility = Visibility.Visible;
-                this.label2.Visibility = Visibility.Visible;
-                //远程文件路径
-                string imageUrl = "https://www.baidupcs.com/rest/2.0/pcs/file?method=batchdownload&app_id=250528&zipcontent=%7B%22fs_id%22%3A%5B132603429003150%5D%7D&sign=DCb740ccc5511e5e8fedcff06b081203:n0hS4J5pfT0o31LI0VL7IAWSucI%3D&uid=573454139&time=1543294950&dp-logid=7643041996455772472&dp-callid=0&vuk=573454139&zipname=NX_License_Servers_v1.0.0.zip";
-                string fileExt = Path.GetExtension(imageUrl);
-                string fileNewName = Guid.NewGuid() + fileExt;
-                bool isDownLoad = false;
-                string filePath = Path.Combine(_saveDir, fileNewName);
-                if (File.Exists(filePath))
+                ModernDialog.ShowMessage("抱歉，许可证下载失败，可能是下载链接已失效！请检查网络或者联系Capful", "警告", MessageBoxButton.OK);
+            }
+        }
+
+        /// <summary>
+        ///  判断远程文件是否存在
+        /// </summary>
+        /// <param name="fileUrl">文件URL</param>
+        /// <returns>存在-true，不存在-false</returns>
+        private bool HttpFileExist(string http_file_url)
+        {
+            WebResponse response = null;
+            bool result = false;//下载结果
+            try
+            {
+                response = WebRequest.Create(http_file_url).GetResponse();
+                result = response == null ? false : true;
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+            finally
+            {
+                if (response != null)
                 {
-                    isDownLoad = true;
-                }
-                var file = new FileMessage
-                {
-                    FileName = fileNewName,
-                    RelativeUrl = "NX License Servers.zip",
-                    Url = imageUrl,
-                    IsDownLoad = isDownLoad,
-                    SavePath = filePath
-                };
-                if (!file.IsDownLoad)
-                {
-                    string fileDirPath = Path.GetDirectoryName(file.SavePath);
-                    if (!Directory.Exists(fileDirPath))
-                    {
-                        Directory.CreateDirectory(fileDirPath);
-                    }
-                    try
-                    {
-                        WebClient client = new WebClient();
-                        client.DownloadFileCompleted += client_DownloadFileCompleted;
-                        client.DownloadProgressChanged += client_DownloadProgressChanged;
-                        client.DownloadFileAsync(new Uri(file.Url), file.SavePath, file.FileName);
-                    }
-                    catch
-                    {
-                    }
+                    response.Close();
                 }
             }
-            
+            return result;
         }
 
         void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
@@ -319,10 +353,12 @@ namespace CAP_Tools.Pages
             {
                 //下载完成
                 this.label1.Content = "许可证下载完成";
+                //重命名文件
+                File.Move(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX_License_Servers_v1.0.0.exe");
                 //解压文件
-                ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\");
+                //ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\");
                 //删除ZIP文件
-                File.Delete(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString());
+                //File.Delete(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString());
                 //按钮可用
                 this.NXLicence.IsEnabled = true;
                 //运行许可证文件

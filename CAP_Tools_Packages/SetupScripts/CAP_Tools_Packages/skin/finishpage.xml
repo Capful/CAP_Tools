@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Windows>
+<!-- 完成 -->
+ <VerticalLayout >
+    <!--<VerticalLayout width="480" height="250" roundcorner="5,5" bkimage="file='form\in_pic.png'">-->
+	<VerticalLayout width="480" height="250">
+	<ImageShow images="form\in_pic_1.png form\in_pic_2.png form\in_pic_3.png" imagecount="3" loop="true" width="480" height="250" />
+	</VerticalLayout>
+	<VerticalLayout bkcolor="#FFFFFFFF" >	
+	<Button name="btnRun" padding="120,40,0,30" width="240" height="40" text="安装完成" normalimage="form\btn_installation_normal.png" hotimage="form\btn_installation_hovered.png" pushedimage="form\btn_installation_pressed.png" disabledimage="form\btn_installation_disable.png" font="6" textcolor="0xffffffff" disabledtextcolor="0xffffffff" margin="0,10,0,0" />
+	</VerticalLayout>
+ </VerticalLayout>
+</Windows>

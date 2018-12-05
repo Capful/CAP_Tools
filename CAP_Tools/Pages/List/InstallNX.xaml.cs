@@ -259,11 +259,11 @@ namespace CAP_Tools.Pages
 
         private void NXLicence_Click(object sender, RoutedEventArgs e)
         {
-            if (HttpFileExist("https://capful.oss-cn-beijing.aliyuncs.com/NX/NX_License_Servers_v1.0.0.exe"))
+            if (HttpFileExist("https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Server%20v2.0.0.exe"))
             {
-                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX_License_Servers_v1.0.0.exe"))
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers.exe"))
                 {
-                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX_License_Servers_v1.0.0.exe");
+                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers.exe");
                 }
                 else
                 {
@@ -276,7 +276,7 @@ namespace CAP_Tools.Pages
                     this.label1.Visibility = Visibility.Visible;
                     this.label2.Visibility = Visibility.Visible;
                     //远程文件路径
-                    string imageUrl = "https://capful.oss-cn-beijing.aliyuncs.com/NX/NX_License_Servers_v1.0.0.exe";
+                    string imageUrl = "https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Server%20v2.0.0.exe";
                     string fileExt = Path.GetExtension(imageUrl);
                     string fileNewName = Guid.NewGuid() + fileExt;
                     bool isDownLoad = false;
@@ -354,7 +354,7 @@ namespace CAP_Tools.Pages
                 //下载完成
                 this.label1.Content = "许可证下载完成";
                 //重命名文件
-                File.Move(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX_License_Servers_v1.0.0.exe");
+                File.Move(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers.exe");
                 //解压文件
                 //ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\");
                 //删除ZIP文件
@@ -362,7 +362,7 @@ namespace CAP_Tools.Pages
                 //按钮可用
                 this.NXLicence.IsEnabled = true;
                 //运行许可证文件
-                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX_License_Servers_v1.0.0.exe");
+                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers.exe");
                 //进度条隐藏
                 this.Prog.Visibility = Visibility.Hidden;
                 //百分比隐藏

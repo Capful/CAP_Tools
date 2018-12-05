@@ -18,6 +18,7 @@ namespace CAP_Tools.Pages
         private void ModernButton_Click_1(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://pan.baidu.com/s/1hYtNW-0blxtdLdSoDDKeuQ");
+            ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
             try
             {
                 Clipboard.SetText("7t1i");
@@ -25,7 +26,6 @@ namespace CAP_Tools.Pages
             }
             catch { }
             System.Threading.Thread.Sleep(10);
-            ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
         }
 
         private void ModernButton_Click_2(object sender, RoutedEventArgs e)
@@ -40,15 +40,16 @@ namespace CAP_Tools.Pages
 
         private void ModernButton_Click_4(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://pan.baidu.com/s/18G9oj8SLNiXd3Kxj8SE50w");
+            System.Diagnostics.Process.Start("https://pan.baidu.com/s/1KSnIpzDqYb_1KAl1JKIydQ");
+            ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
             try
             {
-                Clipboard.SetText("51py");
+                Clipboard.SetText("s3rc");
                 return;
             }
             catch { }
             System.Threading.Thread.Sleep(10);
-            ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
+            
         }
     }
 }

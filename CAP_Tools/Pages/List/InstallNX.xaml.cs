@@ -31,6 +31,11 @@ namespace CAP_Tools.Pages
         {
             InitializeComponent();
             //在程序所在路径新建文件夹
+            //进度条隐藏
+            this.Prog.Visibility = Visibility.Hidden;
+            //百分比隐藏
+            this.label1.Visibility = Visibility.Hidden;
+            this.label2.Visibility = Visibility.Hidden;
             _saveDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NX License Servers");
         }
 

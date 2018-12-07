@@ -9,7 +9,7 @@
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup DisplayName="欢迎使用">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="NX工具" Source="/Pages/NXListPage.xaml" />
+                <mui:Link DisplayName="UG工具" Source="/Pages/NXListPage.xaml" />
                 <mui:Link DisplayName="NC工具" Source="/Pages/NCListPage.xaml" />
                 <mui:Link DisplayName="软件下载" Source="/Pages/Download.xaml" />
             </mui:LinkGroup.Links>

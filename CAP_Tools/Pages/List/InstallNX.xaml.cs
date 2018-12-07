@@ -320,7 +320,7 @@ namespace CAP_Tools.Pages
             }
             else
             {
-                ModernDialog.ShowMessage("网络连接失败，可能是下载链接已失效！请检查网络或者联系Capful", "警告", MessageBoxButton.OK);
+                ModernDialog.ShowMessage("网络连接失败，请检查网络！\n\r也可能是下载链接已失效，联系Capful", "警告", MessageBoxButton.OK);
             }
         }
 

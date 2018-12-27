@@ -21,6 +21,7 @@
             <Label Content="NX12:" Height="20" Width="41" Margin="10,2,10,3" />
             <Button Name="NX12"  ToolTip="单击运行NX12" Width="249" Height="25"   Margin="0,0,0,0" Click="NX12_Click" FontSize="10.5"/>
         </StackPanel>
-        <Label Content="暂时只支持NX10.0以上版本检测，点击按钮运行软件" Margin="10,15,0,20" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="290" FontSize="10"/>
+        <Label Content="暂时只支持NX10.0以上版本检测，点击按钮运行软件" Margin="10,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="290" FontSize="10"/>
+        <Label Content="如果您刚使用本软件'UG安装'功能安装UG，请重启本软件再试。" Margin="10,0,0,20" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="290" FontSize="10"/>
     </StackPanel>
 </UserControl>

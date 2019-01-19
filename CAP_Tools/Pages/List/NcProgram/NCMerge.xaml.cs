@@ -41,6 +41,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                 }
                 ///如果存在，将替换按钮显示
                 this.CL.IsEnabled = true;
+                this.Dk.IsEnabled = true;
                 ///读取选择的文件夹中NC文件
                 ///清空ListBox
                 list.Items.Clear();
@@ -116,6 +117,12 @@ namespace CAP_Tools.Pages.List.NcProgram
             lines.Remove("G28 Y0.0");
             lines.Remove("G28 Y0.0");
             lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
+            lines.Remove("G28 Y0.0");
             ///删除M30
             lines.Remove("M30");
             lines.Remove("M30");
@@ -138,7 +145,24 @@ namespace CAP_Tools.Pages.List.NcProgram
             lines.Remove("M30");
             lines.Remove("M30");
             lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
+            lines.Remove("M30");
             ///删除M09
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
+            lines.Remove("M09");
             lines.Remove("M09");
             lines.Remove("M09");
             lines.Remove("M09");
@@ -255,5 +279,12 @@ namespace CAP_Tools.Pages.List.NcProgram
                 Process.Start("Explorer.exe", SelectFile);
             }
         }
+
+        private void Dk_Click(object sender, RoutedEventArgs e)
+        {
+            string Path = FileRoute.Text;
+            Process.Start("Explorer.exe", Path);
+        }
     }
+
 }

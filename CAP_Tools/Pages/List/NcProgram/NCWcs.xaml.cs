@@ -380,5 +380,10 @@ namespace CAP_Tools.Pages.List.NcProgram
                 }
             }
         }
+        private void Dk_Click(object sender, RoutedEventArgs e)
+        {
+            string Path = FileRoute.Text;
+            Process.Start("Explorer.exe", Path);
+        }
     }
 }

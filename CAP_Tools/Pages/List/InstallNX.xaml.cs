@@ -9,6 +9,7 @@ using System.Net;
 using System.Threading;
 using System.Windows.Controls;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 
 namespace CAP_Tools.Pages
 {
@@ -77,105 +78,128 @@ namespace CAP_Tools.Pages
         {
             string path1 = NXRoute.Text;
             DirectoryInfo dir = new DirectoryInfo(@path1);
-            foreach (FileInfo file in dir.GetFiles("setup.exe", SearchOption.AllDirectories))//第二个参数表示搜索包含子目录中的文件；
+            foreach (FileInfo file in dir.GetFiles("setup.exe", SearchOption.AllDirectories))//在文件夹中搜索setup.exe；
             {
-                if (file.Name.Contains("setup.exe"))
-                    System.Diagnostics.Process.Start(file.FullName);
+                System.Diagnostics.Process.Start(file.FullName);//运行setup.exe
+                break;
             }
         }
 
         private void NXCrack_Click(object sender, RoutedEventArgs e)
         {
             string path1 = NXRoute.Text;
-            string nx85 = path1 + "\\NX_8.5.0_Win64_crack_SSQ";
             string nx10 = path1 + "\\破解文件\\NX 10.0";
             string nx11 = path1 + "\\破解文件\\NX 11.0";
             string nx12 = path1 + "\\破解文件\\NX 12.0";
+            string nx18472 = (System.IO.Path.GetDirectoryName(path1)); //获取上级目录
+            string nx1847 = nx18472 + "\\Siemens.NX.1847.Win64-SSQ\\_SolidSQUAD_\\Client\\NX";
+            string nx18473 = nx18472 + "\\Siemens.NX.1847.Win64-SSQ\\_SolidSQUAD_\\Client\\NX";
             MessageBoxResult result = ModernDialog.ShowMessage("确定要破解NX吗？请确保NX软件都己经关闭。", "提示", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                if (Directory.Exists(nx85))//判断是否存在
+                if (Directory.Exists(nx10))//判断是否存在
                 {
-                    if (CheckNX85() == true)
+                    if (CheckNX10() == true)
                     {
                         ///获取NX安装路径
                         RegistryKey driverKey = NXregistry();
-                        string EXE = (String)driverKey.GetValue("Unigraphics V26.5");
+                        string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
                         string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
                         ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
                         ///打开主目录
-                        Copy(nx85, Home);
+                        Copy(nx10, Home);
                         ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                     }
                     else
                     {
-                        ModernDialog.ShowMessage("抱歉，您未安装NX8.5！请先安装NX8.5主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                        ModernDialog.ShowMessage("抱歉，您未安装NX10！请先安装NX10主程序后再进行破解文件", "警告", MessageBoxButton.OK);
                     }
                 }
                 else
                 {
-                    if (Directory.Exists(nx10))//判断是否存在
+                    if (Directory.Exists(nx11))//判断是否存在
                     {
-                        if (CheckNX10() == true)
+                        if (CheckNX11() == true)
                         {
                             ///获取NX安装路径
                             RegistryKey driverKey = NXregistry();
-                            string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
+                            string EXE = (String)driverKey.GetValue("Unigraphics V29.0");
                             string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
                             ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
                             ///打开主目录
-                            Copy(nx10, Home);
+                            Copy(nx11, Home);
                             ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                         }
                         else
                         {
-                            ModernDialog.ShowMessage("抱歉，您未安装NX10！请先安装NX10主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                            ModernDialog.ShowMessage("抱歉，您未安装NX11！请先安装NX11主程序后再进行破解文件", "警告", MessageBoxButton.OK);
                         }
                     }
                     else
                     {
-                        if (Directory.Exists(nx11))//判断是否存在
+                        if (Directory.Exists(nx12))//判断是否存在
                         {
-                            if (CheckNX11() == true)
+                            if (CheckNX12() == true)
                             {
                                 ///获取NX安装路径
                                 RegistryKey driverKey = NXregistry();
-                                string EXE = (String)driverKey.GetValue("Unigraphics V29.0");
+                                string EXE = (String)driverKey.GetValue("Unigraphics V30.0");
                                 string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
                                 ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
                                 ///打开主目录
-                                Copy(nx11, Home);
+                                Copy(nx12, Home);
                                 ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                             }
                             else
                             {
-                                ModernDialog.ShowMessage("抱歉，您未安装NX11！请先安装NX11主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                                ModernDialog.ShowMessage("抱歉，您未安装NX12！请先安装NX12主程序后再进行破解文件", "警告", MessageBoxButton.OK);
                             }
                         }
                         else
                         {
-                            if (Directory.Exists(nx12))//判断是否存在
+                            if (Directory.Exists(nx1847))//判断是否存在
                             {
-                                if (CheckNX12() == true)
+                                if (CheckNX1847() == true)
                                 {
                                     ///获取NX安装路径
                                     RegistryKey driverKey = NXregistry();
-                                    string EXE = (String)driverKey.GetValue("Unigraphics V30.0");
+                                    string EXE = (String)driverKey.GetValue("Unigraphics V31.0");
                                     string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
                                     ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
                                     ///打开主目录
-                                    Copy(nx12, Home);
+                                    Copy(nx1847, Home);
                                     ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                                 }
                                 else
                                 {
-                                    ModernDialog.ShowMessage("抱歉，您未安装NX12！请先安装NX12主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                                    ModernDialog.ShowMessage("抱歉，您未安装NX1847！请先安装NX1847主程序后再进行破解文件", "警告", MessageBoxButton.OK);
                                 }
                             }
                             else
                             {
+                                if (Directory.Exists(nx18472))//判断是否存在
+                                {
+                                    if (CheckNX1847() == true)
+                                    {
+                                        ///获取NX安装路径
+                                        RegistryKey driverKey = NXregistry();
+                                        string EXE = (String)driverKey.GetValue("Unigraphics V31.0");
+                                        string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+                                        ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+                                        ///打开主目录
+                                        Copy(nx18472, Home);
+                                        ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
+                                    }
+                                    else
+                                    {
+                                        ModernDialog.ShowMessage("抱歉，您未安装NX1847！请先安装NX1847主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                                    }
+                                }
+                                else
+                                {
 
-                                ModernDialog.ShowMessage("未在安装目录找到破解文件，请检查安装包是否完整。\n\r或者检查破解文件的目录名称是否为‘破解文件’，如果不是，请更改后重试", "警告", MessageBoxButton.OK);
+                                    ModernDialog.ShowMessage("未在安装目录找到破解文件，请检查安装包是否完整。\n\r或者检查破解文件的目录名称是否为‘破解文件’，如果不是，请更改后重试！\n\r NX1847的破解文件的名称'NX1847主程序&许可证'请解压到主程序的同级文件夹内", "警告", MessageBoxButton.OK);
+                                }
                             }
                         }
                     }
@@ -196,11 +220,13 @@ namespace CAP_Tools.Pages
 
         public static void CopyAll(DirectoryInfo source, DirectoryInfo target)
         {
+
             Directory.CreateDirectory(target.FullName);
 
             // Copy each file into the new directory.
             foreach (FileInfo fi in source.GetFiles())
             {
+                
                 Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
                 fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
             }
@@ -212,6 +238,18 @@ namespace CAP_Tools.Pages
                     target.CreateSubdirectory(diSourceSubDir.Name);
                 CopyAll(diSourceSubDir, nextTargetSubDir);
             }
+        }
+
+        private bool CheckNX1847()
+        {
+            RegistryKey driverKey = NXregistry();
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V32.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            if (NXPath != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         private bool CheckNX12()
@@ -250,78 +288,132 @@ namespace CAP_Tools.Pages
             return false;
         }
 
-        private bool CheckNX85()
-        {
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V26.5");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
-            if (NXPath != null)
-            {
-                return true;
-            }
-            return false;
-        }
 
         private void NXLicence_Click(object sender, RoutedEventArgs e)
         {
-            if (HttpFileExist("https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Server%20v2.0.0.exe"))
+            if (CheckNX1847() == true)
             {
-                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers.exe"))
+                if (HttpFileExist("https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Server%20v2.1.0.exe"))
                 {
-                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers.exe");
+                    if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX10-NX1847.exe"))
+                    {
+                        System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX10-NX1847.exe");
+                    }
+                    else
+                    {
+                        //许可证不存在是下载许可证
+                        //按钮不可用
+                        this.NXLicence.IsEnabled = false;
+                        //进度条显示
+                        this.Prog.Visibility = Visibility.Visible;
+                        //进度条百分比显示
+                        this.label1.Visibility = Visibility.Visible;
+                        this.label2.Visibility = Visibility.Visible;
+                        //远程文件路径
+                        string imageUrl = "https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Server%20v2.1.0.exe";
+                        string fileExt = Path.GetExtension(imageUrl);
+                        string fileNewName = Guid.NewGuid() + fileExt;
+                        bool isDownLoad = false;
+                        string filePath = Path.Combine(_saveDir, fileNewName);
+                        if (File.Exists(filePath))
+                        {
+                            isDownLoad = true;
+                        }
+                        var file = new FileMessage
+                        {
+                            FileName = fileNewName,
+                            RelativeUrl = "NX License Servers.zip",
+                            Url = imageUrl,
+                            IsDownLoad = isDownLoad,
+                            SavePath = filePath
+                        };
+                        if (!file.IsDownLoad)
+                        {
+                            string fileDirPath = Path.GetDirectoryName(file.SavePath);
+                            if (!Directory.Exists(fileDirPath))
+                            {
+                                Directory.CreateDirectory(fileDirPath);
+                            }
+                            try
+                            {
+                                WebClient client = new WebClient();
+                                client.DownloadFileCompleted += client_DownloadFileCompleted;
+                                client.DownloadProgressChanged += client_DownloadProgressChanged;
+                                client.DownloadFileAsync(new Uri(file.Url), file.SavePath, file.FileName);
+                            }
+                            catch
+                            {
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    //许可证不存在是下载许可证
-                    //按钮不可用
-                    this.NXLicence.IsEnabled = false;
-                    //进度条显示
-                    this.Prog.Visibility = Visibility.Visible;
-                    //进度条百分比显示
-                    this.label1.Visibility = Visibility.Visible;
-                    this.label2.Visibility = Visibility.Visible;
-                    //远程文件路径
-                    string imageUrl = "https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Server%20v2.0.0.exe";
-                    string fileExt = Path.GetExtension(imageUrl);
-                    string fileNewName = Guid.NewGuid() + fileExt;
-                    bool isDownLoad = false;
-                    string filePath = Path.Combine(_saveDir, fileNewName);
-                    if (File.Exists(filePath))
-                    {
-                        isDownLoad = true;
-                    }
-                    var file = new FileMessage
-                    {
-                        FileName = fileNewName,
-                        RelativeUrl = "NX License Servers.zip",
-                        Url = imageUrl,
-                        IsDownLoad = isDownLoad,
-                        SavePath = filePath
-                    };
-                    if (!file.IsDownLoad)
-                    {
-                        string fileDirPath = Path.GetDirectoryName(file.SavePath);
-                        if (!Directory.Exists(fileDirPath))
-                        {
-                            Directory.CreateDirectory(fileDirPath);
-                        }
-                        try
-                        {
-                            WebClient client = new WebClient();
-                            client.DownloadFileCompleted += client_DownloadFileCompleted;
-                            client.DownloadProgressChanged += client_DownloadProgressChanged;
-                            client.DownloadFileAsync(new Uri(file.Url), file.SavePath, file.FileName);
-                        }
-                        catch
-                        {
-                        }
-                    }
+                    ModernDialog.ShowMessage("网络连接失败，请检查网络！\n\r也可能是下载链接已失效，联系Capful", "警告", MessageBoxButton.OK);
                 }
             }
             else
             {
-                ModernDialog.ShowMessage("网络连接失败，请检查网络！\n\r也可能是下载链接已失效，联系Capful", "警告", MessageBoxButton.OK);
+                if (HttpFileExist("https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Server%20v2.0.0.exe"))
+                {
+                    if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX6-NX12.exe"))
+                    {
+                        System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX6-NX12.exe");
+                    }
+                    else
+                    {
+                        //许可证不存在是下载许可证
+                        //按钮不可用
+                        this.NXLicence.IsEnabled = false;
+                        //进度条显示
+                        this.Prog.Visibility = Visibility.Visible;
+                        //进度条百分比显示
+                        this.label1.Visibility = Visibility.Visible;
+                        this.label2.Visibility = Visibility.Visible;
+                        //远程文件路径
+                        string imageUrl = "https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Server%20v2.0.0.exe";
+                        string fileExt = Path.GetExtension(imageUrl);
+                        string fileNewName = Guid.NewGuid() + fileExt;
+                        bool isDownLoad = false;
+                        string filePath = Path.Combine(_saveDir, fileNewName);
+                        if (File.Exists(filePath))
+                        {
+                            isDownLoad = true;
+                        }
+                        var file = new FileMessage
+                        {
+                            FileName = fileNewName,
+                            RelativeUrl = "NX License Servers.zip",
+                            Url = imageUrl,
+                            IsDownLoad = isDownLoad,
+                            SavePath = filePath
+                        };
+                        if (!file.IsDownLoad)
+                        {
+                            string fileDirPath = Path.GetDirectoryName(file.SavePath);
+                            if (!Directory.Exists(fileDirPath))
+                            {
+                                Directory.CreateDirectory(fileDirPath);
+                            }
+                            try
+                            {
+                                WebClient client = new WebClient();
+                                client.DownloadFileCompleted += client_DownloadFileCompleted;
+                                client.DownloadProgressChanged += client_DownloadProgressChanged;
+                                client.DownloadFileAsync(new Uri(file.Url), file.SavePath, file.FileName);
+                            }
+                            catch
+                            {
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    ModernDialog.ShowMessage("网络连接失败，请检查网络！\n\r也可能是下载链接已失效，联系Capful", "警告", MessageBoxButton.OK);
+                }
             }
+            
         }
 
         /// <summary>
@@ -358,21 +450,28 @@ namespace CAP_Tools.Pages
             {
                 //下载完成
                 this.label1.Content = "许可证下载完成";
-                //重命名文件
-                File.Move(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers.exe");
-                //解压文件
-                //ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\");
-                //删除ZIP文件
-                //File.Delete(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString());
+                
                 //按钮可用
                 this.NXLicence.IsEnabled = true;
-                //运行许可证文件
-                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers.exe");
                 //进度条隐藏
                 this.Prog.Visibility = Visibility.Hidden;
                 //百分比隐藏
                 this.label1.Visibility = Visibility.Hidden;
                 this.label2.Visibility = Visibility.Hidden;
+                if (CheckNX1847() == true)
+                {
+                    //重命名文件
+                    File.Move(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX10-NX1847.exe");
+                    //运行许可证文件
+                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX10-NX1847.exe");
+                }
+                else
+                {
+                    //重命名文件
+                    File.Move(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX6-NX12.exe");
+                    //运行许可证文件
+                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX6-NX12.exe");
+                }
             }
         }
 

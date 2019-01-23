@@ -9,6 +9,10 @@
     <StackPanel HorizontalAlignment="Left" Margin="0,0,0,0" Width="550">
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="80" Margin="0,50,0,20" Width="550">
             <StackPanel Width="88"  Margin="15,0,0,0">
+                <mui:ModernButton  EllipseDiameter="48" IconWidth="30" IconHeight="30" IconData="F1 M 37.2083,42.75L 28.5,31.6667L 33.25,31.6667L 33.25,19L 42.75,19L 42.75,31.6667L 47.5,31.6667L 38.7917,42.75L 37.2083,42.75 Z M 19,38L 23.75,26.9167L 29.6875,26.9167L 29.6875,30.0833L 26.125,30.0833L 22.9583,38L 30.875,38C 30.875,41.935 34.065,45.125 38,45.125C 41.935,45.125 45.125,41.935 45.125,38L 53.0417,38L 49.875,30.0833L 46.3125,30.0833L 46.3125,26.9167L 52.25,26.9167L 57,38L 57,53.8333L 19,53.8333L 19,38 Z" Margin="18,0,0,0" Click="NX1847_Click" Height="50" Width="50" HorizontalAlignment="Left"  />
+                <Label Content="NX1847" ToolTip="Siemens.NX 1847" Width="60" HorizontalAlignment="Center" Margin="18,10,10,0" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Width="88"  Margin="15,0,0,0">
                 <mui:ModernButton  EllipseDiameter="48" IconWidth="30" IconHeight="30" IconData="F1 M 37.2083,42.75L 28.5,31.6667L 33.25,31.6667L 33.25,19L 42.75,19L 42.75,31.6667L 47.5,31.6667L 38.7917,42.75L 37.2083,42.75 Z M 19,38L 23.75,26.9167L 29.6875,26.9167L 29.6875,30.0833L 26.125,30.0833L 22.9583,38L 30.875,38C 30.875,41.935 34.065,45.125 38,45.125C 41.935,45.125 45.125,41.935 45.125,38L 53.0417,38L 49.875,30.0833L 46.3125,30.0833L 46.3125,26.9167L 52.25,26.9167L 57,38L 57,53.8333L 19,53.8333L 19,38 Z" Margin="18,0,0,0" Click="NX12_Click" Height="50" Width="50" HorizontalAlignment="Left"  />
                 <Label Content="NX12" ToolTip="Siemens.NX 12.0.1" Width="34" HorizontalAlignment="Center" Margin="20,10,20,0" VerticalAlignment="Center"/>
             </StackPanel>

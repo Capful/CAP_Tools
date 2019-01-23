@@ -243,7 +243,7 @@ namespace CAP_Tools.Pages
         private bool CheckNX1847()
         {
             RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V32.0");
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V31.0");
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
             if (NXPath != null)
             {
@@ -450,7 +450,6 @@ namespace CAP_Tools.Pages
             {
                 //下载完成
                 this.label1.Content = "许可证下载完成";
-                
                 //按钮可用
                 this.NXLicence.IsEnabled = true;
                 //进度条隐藏

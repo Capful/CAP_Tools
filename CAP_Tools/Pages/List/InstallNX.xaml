@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="320">
     <StackPanel HorizontalAlignment="Left" Margin="0,0,-10,0" Width="320">
-        <TextBlock Text="NX快捷安装"  Margin="0,0,0,8" FontWeight="Bold" FontSize="14" />
+        <TextBlock Text="NX快捷安装-最新支持NX1847"  Margin="0,0,0,8" FontWeight="Bold" FontSize="14" />
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,8" Width="267">
             <Label Content="选择NX安装包解压路径" Height="20" Width="140" Margin="0,0,0,0" HorizontalAlignment="Left" />
             <Button x:Name="Xz" Content="浏览" Click="XZ_Click" FontSize="10.5" Margin="15,0,0,0" Width="90" />

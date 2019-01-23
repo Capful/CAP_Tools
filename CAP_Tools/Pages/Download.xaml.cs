@@ -17,7 +17,7 @@ namespace CAP_Tools.Pages
 
         private void NX1847_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://pan.baidu.com/s/1y6S0J7KLRjtDqwvsB4plhw");
+            System.Diagnostics.Process.Start("https://pan.baidu.com/s/1xQWgpPVKICHKGQBxVfSC9w");
             //ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
             //try
             //{

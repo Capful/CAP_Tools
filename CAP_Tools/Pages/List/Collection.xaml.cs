@@ -178,48 +178,79 @@ namespace CAP_Tools.Pages.List
                             }
                             Copy(Post1, Post2);
                         }
-                        if (CheckNX11() == true)
+                        else
                         {
-                            ///获取NX安装路径
-                            RegistryKey driverKey = NXregistry();
-                            string EXE = (String)driverKey.GetValue("Unigraphics V29.0");
-                            string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                            string Post2 = Home + @"\MACH\resource\postprocessor";
-                            ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                            ///打开主目录
-                            if (File.Exists(Post2 + "\\template_post.dat"))
+                            if (CheckNX11() == true)
                             {
-                                if (File.Exists(Post2 + "\\template_post.dat.bak"))
+                                ///获取NX安装路径
+                                RegistryKey driverKey = NXregistry();
+                                string EXE = (String)driverKey.GetValue("Unigraphics V29.0");
+                                string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+                                string Post2 = Home + @"\MACH\resource\postprocessor";
+                                ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+                                ///打开主目录
+                                if (File.Exists(Post2 + "\\template_post.dat"))
                                 {
+                                    if (File.Exists(Post2 + "\\template_post.dat.bak"))
+                                    {
+                                    }
+                                    else
+                                    {
+                                        File.Move(Post2 + "\\template_post.dat", Post2 + "\\template_post.dat.bak");
+                                    }
+                                }
+                                Copy(Post1, Post2);
+                            }
+                            else
+                            {
+                                if (CheckNX12() == true)
+                                {
+                                    ///获取NX安装路径
+                                    RegistryKey driverKey = NXregistry();
+                                    string EXE = (String)driverKey.GetValue("Unigraphics V30.0");
+                                    string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+                                    string Post2 = Home + @"\MACH\resource\postprocessor";
+                                    ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+                                    ///打开主目录
+                                    if (File.Exists(Post2 + "\\template_post.dat"))
+                                    {
+                                        if (File.Exists(Post2 + "\\template_post.dat.bak"))
+                                        {
+                                        }
+                                        else
+                                        {
+                                            File.Move(Post2 + "\\template_post.dat", Post2 + "\\template_post.dat.bak");
+                                        }
+                                    }
+                                    Copy(Post1, Post2);
                                 }
                                 else
                                 {
-                                    File.Move(Post2 + "\\template_post.dat", Post2 + "\\template_post.dat.bak");
+                                    if (CheckNX1847() == true)
+                                    {
+                                        ///获取NX安装路径
+                                        RegistryKey driverKey = NXregistry();
+                                        string EXE = (String)driverKey.GetValue("Unigraphics V31.0");
+                                        string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+                                        string Post2 = Home + @"\MACH\resource\postprocessor";
+                                        ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+                                        ///打开主目录
+                                        if (File.Exists(Post2 + "\\template_post.dat"))
+                                        {
+                                            if (File.Exists(Post2 + "\\template_post.dat.bak"))
+                                            {
+                                            }
+                                            else
+                                            {
+                                                File.Move(Post2 + "\\template_post.dat", Post2 + "\\template_post.dat.bak");
+                                            }
+                                        }
+                                        Copy(Post1, Post2);
+                                    }
                                 }
                             }
-                            Copy(Post1, Post2);
                         }
-                        if (CheckNX12() == true)
-                        {
-                            ///获取NX安装路径
-                            RegistryKey driverKey = NXregistry();
-                            string EXE = (String)driverKey.GetValue("Unigraphics V30.0");
-                            string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                            string Post2 = Home + @"\MACH\resource\postprocessor";
-                            ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                            ///打开主目录
-                            if (File.Exists(Post2 + "\\template_post.dat"))
-                            {
-                                if (File.Exists(Post2 + "\\template_post.dat.bak"))
-                                {
-                                }
-                                else
-                                {
-                                    File.Move(Post2 + "\\template_post.dat", Post2 + "\\template_post.dat.bak");
-                                }
-                            }
-                            Copy(Post1, Post2);
-                        }
+
                         ModernDialog.ShowMessage("后处理文件安装完成，已将原始菜单文件后缀名改为.bak", "提示", MessageBoxButton.OK);
                     }
                     else
@@ -261,6 +292,18 @@ namespace CAP_Tools.Pages.List
                     target.CreateSubdirectory(diSourceSubDir.Name);
                 CopyAll(diSourceSubDir, nextTargetSubDir);
             }
+        }
+
+            private bool CheckNX1847()
+        {
+            RegistryKey driverKey = NXregistry();
+            string NXEXE = (String)driverKey.GetValue("Unigraphics V31.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            if (NXPath != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         private bool CheckNX12()

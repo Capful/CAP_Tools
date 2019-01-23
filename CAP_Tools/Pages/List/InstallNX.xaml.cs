@@ -60,6 +60,7 @@ namespace CAP_Tools.Pages
             this.NXRoute.Text = m_Dir;
             string path1 = NXRoute.Text;
             string path2 = "Launch.exe";
+            string path3 = "\\UG_NX1847正式版\\";
             string newPath = System.IO.Path.Combine(path1, path2);
             if (File.Exists(@newPath))
             {
@@ -68,9 +69,18 @@ namespace CAP_Tools.Pages
             }
             else
             {
-                this.NXInstall.IsEnabled = false;
-                this.NXCrack.IsEnabled = false;
-                ModernDialog.ShowMessage("NX安装主程序不存在，请重新选择文件夹或检测安装程序完整性", "警告", MessageBoxButton.OK);
+                if (File.Exists(path1 + path3 + path2))
+                {
+                    this.NXInstall.IsEnabled = true;
+                    this.NXCrack.IsEnabled = true;
+                    ModernDialog.ShowMessage(path1 + path3 + path2, "警告", MessageBoxButton.OK);
+                }
+                else
+                {
+                    this.NXInstall.IsEnabled = false;
+                    this.NXCrack.IsEnabled = false;
+                    ModernDialog.ShowMessage("NX安装主程序不存在，请重新选择文件夹或检测安装程序完整性", "警告", MessageBoxButton.OK);
+                }
             }
         }
 
@@ -91,9 +101,9 @@ namespace CAP_Tools.Pages
             string nx10 = path1 + "\\破解文件\\NX 10.0";
             string nx11 = path1 + "\\破解文件\\NX 11.0";
             string nx12 = path1 + "\\破解文件\\NX 12.0";
-            string nx18472 = (System.IO.Path.GetDirectoryName(path1)); //获取上级目录
-            string nx1847 = nx18472 + "\\Siemens.NX.1847.Win64-SSQ\\_SolidSQUAD_\\Client\\NX";
-            string nx18473 = nx18472 + "\\Siemens.NX.1847.Win64-SSQ\\_SolidSQUAD_\\Client\\NX";
+            string nx1847 = path1 + "\\NX1847破解文件&许可证\\NX";
+            string nx1847SSQ1 = (System.IO.Path.GetDirectoryName(path1)); //获取上级目录
+            string nx1847SSQ = nx1847SSQ1 + "\\Siemens.NX.1847.Win64-SSQ\\_SolidSQUAD_\\Client\\NX";
             MessageBoxResult result = ModernDialog.ShowMessage("确定要破解NX吗？请确保NX软件都己经关闭。", "提示", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
@@ -177,7 +187,7 @@ namespace CAP_Tools.Pages
                             }
                             else
                             {
-                                if (Directory.Exists(nx18472))//判断是否存在
+                                if (Directory.Exists(nx1847SSQ))//判断是否存在
                                 {
                                     if (CheckNX1847() == true)
                                     {
@@ -187,7 +197,7 @@ namespace CAP_Tools.Pages
                                         string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
                                         ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
                                         ///打开主目录
-                                        Copy(nx18472, Home);
+                                        Copy(nx1847SSQ, Home);
                                         ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                                     }
                                     else
@@ -198,7 +208,7 @@ namespace CAP_Tools.Pages
                                 else
                                 {
 
-                                    ModernDialog.ShowMessage("未在安装目录找到破解文件，请检查安装包是否完整。\n\r或者检查破解文件的目录名称是否为‘破解文件’，如果不是，请更改后重试！\n\r NX1847的破解文件的名称'NX1847主程序&许可证'请解压到主程序的同级文件夹内", "警告", MessageBoxButton.OK);
+                                    ModernDialog.ShowMessage("未在安装目录找到破解文件，请检查安装包是否完整。\n\r或者检查破解文件的目录名称是否为‘破解文件’，如果不是，请更改后重试！\n\r NX1847的破解文件的名称'NX1847破解文件&许可证'请确保破解文件夹存在", "警告", MessageBoxButton.OK);
                                 }
                             }
                         }

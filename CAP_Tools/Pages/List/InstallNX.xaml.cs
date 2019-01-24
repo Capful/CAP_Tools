@@ -73,7 +73,6 @@ namespace CAP_Tools.Pages
                 {
                     this.NXInstall.IsEnabled = true;
                     this.NXCrack.IsEnabled = true;
-                    ModernDialog.ShowMessage(path1 + path3 + path2, "警告", MessageBoxButton.OK);
                 }
                 else
                 {
@@ -87,10 +86,10 @@ namespace CAP_Tools.Pages
         private void NXInstall_Click(object sender, RoutedEventArgs e)
         {
             string path1 = NXRoute.Text;
-            DirectoryInfo dir = new DirectoryInfo(@path1);
-            foreach (FileInfo file in dir.GetFiles("setup.exe", SearchOption.AllDirectories))//在文件夹中搜索setup.exe；
+            DirectoryInfo dir = new DirectoryInfo(path1);
+            foreach (FileInfo file in dir.GetFiles("UGII.cab", SearchOption.AllDirectories))//在文件夹中搜索setup.exe；
             {
-                System.Diagnostics.Process.Start(file.FullName);//运行setup.exe
+                System.Diagnostics.Process.Start((System.IO.Path.GetDirectoryName(file.FullName)) + "\\setup.exe");//运行setup.exe
                 break;
             }
         }

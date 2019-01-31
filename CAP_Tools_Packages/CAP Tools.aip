@@ -33,7 +33,9 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
     <ROW Directory="CAPPost_Dir" Directory_Parent="Postprocessor_Dir" DefaultDir="CAPPOS~1|CAP Post"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="Postprocessor_Dir" Directory_Parent="APPDIR" DefaultDir="POSTPR~1|Postprocessor"/>
+    <ROW Directory="ProgramMenuFolder" Directory_Parent="TARGETDIR" DefaultDir="PROGRA~1|ProgramMenuFolder" IsPseudoRoot="1"/>
     <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
   </COMPONENT>
@@ -62,6 +64,8 @@
   <COMPONENT cid="caphyon.advinst.custcomp.MsiShortcutPropertyComponent">
     <ROW MsiShortcutProperty="_0" Shortcut_="_" PropertyKey="System.AppUserModel.PreventPinning" PropVariantValue="1"/>
     <ROW MsiShortcutProperty="CAP0" Shortcut_="CAP" PropertyKey="System.AppUserModel.PreventPinning" PropVariantValue="1"/>
+    <ROW MsiShortcutProperty="CAP_10" Shortcut_="CAP_1" PropertyKey="System.AppUserModel.PreventPinning" PropVariantValue="1"/>
+    <ROW MsiShortcutProperty="CAP_20" Shortcut_="CAP_2" PropertyKey="System.AppUserModel.PreventPinning" PropVariantValue="1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
     <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
@@ -377,6 +381,8 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
     <ROW Shortcut="CAP" Directory_="SHORTCUTDIR" Name="CAP工具箱~1|CAP 工具箱" Component_="CAPTools.exe" Target="[#CAPTools.exe]" Hotkey="0" Icon_="logo.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="CAP_1" Directory_="DesktopFolder" Name="CAP工具箱~1|CAP 工具箱" Component_="CAPTools.exe" Target="[#CAPTools.exe]" Hotkey="0" Icon_="logo.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="CAP_2" Directory_="ProgramMenuFolder" Name="CAP工具箱~1|CAP 工具箱" Component_="CAPTools.exe" Target="[#CAPTools.exe]" Hotkey="0" Icon_="logo.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
     <ROW Shortcut="_" Directory_="APPDIR" Name="卸载" Component_="ProductInformation" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Hotkey="0" Icon_="SystemFoldermsiexec.exe" IconIndex="0" ShowCmd="1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiTextStyleComponent">

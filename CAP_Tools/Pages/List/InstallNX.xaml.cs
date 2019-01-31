@@ -302,7 +302,7 @@ namespace CAP_Tools.Pages
         {
             if (CheckNX1847() == true)
             {
-                if (HttpFileExist("https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Server%20v2.1.0.exe"))
+                if (HttpFileExist("https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Servers%20v%202.2.1901.exe"))
                 {
                     if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX10-NX1847.exe"))
                     {
@@ -319,7 +319,7 @@ namespace CAP_Tools.Pages
                         this.label1.Visibility = Visibility.Visible;
                         this.label2.Visibility = Visibility.Visible;
                         //远程文件路径
-                        string imageUrl = "https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Server%20v2.1.0.exe";
+                        string imageUrl = "https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Servers%20v%202.2.1901.exe";
                         string fileExt = Path.GetExtension(imageUrl);
                         string fileNewName = Guid.NewGuid() + fileExt;
                         bool isDownLoad = false;

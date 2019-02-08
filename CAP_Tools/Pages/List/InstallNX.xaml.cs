@@ -300,129 +300,64 @@ namespace CAP_Tools.Pages
 
         private void NXLicence_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckNX1847() == true)
+            if (HttpFileExist("https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Servers%20v%202.2.1902.exe"))
             {
-                if (HttpFileExist("https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Servers%20v%202.2.1901.exe"))
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers v 2.2.1902.exe"))
                 {
-                    if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX10-NX1847.exe"))
-                    {
-                        System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX10-NX1847.exe");
-                    }
-                    else
-                    {
-                        //许可证不存在是下载许可证
-                        //按钮不可用
-                        this.NXLicence.IsEnabled = false;
-                        //进度条显示
-                        this.Prog.Visibility = Visibility.Visible;
-                        //进度条百分比显示
-                        this.label1.Visibility = Visibility.Visible;
-                        this.label2.Visibility = Visibility.Visible;
-                        //远程文件路径
-                        string imageUrl = "https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Servers%20v%202.2.1901.exe";
-                        string fileExt = Path.GetExtension(imageUrl);
-                        string fileNewName = Guid.NewGuid() + fileExt;
-                        bool isDownLoad = false;
-                        string filePath = Path.Combine(_saveDir, fileNewName);
-                        if (File.Exists(filePath))
-                        {
-                            isDownLoad = true;
-                        }
-                        var file = new FileMessage
-                        {
-                            FileName = fileNewName,
-                            RelativeUrl = "NX License Servers.zip",
-                            Url = imageUrl,
-                            IsDownLoad = isDownLoad,
-                            SavePath = filePath
-                        };
-                        if (!file.IsDownLoad)
-                        {
-                            string fileDirPath = Path.GetDirectoryName(file.SavePath);
-                            if (!Directory.Exists(fileDirPath))
-                            {
-                                Directory.CreateDirectory(fileDirPath);
-                            }
-                            try
-                            {
-                                WebClient client = new WebClient();
-                                client.DownloadFileCompleted += client_DownloadFileCompleted;
-                                client.DownloadProgressChanged += client_DownloadProgressChanged;
-                                client.DownloadFileAsync(new Uri(file.Url), file.SavePath, file.FileName);
-                            }
-                            catch
-                            {
-                            }
-                        }
-                    }
+                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers v 2.2.1902.exe");
                 }
                 else
                 {
-                    ModernDialog.ShowMessage("网络连接失败，请检查网络！\n\r也可能是下载链接已失效，联系Capful", "警告", MessageBoxButton.OK);
+                    //许可证不存在是下载许可证
+                    //按钮不可用
+                    this.NXLicence.IsEnabled = false;
+                    //进度条显示
+                    this.Prog.Visibility = Visibility.Visible;
+                    //进度条百分比显示
+                    this.label1.Visibility = Visibility.Visible;
+                    this.label2.Visibility = Visibility.Visible;
+                    //远程文件路径
+                    string imageUrl = "https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Servers%20v%202.2.1902.exe";
+                    string fileExt = Path.GetExtension(imageUrl);
+                    string fileNewName = Guid.NewGuid() + fileExt;
+                    bool isDownLoad = false;
+                    string filePath = Path.Combine(_saveDir, fileNewName);
+                    if (File.Exists(filePath))
+                    {
+                        isDownLoad = true;
+                    }
+                    var file = new FileMessage
+                    {
+                        FileName = fileNewName,
+                        RelativeUrl = "NX License Servers.zip",
+                        Url = imageUrl,
+                        IsDownLoad = isDownLoad,
+                        SavePath = filePath
+                    };
+                    if (!file.IsDownLoad)
+                    {
+                        string fileDirPath = Path.GetDirectoryName(file.SavePath);
+                        if (!Directory.Exists(fileDirPath))
+                        {
+                            Directory.CreateDirectory(fileDirPath);
+                        }
+                        try
+                        {
+                            WebClient client = new WebClient();
+                            client.DownloadFileCompleted += client_DownloadFileCompleted;
+                            client.DownloadProgressChanged += client_DownloadProgressChanged;
+                            client.DownloadFileAsync(new Uri(file.Url), file.SavePath, file.FileName);
+                        }
+                        catch
+                        {
+                        }
+                    }
                 }
             }
             else
             {
-                if (HttpFileExist("https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Server%20v2.0.0.exe"))
-                {
-                    if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX6-NX12.exe"))
-                    {
-                        System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX6-NX12.exe");
-                    }
-                    else
-                    {
-                        //许可证不存在是下载许可证
-                        //按钮不可用
-                        this.NXLicence.IsEnabled = false;
-                        //进度条显示
-                        this.Prog.Visibility = Visibility.Visible;
-                        //进度条百分比显示
-                        this.label1.Visibility = Visibility.Visible;
-                        this.label2.Visibility = Visibility.Visible;
-                        //远程文件路径
-                        string imageUrl = "https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Server%20v2.0.0.exe";
-                        string fileExt = Path.GetExtension(imageUrl);
-                        string fileNewName = Guid.NewGuid() + fileExt;
-                        bool isDownLoad = false;
-                        string filePath = Path.Combine(_saveDir, fileNewName);
-                        if (File.Exists(filePath))
-                        {
-                            isDownLoad = true;
-                        }
-                        var file = new FileMessage
-                        {
-                            FileName = fileNewName,
-                            RelativeUrl = "NX License Servers.zip",
-                            Url = imageUrl,
-                            IsDownLoad = isDownLoad,
-                            SavePath = filePath
-                        };
-                        if (!file.IsDownLoad)
-                        {
-                            string fileDirPath = Path.GetDirectoryName(file.SavePath);
-                            if (!Directory.Exists(fileDirPath))
-                            {
-                                Directory.CreateDirectory(fileDirPath);
-                            }
-                            try
-                            {
-                                WebClient client = new WebClient();
-                                client.DownloadFileCompleted += client_DownloadFileCompleted;
-                                client.DownloadProgressChanged += client_DownloadProgressChanged;
-                                client.DownloadFileAsync(new Uri(file.Url), file.SavePath, file.FileName);
-                            }
-                            catch
-                            {
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    ModernDialog.ShowMessage("网络连接失败，请检查网络！\n\r也可能是下载链接已失效，联系Capful", "警告", MessageBoxButton.OK);
-                }
+                ModernDialog.ShowMessage("网络连接失败，请检查网络！\n\r也可能是下载链接已失效，联系Capful", "警告", MessageBoxButton.OK);
             }
-            
         }
 
         /// <summary>
@@ -459,27 +394,21 @@ namespace CAP_Tools.Pages
             {
                 //下载完成
                 this.label1.Content = "许可证下载完成";
+                //重命名文件
+                File.Move(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers v 2.2.1902.exe");
+                //解压文件
+                //ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\");
+                //删除ZIP文件
+                //File.Delete(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString());
                 //按钮可用
                 this.NXLicence.IsEnabled = true;
+                //运行许可证文件
+                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers v 2.2.1902.exe");
                 //进度条隐藏
                 this.Prog.Visibility = Visibility.Hidden;
                 //百分比隐藏
                 this.label1.Visibility = Visibility.Hidden;
                 this.label2.Visibility = Visibility.Hidden;
-                if (CheckNX1847() == true)
-                {
-                    //重命名文件
-                    File.Move(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX10-NX1847.exe");
-                    //运行许可证文件
-                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX10-NX1847.exe");
-                }
-                else
-                {
-                    //重命名文件
-                    File.Move(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX6-NX12.exe");
-                    //运行许可证文件
-                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers NX6-NX12.exe");
-                }
             }
         }
 

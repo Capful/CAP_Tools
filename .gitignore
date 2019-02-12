@@ -190,3 +190,7 @@ UpgradeLog*.htm
 FakesAssemblies/
 .nuget/nuget.exe.old
 *.DotSettings
+
+
+# ÆÁ±Î»º´æÎÄ¼þ¼Ð
+CAP_Tools_Packages/CAP Tools-cache/

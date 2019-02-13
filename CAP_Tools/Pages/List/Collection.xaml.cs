@@ -33,19 +33,19 @@ namespace CAP_Tools.Pages.List
             }
             else
             {
-                if (CheckNX12() == true)
+                if (CheckNX1847() == true)
                 {
                     ///获取NX安装路径
                     RegistryKey driverKey = NXregistry();
-                    string NX12EXE = (String)driverKey.GetValue("Unigraphics V30.0");
+                    string NX1847EXE = (String)driverKey.GetValue("Unigraphics V31.0");
                     ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                    string NX12 = (System.IO.Path.GetDirectoryName(@NX12EXE));
-                    string path1 = @NX12;
+                    string NX1847 = (System.IO.Path.GetDirectoryName(@NX1847EXE));
+                    string path1 = @NX1847;
                     string path2 = "ugshext.dll";
                     string newPath = System.IO.Path.Combine(path1, path2); // newPath = "D:\temp\result.txt";
                     string newPath1 = "\"" + newPath + "\""; //"\"" + path + "\""（path为原来的路径）
                     string newPath2 = "\"" + newPath + "\""; //"\"" + path + "\""（path为原来的路径）
-                                                             ///注册DLL
+                    ///注册DLL
                     System.Diagnostics.Process p = new System.Diagnostics.Process();
                     p.StartInfo.FileName = "Regsvr32.exe";
                     p.StartInfo.Arguments = @newPath1;
@@ -54,50 +54,73 @@ namespace CAP_Tools.Pages.List
                 }
                 else
                 {
-                    if (CheckNX11() == true)
+                    if (CheckNX12() == true)
                     {
                         ///获取NX安装路径
                         RegistryKey driverKey = NXregistry();
-                        string NX11EXE = (String)driverKey.GetValue("Unigraphics V29.0");
+                        string NX12EXE = (String)driverKey.GetValue("Unigraphics V30.0");
                         ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                        string NX11 = (System.IO.Path.GetDirectoryName(@NX11EXE));
-                        string path1 = @NX11;
+                        string NX12 = (System.IO.Path.GetDirectoryName(@NX12EXE));
+                        string path1 = @NX12;
                         string path2 = "ugshext.dll";
                         string newPath = System.IO.Path.Combine(path1, path2); // newPath = "D:\temp\result.txt";
-                        string newPath1 = "\"" + @newPath + "\""; //"\"" + path + "\""（path为原来的路径）
-                                                                  ///注册DLL
+                        string newPath1 = "\"" + newPath + "\""; //"\"" + path + "\""（path为原来的路径）
+                        string newPath2 = "\"" + newPath + "\""; //"\"" + path + "\""（path为原来的路径）
+                        ///注册DLL
                         System.Diagnostics.Process p = new System.Diagnostics.Process();
                         p.StartInfo.FileName = "Regsvr32.exe";
                         p.StartInfo.Arguments = @newPath1;
                         p.Start();
-                        ///ModernDialog.ShowMessage("修复NX11缩略图成功", "提示", MessageBoxButton.OK);
+                        /// ModernDialog.ShowMessage(newPath1, "提示", MessageBoxButton.OK);
                     }
                     else
                     {
-                        if (CheckNX10() == true)
+                        if (CheckNX11() == true)
                         {
                             ///获取NX安装路径
                             RegistryKey driverKey = NXregistry();
-                            string NX10EXE = (String)driverKey.GetValue("Unigraphics V28.0");
+                            string NX11EXE = (String)driverKey.GetValue("Unigraphics V29.0");
                             ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                            string NX10 = (System.IO.Path.GetDirectoryName(@NX10EXE));
-                            string path1 = @NX10;
+                            string NX11 = (System.IO.Path.GetDirectoryName(@NX11EXE));
+                            string path1 = @NX11;
                             string path2 = "ugshext.dll";
                             string newPath = System.IO.Path.Combine(path1, path2); // newPath = "D:\temp\result.txt";
                             string newPath1 = "\"" + @newPath + "\""; //"\"" + path + "\""（path为原来的路径）
-                                                                      ///注册DLL
+                            ///注册DLL
                             System.Diagnostics.Process p = new System.Diagnostics.Process();
                             p.StartInfo.FileName = "Regsvr32.exe";
                             p.StartInfo.Arguments = @newPath1;
                             p.Start();
-                            ///ModernDialog.ShowMessage("修复NX10缩略图成功", "提示", MessageBoxButton.OK);
+                            ///ModernDialog.ShowMessage("修复NX11缩略图成功", "提示", MessageBoxButton.OK);
                         }
                         else
                         {
-                            ModernDialog.ShowMessage("您未安装NX软件", "警告", MessageBoxButton.OK);
+                            if (CheckNX10() == true)
+                            {
+                                ///获取NX安装路径
+                                RegistryKey driverKey = NXregistry();
+                                string NX10EXE = (String)driverKey.GetValue("Unigraphics V28.0");
+                                ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+                                string NX10 = (System.IO.Path.GetDirectoryName(@NX10EXE));
+                                string path1 = @NX10;
+                                string path2 = "ugshext.dll";
+                                string newPath = System.IO.Path.Combine(path1, path2); // newPath = "D:\temp\result.txt";
+                                string newPath1 = "\"" + @newPath + "\""; //"\"" + path + "\""（path为原来的路径）
+                              ///注册DLL
+                                System.Diagnostics.Process p = new System.Diagnostics.Process();
+                                p.StartInfo.FileName = "Regsvr32.exe";
+                                p.StartInfo.Arguments = @newPath1;
+                                p.Start();
+                                ///ModernDialog.ShowMessage("修复NX10缩略图成功", "提示", MessageBoxButton.OK);
+                            }
+                            else
+                            {
+                                ModernDialog.ShowMessage("您未安装NX软件", "警告", MessageBoxButton.OK);
+                            }
                         }
                     }
                 }
+                    
             }
             
         }
@@ -294,14 +317,17 @@ namespace CAP_Tools.Pages.List
             }
         }
 
-            private bool CheckNX1847()
+        private bool CheckNX1847()
         {
             RegistryKey driverKey = NXregistry();
             string NXEXE = (String)driverKey.GetValue("Unigraphics V31.0");
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
             if (NXPath != null)
             {
-                return true;
+                if (File.Exists(NXEXE))
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -313,7 +339,10 @@ namespace CAP_Tools.Pages.List
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
             if (NXPath != null)
             {
-                return true;
+                if (File.Exists(NXEXE))
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -325,7 +354,10 @@ namespace CAP_Tools.Pages.List
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
             if (NXPath != null)
             {
-                return true;
+                if (File.Exists(NXEXE))
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -337,7 +369,10 @@ namespace CAP_Tools.Pages.List
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
             if (NXPath != null)
             {
-                return true;
+                if (File.Exists(NXEXE))
+                {
+                    return true;
+                }
             }
             return false;
         }

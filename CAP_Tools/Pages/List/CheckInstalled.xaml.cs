@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
@@ -134,7 +135,10 @@ namespace CAP_Tools.Pages.List
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             if (NXPath != null)
             {
-                return true;
+                if (File.Exists(NXEXE))
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -146,7 +150,10 @@ namespace CAP_Tools.Pages.List
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             if (NXPath != null)
             {
-                return true;
+                if (File.Exists(NXEXE))
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -158,7 +165,10 @@ namespace CAP_Tools.Pages.List
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             if (NXPath != null)
             {
-                return true;
+                if (File.Exists(NXEXE))
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -170,19 +180,10 @@ namespace CAP_Tools.Pages.List
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             if (NXPath != null)
             {
-                return true;
-            }
-            return false;
-        }
-
-        private bool CheckNX85()
-        {
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V26.5");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
-            if (NXPath != null)
-            {
-                return true;
+                if (File.Exists(NXEXE))
+                {
+                    return true;
+                }
             }
             return false;
         }

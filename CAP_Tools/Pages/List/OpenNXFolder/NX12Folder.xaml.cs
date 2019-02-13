@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -81,7 +82,10 @@ namespace CAP_Tools.Pages.List.OpenFolder
             string NX12 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX12EXE)));
             if (NX12 != null)
             {
-                return true;
+                if (File.Exists(NX12EXE))
+                {
+                    return true;
+                }
             }
             return false;
         }

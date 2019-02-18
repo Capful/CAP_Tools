@@ -60,27 +60,54 @@ namespace CAP_Tools.Pages
             this.NXRoute.Text = m_Dir;
             string path1 = NXRoute.Text;
             string path2 = "Launch.exe";
-            string path3 = "\\UG_NX1847正式版\\";
+            
             string newPath = System.IO.Path.Combine(path1, path2);
-            if (File.Exists(@newPath))
+            if (File.Exists(newPath))
             {
                 this.NXInstall.IsEnabled = true;
                 this.NXCrack.IsEnabled = true;
             }
             else
             {
-                if (File.Exists(path1 + path3 + path2))
+                this.NXInstall.IsEnabled = false;
+                this.NXCrack.IsEnabled = false;
+                ModernDialog.ShowMessage("NX安装主程序不存在，请重新选择文件夹或检测安装程序完整性", "警告", MessageBoxButton.OK);
+            }
+            ///判断安装哪个版本
+            string nx10 = m_Dir + "\\nx100";
+            string nx11 = m_Dir + "\\nx110";
+            string nx12 = m_Dir + "\\nx120";
+            string nx = m_Dir + "\\nx";
+            if (Directory.Exists(nx10))
+            {
+                this.Name.Text = "- 正在安装NX10.0";
+            }
+            else
+            {
+                if (Directory.Exists(nx11))
                 {
-                    this.NXInstall.IsEnabled = true;
-                    this.NXCrack.IsEnabled = true;
+                    this.Name.Text = "- 正在安装NX11.0";
                 }
                 else
                 {
-                    this.NXInstall.IsEnabled = false;
-                    this.NXCrack.IsEnabled = false;
-                    ModernDialog.ShowMessage("NX安装主程序不存在，请重新选择文件夹或检测安装程序完整性", "警告", MessageBoxButton.OK);
+                    if (Directory.Exists(nx12))
+                    {
+                        this.Name.Text = "- 正在安装NX12.0";
+                    }
+                    else
+                    {
+                        if (Directory.Exists(nx))
+                        {
+                            this.Name.Text = "- 正在安装NX(2019)";
+                        }
+                        else
+                        {
+                            this.Name.Text = "- 支持NX(2019)";
+                        }
+                    }
                 }
             }
+
         }
 
         private void NXInstall_Click(object sender, RoutedEventArgs e)
@@ -419,6 +446,11 @@ namespace CAP_Tools.Pages
             this.Prog.Value = (int)e.BytesReceived;
             this.label1.Content = "许可证下载进度 : " + e.ProgressPercentage + "%"; 
             this.label2.Content = String.Format("{0}M/{1}M", Math.Round((double)e.BytesReceived / 1024 / 1024, 2), Math.Round((double)e.TotalBytesToReceive / 1024 / 1024, 2));
+        }
+
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

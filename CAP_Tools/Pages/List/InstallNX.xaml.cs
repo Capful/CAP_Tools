@@ -60,6 +60,7 @@ namespace CAP_Tools.Pages
             }
             string m_Dir = m_Dialog.SelectedPath.Trim();
             this.XZRoute.Text = m_Dir;
+            this.NXRoute.Text = m_Dir;
             DirectoryInfo dir = new DirectoryInfo(m_Dir);
             foreach (FileInfo file in dir.GetFiles("UGII.cab", SearchOption.AllDirectories))//在文件夹中搜索UGII.cab；
             {
@@ -128,6 +129,7 @@ namespace CAP_Tools.Pages
                             {
                                 this.NXInstall.IsEnabled = false;
                                 this.NXCrack.IsEnabled = false;
+                                this.a.Text = "- 支持NX(2019)";
                                 ModernDialog.ShowMessage("NX安装主程序不存在，请重新选择文件夹或检测安装程序完整性！\n\r或者选择的安装包为NX10.0以下版本", "警告", MessageBoxButton.OK);
                             }
                         }
@@ -170,22 +172,11 @@ namespace CAP_Tools.Pages
             {
                 if (version == "NX10")
                 {
-                    ///获取NX安装路径
-                    RegistryKey driverKey = NXregistry();
-                    string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-                    ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                    string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                    ///复制文件
-                    Copy(pjfile, Home);
-                    ModernDialog.ShowMessage(version + "破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
-                }
-                else
-                {
-                    if (version == "NX11")
+                    if (CheckNX10() == true)
                     {
                         ///获取NX安装路径
                         RegistryKey driverKey = NXregistry();
-                        string EXE = (String)driverKey.GetValue("Unigraphics V29.0");
+                        string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
                         ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
                         string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
                         ///复制文件
@@ -194,11 +185,18 @@ namespace CAP_Tools.Pages
                     }
                     else
                     {
-                        if (version == "NX12")
+                        ModernDialog.ShowMessage("抱歉，您未安装" + version+ "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                    }
+                }
+                else
+                {
+                    if (version == "NX11")
+                    {
+                        if (CheckNX11() == true)
                         {
                             ///获取NX安装路径
                             RegistryKey driverKey = NXregistry();
-                            string EXE = (String)driverKey.GetValue("Unigraphics V30.0");
+                            string EXE = (String)driverKey.GetValue("Unigraphics V29.0");
                             ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
                             string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
                             ///复制文件
@@ -207,16 +205,48 @@ namespace CAP_Tools.Pages
                         }
                         else
                         {
-                            if (version == "NX(2019)")
+                            ModernDialog.ShowMessage("抱歉，您未安装" + version + "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                        }
+                    }
+                    else
+                    {
+                        if (version == "NX12")
+                        {
+                            if (CheckNX12() == true)
                             {
                                 ///获取NX安装路径
                                 RegistryKey driverKey = NXregistry();
-                                string EXE = (String)driverKey.GetValue("Unigraphics V31.0");
+                                string EXE = (String)driverKey.GetValue("Unigraphics V30.0");
                                 ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
                                 string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
                                 ///复制文件
                                 Copy(pjfile, Home);
                                 ModernDialog.ShowMessage(version + "破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
+                            }
+                            else
+                            {
+                                ModernDialog.ShowMessage("抱歉，您未安装" + version + "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                            }
+                        }
+                        else
+                        {
+                            if (version == "NX(2019)")
+                            {
+                                if (CheckNX1847() == true)
+                                {
+                                    ///获取NX安装路径
+                                    RegistryKey driverKey = NXregistry();
+                                    string EXE = (String)driverKey.GetValue("Unigraphics V31.0");
+                                    ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+                                    string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+                                    ///复制文件
+                                    Copy(pjfile, Home);
+                                    ModernDialog.ShowMessage(version + "破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
+                                }
+                                else
+                                {
+                                    ModernDialog.ShowMessage("抱歉，您未安装" + version + "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                                }
                             }
                             else
                             {

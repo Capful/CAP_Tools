@@ -17,7 +17,7 @@ namespace CAP_Tools.Pages
 
         private void NX1847_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://pan.baidu.com/s/1xQWgpPVKICHKGQBxVfSC9w");
+            System.Diagnostics.Process.Start("https://pan.baidu.com/s/14zihSEATlf1G8p-3XDekvQ");
             //ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
             //try
             //{
@@ -30,7 +30,7 @@ namespace CAP_Tools.Pages
 
         private void NX12_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://pan.baidu.com/s/1KnqEg1vNwKHmB1NrCfO68g");
+            System.Diagnostics.Process.Start("https://pan.baidu.com/s/1bqMtpLSBcQ9Yb4owdwuqpw");
             //ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
             //try
             //{
@@ -43,7 +43,7 @@ namespace CAP_Tools.Pages
 
         private void NX11_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://pan.baidu.com/s/1hTVqltDXn4b-wx1Itm2ieQ");
+            System.Diagnostics.Process.Start("https://pan.baidu.com/s/1660kiXn5EiRyPd7Q8i1Hng");
             //ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
             //try
             //{
@@ -56,7 +56,7 @@ namespace CAP_Tools.Pages
 
         private void NX10_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://pan.baidu.com/s/1204CqN0VKgWxs-ax1VA3mQ");
+            System.Diagnostics.Process.Start("https://pan.baidu.com/s/1RzdfVBgOLgWbFiJNtvE4JQ");
             //ModernDialog.ShowMessage("密码已复制到剪切板", "提示", MessageBoxButton.OK);
             //try
             //{

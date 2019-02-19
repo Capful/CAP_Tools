@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="15.1" version="15.1" Modules="architect" RootPath="." Language="zh" Id="{B54E1AA0-C78E-49DE-B748-FD749597F6D6}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="15.1" version="15.2" Modules="architect" RootPath="." Language="zh" Id="{B54E1AA0-C78E-49DE-B748-FD749597F6D6}">
   <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
     <ROW Name="HiddenItems" Value="AppXProductDetailsComponent;AppXDependenciesComponent;AppXAppDetailsComponent;AppXVisualAssetsComponent;AppXCapabilitiesComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent;ActSyncAppComponent"/>
   </COMPONENT>
@@ -158,7 +158,7 @@
     <ROW Dialog_="InstallDlg" Control="Text_2" Type="Text" X="26" Y="93" Width="299" Height="20" Attributes="196611" Text="......................................................................................................................................" TextStyle="DlgFont8_DlgFont8" Order="1500"/>
     <ROW Dialog_="InstallDlg" Control="Text_3" Type="Text" X="26" Y="204" Width="299" Height="20" Attributes="196611" Text="......................................................................................................................................" TextStyle="DlgFont8_DlgFont8" Order="1600"/>
     <ROW Dialog_="InstallDlg" Control="Text_4" Type="Text" X="26" Y="132" Width="299" Height="20" Attributes="196611" Text="# 支持NX软件、检测、打开工作目录等功能" TextStyle="DlgFont8_DlgFont8" Order="1700"/>
-    <ROW Dialog_="InstallDlg" Control="Text_5" Type="Text" X="26" Y="113" Width="299" Height="20" Attributes="196611" Text="# 支持NX10 - NX1847 软件快捷安装" TextStyle="DlgFont8_DlgFont8" Order="1800"/>
+    <ROW Dialog_="InstallDlg" Control="Text_5" Type="Text" X="26" Y="113" Width="299" Height="20" Attributes="196611" Text="# 支持NX10 - NX(2019) 软件快捷安装" TextStyle="DlgFont8_DlgFont8" Order="1800"/>
     <ROW Dialog_="InstallDlg" Control="Text_6" Type="Text" X="26" Y="171" Width="299" Height="20" Attributes="196611" Text="# NX10.0以上版本软件、许可证下载集合" TextStyle="DlgFont8_DlgFont8" Order="1900"/>
     <ROW Dialog_="InstallDlg" Control="Text_7" Type="Text" X="26" Y="152" Width="299" Height="20" Attributes="196611" Text="# 支持NC程序批量改坐标、程序串联" TextStyle="DlgFont8_DlgFont8" Order="2000"/>
     <ROW Dialog_="InstallDlg" Control="Text_8" Type="Text" X="26" Y="189" Width="299" Height="20" Attributes="196611" Text="# 一些实用小工具" TextStyle="DlgFont8_DlgFont8" Order="2100"/>

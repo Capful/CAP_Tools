@@ -37,6 +37,8 @@ namespace CAP_Tools.Pages
             //百分比隐藏
             this.label1.Visibility = Visibility.Hidden;
             this.label2.Visibility = Visibility.Hidden;
+            //测试按钮隐藏
+            this.Test.Visibility = Visibility.Hidden;
             _saveDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NX License Servers");
         }
 
@@ -57,57 +59,95 @@ namespace CAP_Tools.Pages
                 return;
             }
             string m_Dir = m_Dialog.SelectedPath.Trim();
-            this.NXRoute.Text = m_Dir;
-            string path1 = NXRoute.Text;
-            string path2 = "Launch.exe";
-            
-            string newPath = System.IO.Path.Combine(path1, path2);
-            if (File.Exists(newPath))
+            this.XZRoute.Text = m_Dir;
+            DirectoryInfo dir = new DirectoryInfo(m_Dir);
+            foreach (FileInfo file in dir.GetFiles("UGII.cab", SearchOption.AllDirectories))//在文件夹中搜索UGII.cab；
             {
+                ///截取路径添加到变量
+                string NXRoute = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(file.FullName)));
+                this.NXRoute.Text = NXRoute;
+                break;
+            }
+            DirectoryInfo dir2 = new DirectoryInfo(m_Dir);
+            foreach (FileInfo file in dir.GetFiles("jt_catiav5.exe", SearchOption.AllDirectories))//在文件夹中搜索jt_catiav5.exe；
+            {
+                ///截取路径添加到变量
+                string PJNXRoute = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName((System.IO.Path.GetDirectoryName(file.FullName)))));
+                this.PJRoute.Text = PJNXRoute;
+                break;
+            }
+            ///判断安装哪个版本
+            string route = NXRoute.Text;
+            string nx10 = route + "\\nx100";
+            string nx11 = route + "\\nx110";
+            string nx12 = route + "\\nx120";
+            string nx122 = route + "\\nx1202";
+            string nx = route + "\\nx";
+
+            if (Directory.Exists(nx10))
+            {
+                this.a.Text = "- 正在安装 NX10.0";
+                this.Version.Text = "NX10";
                 this.NXInstall.IsEnabled = true;
                 this.NXCrack.IsEnabled = true;
             }
             else
             {
-                this.NXInstall.IsEnabled = false;
-                this.NXCrack.IsEnabled = false;
-                ModernDialog.ShowMessage("NX安装主程序不存在，请重新选择文件夹或检测安装程序完整性", "警告", MessageBoxButton.OK);
-            }
-            ///判断安装哪个版本
-            string nx10 = m_Dir + "\\nx100";
-            string nx11 = m_Dir + "\\nx110";
-            string nx12 = m_Dir + "\\nx120";
-            string nx = m_Dir + "\\nx";
-            if (Directory.Exists(nx10))
-            {
-                this.Name.Text = "- 正在安装NX10.0";
-            }
-            else
-            {
                 if (Directory.Exists(nx11))
                 {
-                    this.Name.Text = "- 正在安装NX11.0";
+                    this.a.Text = "- 正在安装 NX11.0";
+                    this.Version.Text = "NX11";
+                    this.NXInstall.IsEnabled = true;
                 }
                 else
                 {
                     if (Directory.Exists(nx12))
                     {
-                        this.Name.Text = "- 正在安装NX12.0";
+                        this.a.Text = "- 正在安装 NX12.0";
+                        this.Version.Text = "NX12";
+                        this.NXInstall.IsEnabled = true;
                     }
                     else
                     {
-                        if (Directory.Exists(nx))
+                        if (Directory.Exists(nx122))
                         {
-                            this.Name.Text = "- 正在安装NX(2019)";
+                            
+                            this.a.Text = "- 正在安装 NX12.0.2";
+                            this.Version.Text = "NX12";
+                            this.NXInstall.IsEnabled = true;
                         }
                         else
                         {
-                            this.Name.Text = "- 支持NX(2019)";
+                            if (Directory.Exists(nx))
+                            {
+                                this.a.Text = "- 正在安装 NX(2019)";
+                                this.Version.Text = "NX(2019)";
+                                this.NXInstall.IsEnabled = true;
+                            }
+                            else
+                            {
+                                this.NXInstall.IsEnabled = false;
+                                this.NXCrack.IsEnabled = false;
+                                ModernDialog.ShowMessage("NX安装主程序不存在，请重新选择文件夹或检测安装程序完整性！\n\r或者选择的安装包为NX10.0以下版本", "警告", MessageBoxButton.OK);
+                            }
                         }
                     }
                 }
             }
-
+            ///判断破解文件是否存在
+            string pjfile = PJRoute.Text;
+            if (NXInstall.IsEnabled == true)
+            {
+                if (Directory.Exists(pjfile))
+                {
+                    this.NXCrack.IsEnabled = true;
+                }
+                else
+                {
+                    this.NXCrack.IsEnabled = false;
+                    ModernDialog.ShowMessage("未在安装目录找到破解文件，请检查安装包是否包含破解文件。\n\r请将破解文件整个文件夹复制到安装目录后重试！", "警告", MessageBoxButton.OK);
+                }
+            }
         }
 
         private void NXInstall_Click(object sender, RoutedEventArgs e)
@@ -123,119 +163,64 @@ namespace CAP_Tools.Pages
 
         private void NXCrack_Click(object sender, RoutedEventArgs e)
         {
-            string path1 = NXRoute.Text;
-            string nx10 = path1 + "\\破解文件\\NX 10.0";
-            string nx11 = path1 + "\\破解文件\\NX 11.0";
-            string nx12 = path1 + "\\破解文件\\NX 12.0";
-            string nx1847 = path1 + "\\NX1847破解文件&许可证\\NX";
-            string nx1847SSQ1 = (System.IO.Path.GetDirectoryName(path1)); //获取上级目录
-            string nx1847SSQ = nx1847SSQ1 + "\\Siemens.NX.1847.Win64-SSQ\\_SolidSQUAD_\\Client\\NX";
-            MessageBoxResult result = ModernDialog.ShowMessage("确定要破解NX吗？请确保NX软件都己经关闭。", "提示", MessageBoxButton.YesNo);
+            string version = Version.Text;
+            string pjfile = PJRoute.Text;
+            MessageBoxResult result = ModernDialog.ShowMessage("确定要破解" + version + "吗？请确保NX软件都己经关闭。", "提示", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                if (Directory.Exists(nx10))//判断是否存在
+                if (version == "NX10")
                 {
-                    if (CheckNX10() == true)
-                    {
-                        ///获取NX安装路径
-                        RegistryKey driverKey = NXregistry();
-                        string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-                        string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                        ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                        ///打开主目录
-                        Copy(nx10, Home);
-                        ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
-                    }
-                    else
-                    {
-                        ModernDialog.ShowMessage("抱歉，您未安装NX10！请先安装NX10主程序后再进行破解文件", "警告", MessageBoxButton.OK);
-                    }
+                    ///获取NX安装路径
+                    RegistryKey driverKey = NXregistry();
+                    string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
+                    ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+                    string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+                    ///复制文件
+                    Copy(pjfile, Home);
+                    ModernDialog.ShowMessage(version + "破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                 }
                 else
                 {
-                    if (Directory.Exists(nx11))//判断是否存在
+                    if (version == "NX11")
                     {
-                        if (CheckNX11() == true)
-                        {
-                            ///获取NX安装路径
-                            RegistryKey driverKey = NXregistry();
-                            string EXE = (String)driverKey.GetValue("Unigraphics V29.0");
-                            string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                            ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                            ///打开主目录
-                            Copy(nx11, Home);
-                            ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
-                        }
-                        else
-                        {
-                            ModernDialog.ShowMessage("抱歉，您未安装NX11！请先安装NX11主程序后再进行破解文件", "警告", MessageBoxButton.OK);
-                        }
+                        ///获取NX安装路径
+                        RegistryKey driverKey = NXregistry();
+                        string EXE = (String)driverKey.GetValue("Unigraphics V29.0");
+                        ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+                        string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+                        ///复制文件
+                        Copy(pjfile, Home);
+                        ModernDialog.ShowMessage(version + "破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                     }
                     else
                     {
-                        if (Directory.Exists(nx12))//判断是否存在
+                        if (version == "NX12")
                         {
-                            if (CheckNX12() == true)
-                            {
-                                ///获取NX安装路径
-                                RegistryKey driverKey = NXregistry();
-                                string EXE = (String)driverKey.GetValue("Unigraphics V30.0");
-                                string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                                ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                                ///打开主目录
-                                Copy(nx12, Home);
-                                ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
-                            }
-                            else
-                            {
-                                ModernDialog.ShowMessage("抱歉，您未安装NX12！请先安装NX12主程序后再进行破解文件", "警告", MessageBoxButton.OK);
-                            }
+                            ///获取NX安装路径
+                            RegistryKey driverKey = NXregistry();
+                            string EXE = (String)driverKey.GetValue("Unigraphics V30.0");
+                            ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+                            string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+                            ///复制文件
+                            Copy(pjfile, Home);
+                            ModernDialog.ShowMessage(version + "破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                         }
                         else
                         {
-                            if (Directory.Exists(nx1847))//判断是否存在
+                            if (version == "NX(2019)")
                             {
-                                if (CheckNX1847() == true)
-                                {
-                                    ///获取NX安装路径
-                                    RegistryKey driverKey = NXregistry();
-                                    string EXE = (String)driverKey.GetValue("Unigraphics V31.0");
-                                    string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                                    ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                                    ///打开主目录
-                                    Copy(nx1847, Home);
-                                    ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
-                                }
-                                else
-                                {
-                                    ModernDialog.ShowMessage("抱歉，您未安装NX1847！请先安装NX1847主程序后再进行破解文件", "警告", MessageBoxButton.OK);
-                                }
+                                ///获取NX安装路径
+                                RegistryKey driverKey = NXregistry();
+                                string EXE = (String)driverKey.GetValue("Unigraphics V31.0");
+                                ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+                                string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+                                ///复制文件
+                                Copy(pjfile, Home);
+                                ModernDialog.ShowMessage(version + "破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
                             }
                             else
                             {
-                                if (Directory.Exists(nx1847SSQ))//判断是否存在
-                                {
-                                    if (CheckNX1847() == true)
-                                    {
-                                        ///获取NX安装路径
-                                        RegistryKey driverKey = NXregistry();
-                                        string EXE = (String)driverKey.GetValue("Unigraphics V31.0");
-                                        string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                                        ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                                        ///打开主目录
-                                        Copy(nx1847SSQ, Home);
-                                        ModernDialog.ShowMessage("破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
-                                    }
-                                    else
-                                    {
-                                        ModernDialog.ShowMessage("抱歉，您未安装NX1847！请先安装NX1847主程序后再进行破解文件", "警告", MessageBoxButton.OK);
-                                    }
-                                }
-                                else
-                                {
-
-                                    ModernDialog.ShowMessage("未在安装目录找到破解文件，请检查安装包是否完整。\n\r或者检查破解文件的目录名称是否为‘破解文件’，如果不是，请更改后重试！\n\r NX1847的破解文件的名称'NX1847破解文件&许可证'请确保破解文件夹存在", "警告", MessageBoxButton.OK);
-                                }
+                                ModernDialog.ShowMessage("抱歉，您未安装" + version + "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
                             }
                         }
                     }

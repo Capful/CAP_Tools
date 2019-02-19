@@ -14,7 +14,7 @@
                 <mui:Link DisplayName="NX10" Source="/Pages/List/OpenNXFolder/NX10Folder.xaml" />
                 <mui:Link DisplayName="NX11" Source="/Pages/List/OpenNXFolder/NX11Folder.xaml" />
                 <mui:Link DisplayName="NX12" Source="/Pages/List/OpenNXFolder/NX12Folder.xaml" />
-                <mui:Link DisplayName="NX1847" Source="/Pages/List/OpenNXFolder/NX1847Folder.xaml" />
+                <mui:Link DisplayName="NX(2019)" Source="/Pages/List/OpenNXFolder/NX1847Folder.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

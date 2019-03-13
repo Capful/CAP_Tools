@@ -82,6 +82,7 @@ namespace CAP_Tools.Pages
             string nx10 = route + "\\nx100";
             string nx11 = route + "\\nx110";
             string nx12 = route + "\\nx120";
+            string nx121 = route + "\\nx1201";
             string nx122 = route + "\\nx1202";
             string nx = route + "\\nx";
 
@@ -119,18 +120,28 @@ namespace CAP_Tools.Pages
                         }
                         else
                         {
-                            if (Directory.Exists(nx))
+                            if (Directory.Exists(nx121))
                             {
-                                this.a.Text = "- 正在安装 NX(2019)";
-                                this.Version.Text = "NX(2019)";
+
+                                this.a.Text = "- 正在安装 NX12.0.1";
+                                this.Version.Text = "NX12";
                                 this.NXInstall.IsEnabled = true;
                             }
                             else
                             {
-                                this.NXInstall.IsEnabled = false;
-                                this.NXCrack.IsEnabled = false;
-                                this.a.Text = "- 支持NX(2019)";
-                                ModernDialog.ShowMessage("NX安装主程序不存在，请重新选择文件夹或检测安装程序完整性！\n\r或者选择的安装包为NX10.0以下版本", "警告", MessageBoxButton.OK);
+                                if (Directory.Exists(nx))
+                                {
+                                    this.a.Text = "- 正在安装 NX(2019)";
+                                    this.Version.Text = "NX(2019)";
+                                    this.NXInstall.IsEnabled = true;
+                                }
+                                else
+                                {
+                                    this.NXInstall.IsEnabled = false;
+                                    this.NXCrack.IsEnabled = false;
+                                    this.a.Text = "- 支持NX(2019)";
+                                    ModernDialog.ShowMessage("NX安装主程序不存在，请重新选择文件夹或检测安装程序完整性！\n\r或者选择的安装包为NX10.0以下版本", "警告", MessageBoxButton.OK);
+                                }
                             }
                         }
                     }

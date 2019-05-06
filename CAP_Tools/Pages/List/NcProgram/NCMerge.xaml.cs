@@ -65,7 +65,6 @@ namespace CAP_Tools.Pages.List.NcProgram
                 list.Items.Clear();
                 ModernDialog.ShowMessage("您选择的文件夹不存在.NC文件程序", "警告", MessageBoxButton.OK);
                 }
-                
         }
 
         private void CL_Click(object sender, RoutedEventArgs e)
@@ -273,10 +272,14 @@ namespace CAP_Tools.Pages.List.NcProgram
             fs2.Close();
             File.Delete(TempFile);                                                    //删除Temp文件
             //判断是否打开文件夹
-            MessageBoxResult result = ModernDialog.ShowMessage("串联成功，是否打开文件所在目录？", "提示", MessageBoxButton.YesNo);
+            MessageBoxResult result = ModernDialog.ShowMessage("串联成功，是否打开串联好的文件到上级目录？", "提示", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                Process.Start("Explorer.exe", SelectFile);
+                ///Process.Start("Explorer.exe", SelectFile);
+                ///创建文件夹
+                string a = (System.IO.Path.GetDirectoryName(FileRoute.Text)) + "\\程序";
+                Directory.CreateDirectory(a);
+                File.Copy(NewFile,a + "\\" + FolderName + ".nc", true);
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -28,10 +29,16 @@ namespace CAP_Tools.Pages.List.NcProgram
                 return;
             }
             string m_Dir = m_Dialog.SelectedPath.Trim();
-            this.FileRoute.Text = m_Dir;
             ///判断选择的文件夹中是否含有后缀名为NC的文件
             if (System.IO.Directory.GetFiles(m_Dir, "*.nc").Length > 0)
             {
+                this.FileRoute.Text = m_Dir;
+                ///将选择的路径写入当前程序运行路径下的FileRoute.ini文件中
+                FileStream a = File.Create(AppDomain.CurrentDomain.BaseDirectory + "FileRoute.ini");
+                StreamWriter sw = new StreamWriter(a);
+                sw.WriteLine(m_Dir);
+                sw.Close();
+                a.Close();
                 ///如果存在，将替换按钮显示
                 this.Th.IsEnabled = true;
                 this.Dk.IsEnabled = true;
@@ -207,6 +214,7 @@ namespace CAP_Tools.Pages.List.NcProgram
             {
                 ///批量替换文本中的值
                 string Path = FileRoute.Text;
+                string SPath = (System.IO.Path.GetDirectoryName(Path))+"\\程序串联";
                 string WcsPath = WCS.Text;
                 string AWcsPath = AWCS.Text;
                 string[] pathFile = Directory.GetFiles(Path);
@@ -227,11 +235,14 @@ namespace CAP_Tools.Pages.List.NcProgram
                     sw.Close();
                     fs2.Close();
                 }
-                MessageBoxResult result = ModernDialog.ShowMessage("替换成功，是否打开文件夹？", "提示", MessageBoxButton.YesNo);
+                MessageBoxResult result = ModernDialog.ShowMessage("替换成功，是否复制已修改坐标的文件到程序串联目录？", "提示", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
                     ///完成后打开文件夹
-                    Process.Start("Explorer.exe", Path);
+                    ///Process.Start("Explorer.exe", Path);
+                    ///复制已修改坐标的文件到程序串联目录
+                    Directory.CreateDirectory((System.IO.Path.GetDirectoryName(Path)) + "\\程序串联");
+                    CopyDirectory(Path, SPath);
                 }
 
                 ///完成后检测文件夹中的值，并返回
@@ -385,6 +396,33 @@ namespace CAP_Tools.Pages.List.NcProgram
         {
             string Path = FileRoute.Text;
             Process.Start("Explorer.exe", Path);
+        }
+        public static void CopyDirectory(string srcPath, string destPath)
+        {
+            try
+            {
+                DirectoryInfo dir = new DirectoryInfo(srcPath);
+                FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();  //获取目录下（不包含子目录）的文件和子目录
+                foreach (FileSystemInfo i in fileinfo)
+                {
+                    if (i is DirectoryInfo)     //判断是否文件夹
+                    {
+                        if (!Directory.Exists(destPath + "\\" + i.Name))
+                        {
+                            Directory.CreateDirectory(destPath + "\\" + i.Name);   //目标目录下不存在此文件夹即创建子文件夹
+                        }
+                        CopyDirectory(i.FullName, destPath + "\\" + i.Name);    //递归调用复制子文件夹
+                    }
+                    else
+                    {
+                        File.Copy(i.FullName, destPath + "\\" + i.Name, true);      //不是文件夹即复制文件，true表示可以覆盖同名文件
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
     }
 }

@@ -34,6 +34,7 @@ namespace CAP_Tools.Pages.List.NcProgram
             {
                 ///如果存在，将替换按钮显示
                 this.Th.IsEnabled = true;
+                this.Dk.IsEnabled = true;
                 ///读取选择的文件夹中NC文件
                 ///清空ListBox
                 list.Items.Clear();

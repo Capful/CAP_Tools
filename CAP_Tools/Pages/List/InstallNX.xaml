@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:local="clr-namespace:CAP_Tools.Pages" x:Class="CAP_Tools.Pages.InstallNX"
-             mc:Ignorable="d" 
-             d:DesignHeight="400" Width="460">
-    <StackPanel HorizontalAlignment="Left" Width="460">
+             mc:Ignorable="d" Width="460" Height="360">
+    <StackPanel HorizontalAlignment="Left" Width="460" Height="360" VerticalAlignment="Top">
         <TextBlock Width="300" Margin="0,0,0,8" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left">
             <Run Text="NX快捷安装" />
             <Run x:Name="a" Text="- 支持NX(2019)" />
@@ -27,10 +26,14 @@
             <Button Name="NXCrack" Content="破解文件" Width="90" Margin="0,0,25,0"  Click="NXCrack_Click" IsEnabled="False" FontSize="10.5" />
             <Button Name="NXLicence" Content="安装许可证" ToolTip="在线下载许可证文件" Width="90" Margin="0,0,20,0"  Click="NXLicence_Click" IsEnabled="True" FontSize="10.5" />
         </StackPanel>
-        <ProgressBar Name="Prog" Minimum="0" Maximum="1" Value="0.0" Height="16" HorizontalAlignment="Left" Width="350" Margin="0,20,0,0" Visibility="Visible" />
-        <Label Content="许可证下载进度：00.00%" Name="label1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Visibility="Visible" FontSize="10.5" />
-        <Label Content="00.00M/00.00M" Name="label2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="270,-17.5,-5,0" Visibility="Visible" FontSize="10.5" Width="90" />
-        <mui:BBCodeBlock BBCode="第一步安装主程序；第二步替换破解文件；第三步在线安装许可证文件，安装许可证前请先卸载旧的许可证。如果安装主程序中途关闭了本软件，请重新打开安装包路径再进行破解文件。安装完成可能需要重新启动本软件才能使用部分功能。" Margin="0,10,0,32" FontSize="10.5" FontFamily="Microsoft YaHei" />
+        <ProgressBar Name="Prog" Minimum="0" Maximum="1" Value="0.0" Height="18" HorizontalAlignment="Left" Width="355" Margin="0,20,0,0" Visibility="Visible" />
+        <Label Content="许可证下载进度：00.00%" Name="label1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Visibility="Visible" FontSize="11" />
+        <Label Content="00.00M/00.00M" Name="label2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="270,-17.5,-5,0" Visibility="Visible" FontSize="11" Width="90" />
+        <mui:BBCodeBlock BBCode="第一步：点击'浏览'按钮，选择安装包的路径；" Margin="0,10,0,5" FontSize="12" FontFamily="Microsoft YaHei" />
+        <mui:BBCodeBlock BBCode="第二步：安装主程序；" Margin="0,5,0,5" FontSize="12" FontFamily="Microsoft YaHei" />
+        <mui:BBCodeBlock BBCode="第三步：替换破解文件，软件界面可能出现暂时卡顿；" Margin="0,5,0,5" FontSize="12" FontFamily="Microsoft YaHei" />
+        <mui:BBCodeBlock BBCode="第四步：在线安装许可证文件，安装许可证前请先卸载旧的许可证。" Margin="0,5,0,5" FontSize="12" FontFamily="Microsoft YaHei" />
+        <mui:BBCodeBlock BBCode="注意事项：如果安装主程序中途关闭了本软件，请重新打开安装包路径再进行破解文件。安装完成可能需要重新启动本软件才能使用部分功能。" Margin="0,5,0,5" FontSize="12" FontFamily="Microsoft YaHei" />
         <TextBlock Width="300" FontSize="10" HorizontalAlignment="Left" Visibility="Hidden" >
             <Run Text="缓存变量:" />
             <Run x:Name="XZRoute" Text="选择的路径" />

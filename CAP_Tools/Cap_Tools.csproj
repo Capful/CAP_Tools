@@ -93,6 +93,9 @@
     <Compile Include="Pages\List\NcProgram\NCMerge.xaml.cs">
       <DependentUpon>NCMerge.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\List\NcProgram\NCTest.xaml.cs">
+      <DependentUpon>NCTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\List\NcProgram\NCWcs.xaml.cs">
       <DependentUpon>NCWcs.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\List\NcProgram\NCMerge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\List\NcProgram\NCTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

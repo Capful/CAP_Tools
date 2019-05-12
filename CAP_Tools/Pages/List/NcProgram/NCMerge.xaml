@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="360" d:DesignWidth="460">
     <StackPanel MinWidth="200">
         <TextBlock Text="多程序串联" Style="{StaticResource Heading2}" Width="99" HorizontalAlignment="Left" />
-        <Label Content="请把要串联的程序放在一个文件夹" Height="17" Width="274" Margin="0,2,0,3" HorizontalAlignment="Left" />
-        <TextBlock Width="300" FontSize="10" HorizontalAlignment="Left" Margin="0">
+        <Label Content="请把要串联的程序放在一个文件夹" Height="17" Width="274" Margin="0,2,0,3" HorizontalAlignment="Left" FontSize="12" />
+        <TextBlock Width="455" FontSize="10" HorizontalAlignment="Left" Margin="0">
             <Run Text="文件路径:" />
             <Run x:Name="FileRoute" Text="请点击'浏览'按钮选择需要串联的NC程序文件夹"  />
         </TextBlock>
@@ -20,6 +20,6 @@
             <Button Name="CL" Content="串联"  Click="CL_Click" Margin="-60,52,0,55" Width="60" FontSize="10.5" IsEnabled="False" />
             <Button Name="Dk" Content="打开" Click="Dk_Click" Margin="-60,92,0,15"  Width="60" FontSize="10.5" IsEnabled="False" />
         </StackPanel>
-        <Label Content="将文件夹名字改为您需要的名字,新文件将采用文件夹名字命名" Height="17" Width="300" Margin="0,0,0,0"  FontSize="9.5" HorizontalAlignment="Left" />
+        <Label Content="将文件夹名字改为您需要的名字,新文件将采用文件夹名字命名" Height="17" Width="455" Margin="0,0,0,0"  FontSize="12" HorizontalAlignment="Left" />
     </StackPanel>
 </UserControl>

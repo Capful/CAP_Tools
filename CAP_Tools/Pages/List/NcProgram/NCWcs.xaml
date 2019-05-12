@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="360" d:DesignWidth="460">
     <StackPanel MinWidth="200">
         <TextBlock Text="批量坐标替换" Style="{StaticResource Heading2}" Width="99" HorizontalAlignment="Left" />
-        <Label Content="选择需要替换坐标的程序文件夹" Height="20" Width="228" Margin="0,2,0,3" HorizontalAlignment="Left" />
-        <TextBlock Width="300" FontSize="10" HorizontalAlignment="Left" Margin="0">
+        <Label Content="选择需要替换坐标的程序文件夹" Height="20" Width="228" Margin="0,2,0,3" HorizontalAlignment="Left" FontSize="12" />
+        <TextBlock Width="460" FontSize="10" HorizontalAlignment="Left" Margin="0">
             <Run Text="文件路径:" />
             <Run x:Name="FileRoute" Text="请点击'浏览'按钮选择NC程序文件夹"  />
         </TextBlock>
@@ -17,7 +17,7 @@
             <TextBlock Text="将" Height="20" Margin="0,3,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />
             <TextBlock x:Name="WCS" Text="G54" Height="20" Margin="0,3,0,-2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="32"  FontSize="10.5" />
             <TextBlock Text="替换为" Height="18" Margin="0,3,5,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />
-            <TextBox x:Name="AWCS" Text="G55" Margin="0,0,30,0" Width="42"  FontSize="10.5" />
+            <TextBox x:Name="AWCS" Text="G54" Margin="0,0,30,0" Width="42"  FontSize="10.5" />
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="132" Margin="0,3,0,0" Width="300" >
             <Rectangle Fill="#00000000" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Width="210" HorizontalAlignment="Left" Height="131" VerticalAlignment="Top" Margin="0,1,0,0"/>

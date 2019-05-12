@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="360" d:DesignWidth="460">
     <StackPanel MinWidth="200">
         <TextBlock Text="文件夹" Style="{StaticResource Heading2}" Width="99" HorizontalAlignment="Left" />
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="24" Margin="0,5,0,0" Width="300"  >
-            <TextBlock Text="在串联程序路径新建刀具名称文件夹" Height="20" Margin="0,2,20,2" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="11.5" />
+            <TextBlock Text="在串联程序路径新建刀具名称文件夹" Height="20" Margin="0,2,20,2" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="12" />
 
             <Button Name="SX" Content="刷新路径" Click="SX_Click" Margin="0,0,0,0"  Width="80" FontSize="10.5" IsEnabled="True" />
         </StackPanel>
-        <TextBlock Width="300" FontSize="10" HorizontalAlignment="Left" Margin="0,2">
+        <TextBlock Width="455" FontSize="10" HorizontalAlignment="Left" Margin="0,2">
             <Run Text="文件路径:" />
             <Run x:Name="FileRoute" Text="请点击'浏览'按钮选择NC程序路径"  />
         </TextBlock>
@@ -45,7 +45,7 @@
             <TextBox x:Name="DD" Text="D2R02" Margin="0,0,30,0" Width="73"  FontSize="10.5" />
             <Button Name="XJ4" Content="新建" Click="XJ4_Click" Margin="0,0,0,0"  Width="81" FontSize="10.5" IsEnabled="True" />
         </StackPanel>
-        <Label Content="将文件夹名字改为您需要的名字,新文件将采用文件夹名字命名" Height="17" Width="300" Margin="0,6,0,0"  FontSize="9.5" HorizontalAlignment="Left" />
-        <Label Content="使用前请刷新路径！！！" Height="17" Width="300" Margin="0,1,0,0"  FontSize="9.5" HorizontalAlignment="Left" />
+        <Label Content="将文件夹名字改为您需要的名字,新文件将采用文件夹名字命名" Height="17" Width="460" Margin="0,10,0,0"  FontSize="12" HorizontalAlignment="Left" />
+        <Label Content="使用前请刷新路径！！！" Height="17" Width="300" Margin="0,5,0,0"  FontSize="12" HorizontalAlignment="Left" />
     </StackPanel>
 </UserControl>

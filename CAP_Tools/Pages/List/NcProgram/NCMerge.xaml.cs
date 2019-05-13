@@ -29,46 +29,84 @@ namespace CAP_Tools.Pages.List.NcProgram
                 return;
             }
             string m_Dir = m_Dialog.SelectedPath.Trim();
-            this.FileRoute.Text = m_Dir;
             ///判断选择的文件夹中是否含有后缀名为NC的文件
             if (System.IO.Directory.GetFiles(m_Dir, "*.nc").Length > 0)
             {
-                string FolderName = m_Dir.Substring(m_Dir.LastIndexOf('\\') + 1);
-                string NewFile = m_Dir + "\\" + FolderName + ".nc";
-                if (File.Exists(NewFile))
-                {
-                    File.Delete(NewFile);
-                }
+                this.FileRoute.Text = m_Dir;
                 ///如果存在，将替换按钮显示
                 this.CL.IsEnabled = true;
                 this.Dk.IsEnabled = true;
                 ///读取选择的文件夹中NC文件
-                ///清空ListBox
-                list.Items.Clear();
-                string NcName = null;
+                ///清空listView
+                listView.Items.Clear();
+                string FilePath = null;
+                string FileName = null;
+                string Tools = null;
+                string WCS = null;
                 DirectoryInfo d = new DirectoryInfo(m_Dir);
                 FileInfo[] Files = d.GetFiles("*.nc");
                 List<string> lstr = new List<string>();
-                ///获取文件夹下文件名，将路径显示到ListBox
+                ///获取文件夹下文件名，将路径显示到listView
                 foreach (FileInfo file in Files)
                 {
-                    /// a = file.FullName; 路径名称在文件名
-                    NcName = file.Name;
-                    list.Items.Add(NcName);
+                    ///获取文件夹下文件名
+                    FilePath = file.FullName;
+                    FileName = file.Name;
+                    ///文件夹下所有文件的坐标系
+                    StreamReader Wcs_objReader = new StreamReader(FilePath);
+                    string WCS_A = string.Empty;
+                    int j = 0;
+                    while ((WCS = Wcs_objReader.ReadLine()) != null)
+                    {
+                        j++;
+                        ///第二行
+                        if (j == 2)
+                        {
+                            WCS_A = WCS;
+                            ///截取第七行字符中两个指定字符间的字符
+                            int k = WCS.IndexOf("9");//找a的位置
+                            int l = WCS.IndexOf("G8");//找b的位置
+                            WCS = (WCS.Substring(k + 1)).Substring(0, l - k - 1);
+                            break;
+                        }
+                    }
+                    Wcs_objReader.Close();//关闭流
+                    ///文件夹下所有文件的刀具尺寸
+                    StreamReader Tools_objReader = new StreamReader(FilePath);
+                    string Tools_A = string.Empty;
+
+                    int i = 0;
+                    while ((Tools = Tools_objReader.ReadLine()) != null)
+                    {
+                        i++;
+                        ///第七行
+                        if (i == 7)
+                        {
+                            Tools_A = Tools;
+                            ///截取第七行字符中两个指定字符间的字符
+                            int s = Tools.IndexOf("(");//找a的位置
+                            int g = Tools.IndexOf("-");//找b的位置
+                            Tools = (Tools.Substring(s + 1)).Substring(0, g - s - 1);
+                            break;
+                        }
+                    }
+                    Tools_objReader.Close(); //关闭流
+                    ///获取文件夹下文件名，将路径显示到listView
+                    listView.Items.Add(new { A = FileName, B = WCS, C = Tools });
                 }
-                }
-                else
-                {
+            }
+            else
+            {
                 ///不存在
                 this.CL.IsEnabled = false;
                 ///清空ListBox
-                list.Items.Clear();
+                listView.Items.Clear();
                 ModernDialog.ShowMessage("您选择的文件夹不存在.NC文件程序", "警告", MessageBoxButton.OK);
-                }
+            }
         }
 
-        private void CL_Click(object sender, RoutedEventArgs e)
-        {
+            private void CL_Click(object sender, RoutedEventArgs e)
+            {
             ///设置路径变量
             string Path = FileRoute.Text;                                             //获取打开文件夹对话框选择的路径
             string FolderName = Path.Substring(Path.LastIndexOf('\\') + 1);           //获取选择的路径名称，获取\后的一串字符

@@ -13,12 +13,21 @@
             <Run Text="文件路径:" />
             <Run x:Name="FileRoute" Text="请点击'浏览'按钮选择需要串联的NC程序文件夹"  />
         </TextBlock>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="136" Margin="0,3,0,0" Width="295" >
-            <Rectangle Fill="#00000000" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Width="210" HorizontalAlignment="Left" Height="131" VerticalAlignment="Top" Margin="0,1,0,0"/>
-            <ListBox Name="list" HorizontalAlignment="Left" Width="210" Margin="-210,1,0,5" />
-            <Button Name="Xz" Content="浏览" Click="Xz_Click"  Margin="18,12,0,95" Width="60" FontSize="10.5" />
-            <Button Name="CL" Content="串联"  Click="CL_Click" Margin="-60,52,0,55" Width="60" FontSize="10.5" IsEnabled="False" />
-            <Button Name="Dk" Content="打开" Click="Dk_Click" Margin="-60,92,0,15"  Width="60" FontSize="10.5" IsEnabled="False" />
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="161" Margin="0,3,0,0" Width="440" >
+            <Rectangle Fill="#00000000" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Width="260" HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Margin="0,0,-320,0"/>
+            <ListView x:Name="listView" Height="160" VerticalAlignment="Center" HorizontalAlignment="Left" Width="260">
+                <ListView.View>
+                    <!--设置列标签并将列成员与一个变量名称相绑定，以便后台链接修改-->
+                    <GridView>
+                        <GridViewColumn Header="程序名称" Width="100" DisplayMemberBinding="{Binding Path=A}"/>
+                        <GridViewColumn Header="坐标" Width="50" DisplayMemberBinding="{Binding Path=B}"/>
+                        <GridViewColumn Header="刀具" Width="70" DisplayMemberBinding="{Binding Path=C}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Name="Xz" Content="浏览" Click="Xz_Click"  Margin="18,12,0,120" Width="60" FontSize="11" />
+            <Button Name="CL" Content="串联"  Click="CL_Click" Margin="-60,62,0,70" Width="60" FontSize="11" IsEnabled="False" />
+            <Button Name="Dk" Content="打开" Click="Dk_Click" Margin="-60,116,0,15"  Width="60" FontSize="11" IsEnabled="False" />
         </StackPanel>
         <Label Content="将文件夹名字改为您需要的名字,新文件将采用文件夹名字命名" Height="17" Width="455" Margin="0,0,0,0"  FontSize="12" HorizontalAlignment="Left" />
     </StackPanel>

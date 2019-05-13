@@ -43,137 +43,182 @@ namespace CAP_Tools.Pages.List.NcProgram
                 this.Th.IsEnabled = true;
                 this.Dk.IsEnabled = true;
                 ///读取选择的文件夹中NC文件
-                ///清空ListBox
-                list.Items.Clear();
+                ///清空listView
+                listView.Items.Clear();
                 string FilePath = null;
                 string FileName = null;
+                string Tools = null;
+                string WCS = null;
                 DirectoryInfo d = new DirectoryInfo(m_Dir);
                 FileInfo[] Files = d.GetFiles("*.nc");
                 List<string> lstr = new List<string>();
-                ///获取文件夹下文件名，将路径显示到ListBox
+                ///获取文件夹下文件名，将路径显示到listView
                 foreach (FileInfo file in Files)
                 {
+                    ///获取文件夹下文件名
                     FilePath = file.FullName;
                     FileName = file.Name;
-                    list.Items.Add(FileName);
-                }
-                if (!File.Exists(FilePath))
-                {
-                    return;
-                }
-                var filest = new FileStream(FilePath, FileMode.Open, FileAccess.ReadWrite);
-                using (var sr = new StreamReader(filest))
-                {
-                    string NC = sr.ReadToEnd();//直接读取全部
-                    sr.Close(); //关闭流
-                    filest.Close();
-                    ///判断文件中是否含有G54,如果没有，继续查找，直到查找到G59.9
-                    string G54 = "G54";
-                    if (NC.Contains(G54))              //判断NC值中是否含有G54字符
+                    ///文件夹下所有文件的坐标系
+                    StreamReader Wcs_objReader = new StreamReader(FilePath);
+                    string WCS_A = string.Empty;
+                    int j = 0;
+                    while ((WCS = Wcs_objReader.ReadLine()) != null)
                     {
-                        this.WCS.Text = "G54";
-                    }
-                    else
-                    {
-                        string G55 = "G55";
-                        if (NC.Contains(G55))
+                        j++;
+                        ///第二行
+                        if (j == 2)
                         {
-                            this.WCS.Text = "G55";
+                            WCS_A = WCS;
+                            ///截取第七行字符中两个指定字符间的字符
+                            int k = WCS.IndexOf("9");//找a的位置
+                            int l = WCS.IndexOf("G8");//找b的位置
+                            WCS = (WCS.Substring(k + 1)).Substring(0, l - k - 1);
+                            break;
+                        }
+                    }
+                    Wcs_objReader.Close();//关闭流
+                    ///文件夹下所有文件的刀具尺寸
+                    StreamReader Tools_objReader = new StreamReader(FilePath);
+                    string Tools_A = string.Empty;
+
+                    int i = 0;
+                    while ((Tools = Tools_objReader.ReadLine()) != null)
+                    {
+                        i++;
+                        ///第七行
+                        if (i == 7)
+                        {
+                            Tools_A = Tools;
+                            ///截取第七行字符中两个指定字符间的字符
+                            int s = Tools.IndexOf("(");//找a的位置
+                            int g = Tools.IndexOf("-");//找b的位置
+                            Tools = (Tools.Substring(s + 1)).Substring(0, g - s - 1);
+                            break;
+                        }
+                    }
+                    Tools_objReader.Close(); //关闭流
+                    ///获取文件夹下文件名，将路径显示到listView
+                    listView.Items.Add(new { A = FileName, B = WCS, C = Tools });
+
+                    ///判断
+                    if (!File.Exists(FilePath))
+                    {
+                        return;
+                    }
+                    var filest = new FileStream(FilePath, FileMode.Open, FileAccess.ReadWrite);
+                    using (var sr = new StreamReader(filest))
+                    {
+                        string NC = sr.ReadToEnd();//直接读取全部
+                        sr.Close(); //关闭流
+                        filest.Close();
+                        ///判断文件中是否含有G54,如果没有，继续查找，直到查找到G59.9
+                        string G54 = "G54";
+                        if (NC.Contains(G54))              //判断NC值中是否含有G54字符
+                        {
+                            this.WCS.Text = "G54";
                         }
                         else
                         {
-                            string G56 = "G56";
-                            if (NC.Contains(G56))
+                            string G55 = "G55";
+                            if (NC.Contains(G55))
                             {
-                                this.WCS.Text = "G56";
+                                this.WCS.Text = "G55";
                             }
                             else
                             {
-                                string G57 = "G57";
-                                if (NC.Contains(G57))
+                                string G56 = "G56";
+                                if (NC.Contains(G56))
                                 {
-                                    this.WCS.Text = "G57";
+                                    this.WCS.Text = "G56";
                                 }
                                 else
                                 {
-                                    string G58 = "G58";
-                                    if (NC.Contains(G58))
+                                    string G57 = "G57";
+                                    if (NC.Contains(G57))
                                     {
-                                        this.WCS.Text = "G58";
+                                        this.WCS.Text = "G57";
                                     }
                                     else
                                     {
-                                        string G100 = "G100";
-                                        if (NC.Contains(G100))
+                                        string G58 = "G58";
+                                        if (NC.Contains(G58))
                                         {
-                                            this.WCS.Text = "G100";
+                                            this.WCS.Text = "G58";
                                         }
                                         else
                                         {
-                                            string G591 = "G59.1";
-                                            if (NC.Contains(G591))
+                                            string G100 = "G100";
+                                            if (NC.Contains(G100))
                                             {
-                                                this.WCS.Text = "G59.1";
+                                                this.WCS.Text = "G100";
                                             }
                                             else
                                             {
-                                                string G592 = "G59.2";
-                                                if (NC.Contains(G592))
+                                                string G591 = "G59.1";
+                                                if (NC.Contains(G591))
                                                 {
-                                                    this.WCS.Text = "G59.2";
+                                                    this.WCS.Text = "G59.1";
                                                 }
                                                 else
                                                 {
-                                                    string G593 = "G59.3";
-                                                    if (NC.Contains(G593))
+                                                    string G592 = "G59.2";
+                                                    if (NC.Contains(G592))
                                                     {
-                                                        this.WCS.Text = "G59.3";
+                                                        this.WCS.Text = "G59.2";
                                                     }
                                                     else
                                                     {
-                                                        string G594 = "G59.4 ";
-                                                        if (NC.Contains(G594))
+                                                        string G593 = "G59.3";
+                                                        if (NC.Contains(G593))
                                                         {
-                                                            this.WCS.Text = "G59.4";
+                                                            this.WCS.Text = "G59.3";
                                                         }
                                                         else
                                                         {
-                                                            string G595 = "G59.5";
-                                                            if (NC.Contains(G595))
+                                                            string G594 = "G59.4 ";
+                                                            if (NC.Contains(G594))
                                                             {
-                                                                this.WCS.Text = "G59.5";
+                                                                this.WCS.Text = "G59.4";
                                                             }
                                                             else
                                                             {
-                                                                string G596 = "G59.6";
-                                                                if (NC.Contains(G596))
+                                                                string G595 = "G59.5";
+                                                                if (NC.Contains(G595))
                                                                 {
-                                                                    this.WCS.Text = "G59.6";
+                                                                    this.WCS.Text = "G59.5";
                                                                 }
                                                                 else
                                                                 {
-                                                                    string G597 = "G59.7";
-                                                                    if (NC.Contains(G597))
+                                                                    string G596 = "G59.6";
+                                                                    if (NC.Contains(G596))
                                                                     {
-                                                                        this.WCS.Text = "G59.7";
+                                                                        this.WCS.Text = "G59.6";
                                                                     }
                                                                     else
                                                                     {
-                                                                        string G598 = "G59.8";
-                                                                        if (NC.Contains(G598))
+                                                                        string G597 = "G59.7";
+                                                                        if (NC.Contains(G597))
                                                                         {
-                                                                            this.WCS.Text = "G59.8";
+                                                                            this.WCS.Text = "G59.7";
                                                                         }
                                                                         else
                                                                         {
-                                                                            string G599 = "G59.9";
-                                                                            if (NC.Contains(G599))
+                                                                            string G598 = "G59.8";
+                                                                            if (NC.Contains(G598))
                                                                             {
-                                                                                this.WCS.Text = "G59.9";
+                                                                                this.WCS.Text = "G59.8";
                                                                             }
                                                                             else
                                                                             {
-                                                                                ModernDialog.ShowMessage("您所选的文件夹可能有错，或不包含坐标，本工具只检测程序前三行是否有G54-G59.9，不支持G59", "警告", MessageBoxButton.OK);
+                                                                                string G599 = "G59.9";
+                                                                                if (NC.Contains(G599))
+                                                                                {
+                                                                                    this.WCS.Text = "G59.9";
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    ModernDialog.ShowMessage("您所选的文件夹可能有错，或不包含坐标，本工具只检测程序前三行是否有G54-G59.9，不支持G59", "警告", MessageBoxButton.OK);
+                                                                                }
                                                                             }
                                                                         }
                                                                     }
@@ -196,10 +241,9 @@ namespace CAP_Tools.Pages.List.NcProgram
                 ///不存在
                 this.Th.IsEnabled = false;
                 ///清空ListBox
-                list.Items.Clear();
+                listView.Items.Clear();
                 ModernDialog.ShowMessage("您选择的文件夹不存在.NC文件程序", "警告", MessageBoxButton.OK);
             }
-
         }
 
 

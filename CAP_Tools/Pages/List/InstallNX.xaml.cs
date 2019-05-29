@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace CAP_Tools.Pages
 {
@@ -38,7 +39,7 @@ namespace CAP_Tools.Pages
             this.label1.Visibility = Visibility.Hidden;
             this.label2.Visibility = Visibility.Hidden;
             //测试按钮隐藏
-            this.Test.Visibility = Visibility.Hidden;
+            //this.Test.Visibility = Visibility.Hidden;
             _saveDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NX License Servers");
         }
 
@@ -51,116 +52,117 @@ namespace CAP_Tools.Pages
 
         private void XZ_Click(object sender, RoutedEventArgs e)
         {
-            FolderBrowserDialog m_Dialog = new FolderBrowserDialog();
-            DialogResult result = m_Dialog.ShowDialog();
-
-            if (result == System.Windows.Forms.DialogResult.Cancel)
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            //string dir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);   //获取桌面路径
+            //dialog.InitialDirectory = dir;      //默认打开桌面
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                return;
-            }
-            string m_Dir = m_Dialog.SelectedPath.Trim();
-            this.XZRoute.Text = m_Dir;
-            this.NXRoute.Text = m_Dir;
-            DirectoryInfo dir = new DirectoryInfo(m_Dir);
-            foreach (FileInfo file in dir.GetFiles("UGII.cab", SearchOption.AllDirectories))//在文件夹中搜索UGII.cab；
-            {
-                ///截取路径添加到变量
-                string NXRoute = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(file.FullName)));
-                this.NXRoute.Text = NXRoute;
-                break;
-            }
-            DirectoryInfo dir2 = new DirectoryInfo(m_Dir);
-            foreach (FileInfo file in dir.GetFiles("jt_catiav5.exe", SearchOption.AllDirectories))//在文件夹中搜索jt_catiav5.exe；
-            {
-                ///截取路径添加到变量
-                string PJNXRoute = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName((System.IO.Path.GetDirectoryName(file.FullName)))));
-                this.PJRoute.Text = PJNXRoute;
-                break;
-            }
-            ///判断安装哪个版本
-            string route = NXRoute.Text;
-            string nx10 = route + "\\nx100";
-            string nx11 = route + "\\nx110";
-            string nx12 = route + "\\nx120";
-            string nx121 = route + "\\nx1201";
-            string nx122 = route + "\\nx1202";
-            string nx = route + "\\nx";
-
-            if (Directory.Exists(nx10))
-            {
-                this.a.Text = "- 正在安装 NX10.0";
-                this.Version.Text = "NX10";
-                this.NXInstall.IsEnabled = true;
-                this.NXCrack.IsEnabled = true;
-            }
-            else
-            {
-                if (Directory.Exists(nx11))
+                string m_Dir = dialog.FileName;
+                this.XZRoute.Text = m_Dir;
+                this.NXRoute.Text = m_Dir;
+                DirectoryInfo dir = new DirectoryInfo(m_Dir);
+                foreach (FileInfo file in dir.GetFiles("UGII.cab", SearchOption.AllDirectories))//在文件夹中搜索UGII.cab；
                 {
-                    this.a.Text = "- 正在安装 NX11.0";
-                    this.Version.Text = "NX11";
+                    ///截取路径添加到变量
+                    string NXRoute = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(file.FullName)));
+                    this.NXRoute.Text = NXRoute;
+                    break;
+                }
+                DirectoryInfo dir2 = new DirectoryInfo(m_Dir);
+                foreach (FileInfo file in dir.GetFiles("jt_catiav5.exe", SearchOption.AllDirectories))//在文件夹中搜索jt_catiav5.exe；
+                {
+                    ///截取路径添加到变量
+                    string PJNXRoute = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName((System.IO.Path.GetDirectoryName(file.FullName)))));
+                    this.PJRoute.Text = PJNXRoute;
+                    break;
+                }
+                ///判断安装哪个版本
+                string route = NXRoute.Text;
+                string nx10 = route + "\\nx100";
+                string nx11 = route + "\\nx110";
+                string nx12 = route + "\\nx120";
+                string nx121 = route + "\\nx1201";
+                string nx122 = route + "\\nx1202";
+                string nx = route + "\\nx";
+
+                if (Directory.Exists(nx10))
+                {
+                    this.a.Text = "- 正在安装 NX10.0";
+                    this.Version.Text = "NX10";
                     this.NXInstall.IsEnabled = true;
+                    this.NXCrack.IsEnabled = true;
                 }
                 else
                 {
-                    if (Directory.Exists(nx12))
+                    if (Directory.Exists(nx11))
                     {
-                        this.a.Text = "- 正在安装 NX12.0";
-                        this.Version.Text = "NX12";
+                        this.a.Text = "- 正在安装 NX11.0";
+                        this.Version.Text = "NX11";
                         this.NXInstall.IsEnabled = true;
                     }
                     else
                     {
-                        if (Directory.Exists(nx122))
+                        if (Directory.Exists(nx12))
                         {
-                            
-                            this.a.Text = "- 正在安装 NX12.0.2";
+                            this.a.Text = "- 正在安装 NX12.0";
                             this.Version.Text = "NX12";
                             this.NXInstall.IsEnabled = true;
                         }
                         else
                         {
-                            if (Directory.Exists(nx121))
+                            if (Directory.Exists(nx122))
                             {
 
-                                this.a.Text = "- 正在安装 NX12.0.1";
+                                this.a.Text = "- 正在安装 NX12.0.2";
                                 this.Version.Text = "NX12";
                                 this.NXInstall.IsEnabled = true;
                             }
                             else
                             {
-                                if (Directory.Exists(nx))
+                                if (Directory.Exists(nx121))
                                 {
-                                    this.a.Text = "- 正在安装 NX(2019)";
-                                    this.Version.Text = "NX(2019)";
+
+                                    this.a.Text = "- 正在安装 NX12.0.1";
+                                    this.Version.Text = "NX12";
                                     this.NXInstall.IsEnabled = true;
                                 }
                                 else
                                 {
-                                    this.NXInstall.IsEnabled = false;
-                                    this.NXCrack.IsEnabled = false;
-                                    this.a.Text = "- 支持NX(2019)";
-                                    ModernDialog.ShowMessage("NX安装主程序不存在，请重新选择文件夹或检测安装程序完整性！\n\r或者选择的安装包为NX10.0以下版本", "警告", MessageBoxButton.OK);
+                                    if (Directory.Exists(nx))
+                                    {
+                                        this.a.Text = "- 正在安装 NX(2019)";
+                                        this.Version.Text = "NX(2019)";
+                                        this.NXInstall.IsEnabled = true;
+                                    }
+                                    else
+                                    {
+                                        this.NXInstall.IsEnabled = false;
+                                        this.NXCrack.IsEnabled = false;
+                                        this.a.Text = "- 支持NX(2019)";
+                                        ModernDialog.ShowMessage("NX安装主程序不存在，请重新选择文件夹或检测安装程序完整性！\n\r或者选择的安装包为NX10.0以下版本", "警告", MessageBoxButton.OK);
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-            ///判断破解文件是否存在
-            string pjfile = PJRoute.Text;
-            if (NXInstall.IsEnabled == true)
-            {
-                if (Directory.Exists(pjfile))
+                ///判断破解文件是否存在
+                string pjfile = PJRoute.Text;
+                if (NXInstall.IsEnabled == true)
                 {
-                    this.NXCrack.IsEnabled = true;
-                }
-                else
-                {
-                    this.NXCrack.IsEnabled = false;
-                    ModernDialog.ShowMessage("未在安装目录找到破解文件，请检查安装包是否包含破解文件。\n\r请将破解文件整个文件夹复制到安装目录后重试！", "警告", MessageBoxButton.OK);
+                    if (Directory.Exists(pjfile))
+                    {
+                        this.NXCrack.IsEnabled = true;
+                    }
+                    else
+                    {
+                        this.NXCrack.IsEnabled = false;
+                        ModernDialog.ShowMessage("未在安装目录找到破解文件，请检查安装包是否包含破解文件。\n\r请将破解文件整个文件夹复制到安装目录后重试！", "警告", MessageBoxButton.OK);
+                    }
                 }
             }
+            
         }
 
         private void NXInstall_Click(object sender, RoutedEventArgs e)
@@ -477,6 +479,14 @@ namespace CAP_Tools.Pages
         private void Test_Click(object sender, RoutedEventArgs e)
         {
 
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            //string dir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);   //获取桌面路径
+            //dialog.InitialDirectory = dir;      //默认打开桌面
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                ModernDialog.ShowMessage("You selected: " + dialog.FileName, "警告", MessageBoxButton.OK);
+            }
         }
     }
 }

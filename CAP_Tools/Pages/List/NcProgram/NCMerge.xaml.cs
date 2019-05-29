@@ -33,7 +33,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                     this.FileRoute.Text = m_Dir;
                     ///如果存在，将替换按钮显示
                     this.CL.IsEnabled = true;
-                    this.Dk.IsEnabled = true;
+                    this.Dk.IsEnabled = false;
                     ///读取选择的文件夹中NC文件
                     ///清空listView
                     listView.Items.Clear();
@@ -309,22 +309,34 @@ namespace CAP_Tools.Pages.List.NcProgram
             sw.Close();
             fs2.Close();
             File.Delete(TempFile);                                                    //删除Temp文件
-            //判断是否打开文件夹
-            MessageBoxResult result = ModernDialog.ShowMessage("串联成功，是否打开串联好的文件到上级目录？", "提示", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
+            //判断是否复制串联好的文件到上级目录
+            if (true == this.copy.IsChecked)
             {
-                ///Process.Start("Explorer.exe", SelectFile);
-                ///创建文件夹
                 string a = (System.IO.Path.GetDirectoryName(FileRoute.Text)) + "\\程序";
                 Directory.CreateDirectory(a);
-                File.Copy(NewFile,a + "\\" + FolderName + ".nc", true);
+                File.Copy(NewFile, a + "\\" + FolderName + ".nc", true);
+                if (File.Exists(NewFile))
+                {
+                    File.Delete(NewFile);
+                }
             }
+            this.Dk.IsEnabled = true;
+            ModernDialog.ShowMessage("程序串联成功                                ", "提示", MessageBoxButton.OK);
         }
 
         private void Dk_Click(object sender, RoutedEventArgs e)
         {
-            string Path = FileRoute.Text;
-            Process.Start("Explorer.exe", Path);
+            if (true == this.copy.IsChecked)
+            {
+                string Path = (System.IO.Path.GetDirectoryName(FileRoute.Text)) + "\\程序";
+                Process.Start("Explorer.exe", Path);
+                this.Dk.IsEnabled = true;
+            }
+            else
+            {
+                string Path1 = FileRoute.Text;
+                Process.Start("Explorer.exe", Path1);
+            }
         }
     }
 

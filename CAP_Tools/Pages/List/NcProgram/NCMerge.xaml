@@ -29,6 +29,9 @@
             <Button Name="CL" Content="串联"  Click="CL_Click" Margin="-60,62,0,70" Width="60" FontSize="11" IsEnabled="False" />
             <Button Name="Dk" Content="打开" Click="Dk_Click" Margin="-60,116,0,15"  Width="60" FontSize="11" IsEnabled="False" />
         </StackPanel>
+        <StackPanel Margin="0,5,0,8">
+            <CheckBox x:Name="copy" Content="复制串联好的文件到上级目录" IsChecked="True" Margin="0,0,0,2" />
+        </StackPanel>
         <Label Content="将文件夹名字改为您需要的名字,新文件将采用文件夹名字命名" Height="17" Width="455" Margin="0,0,0,0"  FontSize="12" HorizontalAlignment="Left" />
     </StackPanel>
 </UserControl>

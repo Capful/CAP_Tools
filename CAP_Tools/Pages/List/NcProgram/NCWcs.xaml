@@ -35,5 +35,9 @@
             <Button Name="Th" Content="替换"  Click="Th_Click" Margin="-60,62,0,70" Width="60" FontSize="11" IsEnabled="False" />
             <Button Name="Dk" Content="打开" Click="Dk_Click" Margin="-60,116,0,15"  Width="60" FontSize="11" IsEnabled="False" />
         </StackPanel>
+        <StackPanel Margin="0,5,0,8">
+            <CheckBox x:Name="copy" Content="复制修改完坐标的文件到上级目录" IsChecked="True" Margin="0,0,0,2" />
+        </StackPanel>
+        <Label Content="替换完坐标后需要新建刀具名称文件夹，将同刀具的文件放入相同文件夹" Height="17" Width="455" Margin="0,0,0,0"  FontSize="12" HorizontalAlignment="Left" />
     </StackPanel>
 </UserControl>

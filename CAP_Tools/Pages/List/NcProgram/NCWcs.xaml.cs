@@ -39,7 +39,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                     a.Close();
                     ///如果存在，将替换按钮显示
                     this.Th.IsEnabled = true;
-                    this.Dk.IsEnabled = true;
+                    this.Dk.IsEnabled = false;
                     ///读取选择的文件夹中NC文件
                     ///清空listView
                     listView.Items.Clear();
@@ -279,15 +279,14 @@ namespace CAP_Tools.Pages.List.NcProgram
                     sw.Close();
                     fs2.Close();
                 }
-                MessageBoxResult result = ModernDialog.ShowMessage("替换成功，是否复制已修改坐标的文件到程序串联目录？", "提示", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes)
+                //判断是否复制串联好的文件到上级目录
+                if (true == this.copy.IsChecked)
                 {
-                    ///完成后打开文件夹
-                    ///Process.Start("Explorer.exe", Path);
-                    ///复制已修改坐标的文件到程序串联目录
                     Directory.CreateDirectory((System.IO.Path.GetDirectoryName(Path)) + "\\程序串联");
                     CopyDirectory(Path, SPath);
                 }
+                this.Dk.IsEnabled = true;
+                ModernDialog.ShowMessage("替换坐标成功                                ", "提示", MessageBoxButton.OK);
 
                 ///完成后检测文件夹中的值，并返回
                 string PathName = null;
@@ -438,8 +437,18 @@ namespace CAP_Tools.Pages.List.NcProgram
         }
         private void Dk_Click(object sender, RoutedEventArgs e)
         {
-            string Path = FileRoute.Text;
-            Process.Start("Explorer.exe", Path);
+            if (true == this.copy.IsChecked)
+            {
+                string Path = FileRoute.Text;
+                string SPath = (System.IO.Path.GetDirectoryName(Path)) + "\\程序串联";
+                Process.Start("Explorer.exe", SPath);
+                this.Dk.IsEnabled = true;
+            }
+            else
+            {
+                string Path1 = FileRoute.Text;
+                Process.Start("Explorer.exe", Path1);
+            }
         }
         public static void CopyDirectory(string srcPath, string destPath)
         {

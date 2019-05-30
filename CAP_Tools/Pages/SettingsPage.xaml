@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="360" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
         <mui:ModernTab Layout="List" SelectedSource="/Pages/Settings/Appearance.xaml" FontFamily="Microsoft YaHei UI Light">
             <mui:ModernTab.Links>
@@ -13,6 +13,6 @@
                 <mui:Link DisplayName="关于" Source="/Pages/Settings/About.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
-        <mui:BBCodeBlock BBCode="Powered by [url=https://weibo.com/u/2355029701]Capful[/url]" Margin="-35,247,-16,-24" Foreground="{DynamicResource WindowTextReadOnly}" />
+        <mui:BBCodeBlock BBCode="Powered by [url=https://weibo.com/u/2355029701]Capful[/url]" Margin="-35,350,-16,-64" Foreground="{DynamicResource WindowTextReadOnly}" />
     </Grid>
 </UserControl>

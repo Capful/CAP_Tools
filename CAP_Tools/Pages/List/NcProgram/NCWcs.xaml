@@ -37,7 +37,15 @@
         </StackPanel>
         <StackPanel Margin="0,5,0,8">
             <CheckBox x:Name="copy" Content="复制修改完坐标的文件到上级目录" IsChecked="True" Margin="0,0,0,2" />
+            <CheckBox x:Name="op" Content="修改完坐标后打开文件所在目录" IsChecked="False" Margin="0,0,0,4" />
         </StackPanel>
         <Label Content="替换完坐标后需要新建刀具名称文件夹，将同刀具的文件放入相同文件夹" Height="17" Width="455" Margin="0,0,0,0"  FontSize="12" HorizontalAlignment="Left" />
+        <TextBlock Width="300" FontSize="10" HorizontalAlignment="Left" Visibility="Hidden" >
+            <Run Text="缓存变量:" />
+            <Run x:Name="WCSFIle" Text="修改完成的路径加名称-上级目录" />
+            <Run x:Name="WCSFIle2" Text="串联完成的路径加名称" />
+            <Run x:Name="PJRoute" Text="破解文件路径" />
+            <Run x:Name="Version" Text="NX版本" />
+        </TextBlock>
     </StackPanel>
 </UserControl>

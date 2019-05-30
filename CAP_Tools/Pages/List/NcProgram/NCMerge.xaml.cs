@@ -1,5 +1,6 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -34,6 +35,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                     ///如果存在，将替换按钮显示
                     this.CL.IsEnabled = true;
                     this.Dk.IsEnabled = false;
+                    this.JC.IsEnabled = false;
                     ///读取选择的文件夹中NC文件
                     ///清空listView
                     listView.Items.Clear();
@@ -105,8 +107,8 @@ namespace CAP_Tools.Pages.List.NcProgram
             
         }
 
-            private void CL_Click(object sender, RoutedEventArgs e)
-            {
+        private void CL_Click(object sender, RoutedEventArgs e)
+        {
             ///设置路径变量
             string Path = FileRoute.Text;                                             //获取打开文件夹对话框选择的路径
             string FolderName = Path.Substring(Path.LastIndexOf('\\') + 1);           //获取选择的路径名称，获取\后的一串字符
@@ -313,29 +315,54 @@ namespace CAP_Tools.Pages.List.NcProgram
             if (true == this.copy.IsChecked)
             {
                 string a = (System.IO.Path.GetDirectoryName(FileRoute.Text)) + "\\程序";
+                this.NCFIle.Text = a + "\\" + FolderName + ".nc";
+                this.NCFIle2.Text = NewFile;
                 Directory.CreateDirectory(a);
-                File.Copy(NewFile, a + "\\" + FolderName + ".nc", true);
+                File.Copy(NewFile, NCFIle.Text, true);
                 if (File.Exists(NewFile))
                 {
                     File.Delete(NewFile);
                 }
             }
             this.Dk.IsEnabled = true;
+            this.JC.IsEnabled = true;
             ModernDialog.ShowMessage("程序串联成功                                ", "提示", MessageBoxButton.OK);
+            //判断是否串联完成后打开文件所在目录
+            if (true == this.op.IsChecked)
+            {
+                if (true == this.copy.IsChecked)
+                {
+                    Process.Start("Explorer.exe", "/select," + NCFIle.Text);
+                }
+                else
+                {
+                    Process.Start("Explorer.exe", "/select," + NCFIle2.Text);
+                }
+            }
         }
 
         private void Dk_Click(object sender, RoutedEventArgs e)
         {
             if (true == this.copy.IsChecked)
             {
-                string Path = (System.IO.Path.GetDirectoryName(FileRoute.Text)) + "\\程序";
-                Process.Start("Explorer.exe", Path);
-                this.Dk.IsEnabled = true;
+                Process.Start("Explorer.exe" , "/select," + NCFIle.Text);
             }
             else
             {
-                string Path1 = FileRoute.Text;
-                Process.Start("Explorer.exe", Path1);
+                Process.Start("Explorer.exe", "/select," + NCFIle2.Text);
+            }
+        }
+
+        private void JC_Click(object sender, RoutedEventArgs e)
+        {
+            string A = AppDomain.CurrentDomain.BaseDirectory + "\\NCVIEWER\\NcViewer.exe";
+            if (true == this.copy.IsChecked)
+            {
+                Process.Start(A, NCFIle.Text);
+            }
+            else
+            {
+                Process.Start(A, NCFIle2.Text);
             }
         }
     }

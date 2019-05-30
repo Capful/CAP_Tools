@@ -17,35 +17,43 @@
             <Run Text="文件路径:" />
             <Run x:Name="FileRoute" Text="请点击'浏览'按钮选择NC程序路径"  />
         </TextBlock>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="24" Margin="0,5,0,0" Width="295"  >
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="24" Margin="0,5,0,0" Width="400"  >
             <TextBlock Text="文件夹名称" Height="20" Margin="0,3,5,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />
             <TextBox x:Name="A" Text="1" Margin="0,0,3,0" Width="30"  FontSize="10.5" FontFamily="Microsoft YaHei UI"/>
             <TextBlock Text="-" Height="20" Margin="0,3,3,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" FontFamily="Microsoft YaHei UI"/>
             <TextBox x:Name="AA" Text="D10" Margin="0,0,30,0" Width="73"  FontSize="10.5" />
-            <Button Name="XJ1" Content="新建" Click="XJ1_Click" Margin="0,0,0,0"  Width="81" FontSize="10.5" IsEnabled="True" />
+            <Button Name="XJ1" Content="新建" Click="XJ1_Click" Margin="0,0,0,0"  Width="110" FontSize="10.5" IsEnabled="True" />
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="24" Margin="0,5,0,0" Width="295"  >
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="24" Margin="0,5,0,0" Width="400"  >
             <TextBlock Text="文件夹名称" Height="20" Margin="0,3,5,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />
             <TextBox x:Name="B" Text="2" Margin="0,0,3,0" Width="30"  FontSize="10.5" FontFamily="Microsoft YaHei UI"/>
             <TextBlock Text="-" Height="20" Margin="0,3,3,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" FontFamily="Microsoft YaHei UI"/>
             <TextBox x:Name="BB" Text="D10R05" Margin="0,0,30,0" Width="73"  FontSize="10.5" />
-            <Button Name="XJ2" Content="新建" Click="XJ2_Click" Margin="0,0,0,0"  Width="81" FontSize="10.5" IsEnabled="True" />
+            <Button Name="XJ2" Content="新建" Click="XJ2_Click" Margin="0,0,0,0"  Width="110" FontSize="10.5" IsEnabled="True" />
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="24" Margin="0,5,0,0" Width="295"  >
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="24" Margin="0,5,0,0" Width="400"  >
             <TextBlock Text="文件夹名称" Height="20" Margin="0,3,5,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />
             <TextBox x:Name="C" Text="3" Margin="0,0,3,0" Width="30"  FontSize="10.5" FontFamily="Microsoft YaHei UI"/>
             <TextBlock Text="-" Height="20" Margin="0,3,3,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" FontFamily="Microsoft YaHei UI"/>
             <TextBox x:Name="CC" Text="D6" Margin="0,0,30,0" Width="73"  FontSize="10.5" />
-            <Button Name="XJ3" Content="新建" Click="XJ3_Click" Margin="0,0,0,0"  Width="81" FontSize="10.5" IsEnabled="True" />
+            <Button Name="XJ3" Content="新建" Click="XJ3_Click" Margin="0,0,0,0"  Width="110" FontSize="10.5" IsEnabled="True" />
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="24" Margin="0,5,0,0" Width="295"  >
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="24" Margin="0,5,0,0" Width="400"  >
             <TextBlock Text="文件夹名称" Height="20" Margin="0,3,5,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />
             <TextBox x:Name="D" Text="4" Margin="0,0,3,0" Width="30"  FontSize="10.5" FontFamily="Microsoft YaHei UI"/>
             <TextBlock Text="-" Height="20" Margin="0,3,3,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" FontFamily="Microsoft YaHei UI"/>
-            <TextBox x:Name="DD" Text="D2R02" Margin="0,0,30,0" Width="73"  FontSize="10.5" />
-            <Button Name="XJ4" Content="新建" Click="XJ4_Click" Margin="0,0,0,0"  Width="81" FontSize="10.5" IsEnabled="True" />
+            <TextBox x:Name="DD" Text="D4" Margin="0,0,30,0" Width="73"  FontSize="10.5" />
+            <Button Name="XJ4" Content="新建" Click="XJ4_Click" Margin="0,0,0,0"  Width="110" FontSize="10.5" IsEnabled="True" />
         </StackPanel>
-        <Label Content="将文件夹名字改为您需要的名字,新文件将采用文件夹名字命名" Height="17" Width="460" Margin="0,10,0,0"  FontSize="12" HorizontalAlignment="Left" />
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="24" Margin="0,5,0,0" Width="400"  >
+            <TextBlock Text="文件夹名称" Height="20" Margin="0,3,5,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />
+            <TextBox x:Name="F" Text="5" Margin="0,0,3,0" Width="30"  FontSize="10.5" FontFamily="Microsoft YaHei UI"/>
+            <TextBlock Text="-" Height="20" Margin="0,3,3,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" FontFamily="Microsoft YaHei UI"/>
+            <TextBox x:Name="FF" Text="D2R02" Margin="0,0,30,0" Width="73"  FontSize="10.5" />
+            <Button Name="XJ5" Content="新建文件夹" Click="XJ4_Click" Margin="0,0,0,0"  Width="110" FontSize="10.5" IsEnabled="True" />
+        </StackPanel>
+        <Label Content="1.新建以刀具尺寸为名称的文件夹，后续串联好的文件会以此为名字" Height="17" Width="460" Margin="0,10,0,0"  FontSize="12" HorizontalAlignment="Left" />
+        <Label Content="2.将同尺寸刀具程序统一归类到同一文件夹，后续执行串联命令" Height="17" Width="460" Margin="0,5,0,0"  FontSize="12" HorizontalAlignment="Left" />
         <Label Content="使用前请刷新路径！！！" Height="17" Width="300" Margin="0,5,0,0"  FontSize="12" HorizontalAlignment="Left" />
     </StackPanel>
 </UserControl>

@@ -312,11 +312,11 @@ namespace CAP_Tools.Pages.List.NcProgram
             fs2.Close();
             File.Delete(TempFile);                                                    //删除Temp文件
             //判断是否复制串联好的文件到上级目录
+            string a = (System.IO.Path.GetDirectoryName(FileRoute.Text)) + "\\程序";
+            this.NCFIle.Text = a + "\\" + FolderName + ".nc";
+            this.NCFIle2.Text = NewFile;
             if (true == this.copy.IsChecked)
             {
-                string a = (System.IO.Path.GetDirectoryName(FileRoute.Text)) + "\\程序";
-                this.NCFIle.Text = a + "\\" + FolderName + ".nc";
-                this.NCFIle2.Text = NewFile;
                 Directory.CreateDirectory(a);
                 File.Copy(NewFile, NCFIle.Text, true);
                 if (File.Exists(NewFile))
@@ -332,11 +332,25 @@ namespace CAP_Tools.Pages.List.NcProgram
             {
                 if (true == this.copy.IsChecked)
                 {
-                    Process.Start("Explorer.exe", "/select," + NCFIle.Text);
+                    if (File.Exists(NCFIle.Text))
+                    {
+                        Process.Start("Explorer.exe", "/select," + NCFIle.Text);
+                    }
+                    else
+                    {
+                        ModernDialog.ShowMessage("文件不存在，请重新串联程序", "警告", MessageBoxButton.OK);
+                    }
                 }
                 else
                 {
-                    Process.Start("Explorer.exe", "/select," + NCFIle2.Text);
+                    if (File.Exists(NCFIle2.Text))
+                    {
+                        Process.Start("Explorer.exe", "/select," + NCFIle2.Text);
+                    }
+                    else
+                    {
+                        ModernDialog.ShowMessage("文件不存在，请重新串联程序", "警告", MessageBoxButton.OK);
+                    }
                 }
             }
         }
@@ -345,11 +359,25 @@ namespace CAP_Tools.Pages.List.NcProgram
         {
             if (true == this.copy.IsChecked)
             {
-                Process.Start("Explorer.exe" , "/select," + NCFIle.Text);
+                if (File.Exists(NCFIle.Text))
+                {
+                    Process.Start("Explorer.exe", "/select," + NCFIle.Text);
+                }
+                else
+                {
+                    ModernDialog.ShowMessage("文件不存在，请重新串联程序", "警告", MessageBoxButton.OK);
+                }
             }
             else
             {
-                Process.Start("Explorer.exe", "/select," + NCFIle2.Text);
+                if (File.Exists(NCFIle2.Text))
+                {
+                    Process.Start("Explorer.exe", "/select," + NCFIle2.Text);
+                }
+                else
+                {
+                    ModernDialog.ShowMessage("文件不存在，请重新串联程序", "警告", MessageBoxButton.OK);
+                }
             }
         }
 

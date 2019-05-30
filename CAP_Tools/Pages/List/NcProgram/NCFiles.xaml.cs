@@ -121,5 +121,18 @@ namespace CAP_Tools.Pages.List.NcProgram
                 Directory.CreateDirectory(D1);
             }
         }
+
+        private void XJ5_Click(object sender, RoutedEventArgs e)
+        {
+            string F1 = FileRoute.Text + "\\" + F.Text + "-" + FF.Text;
+            if (Directory.Exists(F1))
+            {
+                ModernDialog.ShowMessage(F.Text + "-" + FF.Text + " 文件夹已存在！", "警告", MessageBoxButton.OK);
+            }
+            else
+            {
+                Directory.CreateDirectory(F1);
+            }
+        }
     }
 }

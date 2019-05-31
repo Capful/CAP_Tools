@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Text.RegularExpressions;
 
 namespace CAP_Tools.Pages
 {
@@ -39,7 +40,7 @@ namespace CAP_Tools.Pages
             this.label1.Visibility = Visibility.Hidden;
             this.label2.Visibility = Visibility.Hidden;
             //测试按钮隐藏
-            //this.Test.Visibility = Visibility.Hidden;
+            this.Test.Visibility = Visibility.Hidden;
             _saveDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NX License Servers");
         }
 
@@ -478,15 +479,33 @@ namespace CAP_Tools.Pages
 
         private void Test_Click(object sender, RoutedEventArgs e)
         {
-
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-            //string dir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);   //获取桌面路径
-            //dialog.InitialDirectory = dir;      //默认打开桌面
-            dialog.IsFolderPicker = true;
-            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            string Str = "G40 G17 G49 G54 G80";
+            string Start = "G49";
+            string End = "G80";
+            string StrResult = GetValue(Str, Start, End);
+            string WCS = StrResult;
+            ///判断程序是否有坐标系
+            if (WCS.Contains("G5"))
             {
-                ModernDialog.ShowMessage("You selected: " + dialog.FileName, "警告", MessageBoxButton.OK);
+                ModernDialog.ShowMessage(StrResult, "提示", MessageBoxButton.OK);
             }
+            else
+            {
+                ModernDialog.ShowMessage("未获取坐标系", "警告", MessageBoxButton.OK);
+            }
+
+        }
+        /// <summary>
+        /// 获得字符串中开始和结束字符串中间得值
+        /// </summary>
+        /// <param name="str">字符串</param>
+        /// <param name="s">开始</param>
+        /// <param name="e">结束</param>
+        /// <returns></returns> 
+        public static string GetValue(string str, string s, string e)
+        {
+            Regex rg = new Regex("(?<=(" + s + "))[.\\s\\S]*?(?=(" + e + "))", RegexOptions.Multiline | RegexOptions.Singleline);
+            return rg.Match(str).Value;
         }
     }
 }

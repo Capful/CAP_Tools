@@ -35,5 +35,12 @@ namespace CAP_Tools
             //Application.Current.Shutdown(); // 正常结束
             Environment.Exit(0);              // 强制结束
         }
+        // 全局变量
+        public sealed class Cap
+        {
+            public static string NCFileRoute;
+            public static string bb;
+
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Forms;
+using static CAP_Tools.MainWindow;
 
 namespace CAP_Tools.Pages.List.NcProgram
 {
@@ -26,39 +27,33 @@ namespace CAP_Tools.Pages.List.NcProgram
             dialog.IsFolderPicker = true;
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                string m_Dir = dialog.FileName;
+                Cap.NCFileRoute = dialog.FileName;
+                string XZPath = Cap.NCFileRoute;
                 ///判断选择的文件夹中是否含有后缀名为NC的文件
-                if (System.IO.Directory.GetFiles(m_Dir, "*.nc").Length > 0)
+                if (System.IO.Directory.GetFiles(XZPath, "*.nc").Length > 0)
                 {
-                    this.FileRoute.Text = m_Dir;
-                    ///将选择的路径写入当前程序运行路径下的FileRoute.ini文件中
-                    FileStream a = File.Create(AppDomain.CurrentDomain.BaseDirectory + "FileRoute.ini");
-                    StreamWriter sw = new StreamWriter(a);
-                    sw.WriteLine(m_Dir);
-                    sw.Close();
-                    a.Close();
+                    FileRoute.Text = XZPath;
                     ///如果存在，将替换按钮显示
                     this.Th.IsEnabled = true;
                     this.Dk.IsEnabled = false;
                     ///读取选择的文件夹中NC文件
                     ///清空listView
                     listView.Items.Clear();
-                    string FilePath = null;
+                    string FullName = null;
                     string FileName = null;
                     string Tools = null;
                     string WCS = null;
-                    DirectoryInfo d = new DirectoryInfo(m_Dir);
+                    DirectoryInfo d = new DirectoryInfo(XZPath);
                     FileInfo[] Files = d.GetFiles("*.nc");
                     List<string> lstr = new List<string>();
                     ///获取文件夹下文件名，将路径显示到listView
                     foreach (FileInfo file in Files)
                     {
                         ///获取文件夹下文件名
-                        FilePath = file.FullName;
+                        FullName = file.FullName;
                         FileName = file.Name;
-                        ///文件夹下所有文件的坐标系
-                        StreamReader Wcs_objReader = new StreamReader(FilePath);
-                        string WCS_A = string.Empty;
+                        ///获取文件夹下所有程序的坐标系
+                        StreamReader Wcs_objReader = new StreamReader(FullName);
                         int j = 0;
                         while ((WCS = Wcs_objReader.ReadLine()) != null)
                         {
@@ -66,19 +61,17 @@ namespace CAP_Tools.Pages.List.NcProgram
                             ///第二行
                             if (j == 2)
                             {
-                                WCS_A = WCS;
                                 ///截取第二行字符中两个指定字符间的字符
                                 int k = WCS.IndexOf("9");//找a的位置
                                 int l = WCS.IndexOf("G8");//找b的位置
                                 WCS = (WCS.Substring(k + 1)).Substring(0, l - k - 1);
+                                WCS = WCS.Trim(); //去除首尾空格
                                 break;
                             }
                         }
                         Wcs_objReader.Close();//关闭流
-                        ///文件夹下所有文件的刀具尺寸
-                        StreamReader Tools_objReader = new StreamReader(FilePath);
-                        string Tools_A = string.Empty;
-
+                        ///获取文件夹下所有程序的刀具尺寸
+                        StreamReader Tools_objReader = new StreamReader(FullName);
                         int i = 0;
                         while ((Tools = Tools_objReader.ReadLine()) != null)
                         {
@@ -86,7 +79,6 @@ namespace CAP_Tools.Pages.List.NcProgram
                             ///第七行
                             if (i == 7)
                             {
-                                Tools_A = Tools;
                                 ///截取第七行字符中两个指定字符间的字符
                                 int s = Tools.IndexOf("(");//找a的位置
                                 int g = Tools.IndexOf("-");//找b的位置
@@ -95,17 +87,13 @@ namespace CAP_Tools.Pages.List.NcProgram
                             }
                         }
                         Tools_objReader.Close(); //关闭流
-                        ///获取文件夹下文件名，将路径显示到listView
+                        ///将文件名，坐标系，刀具名称添加到ListView
                         listView.Items.Add(new { A = FileName, B = WCS, C = Tools });
+                        this.WCS.Text = WCS;
 
                     }
-
-                    string WCSA = WCS;
-                    ///去除字符首尾空格
-                    WCSA = WCSA.Trim();
-                    this.WCS.Text = WCSA;
                     ///判断程序是否有坐标系
-                    if (WCSA.Contains("G5"))
+                    if (WCS.Contains("G5"))
                     {
                         ///包含坐标系
                     }
@@ -183,66 +171,41 @@ namespace CAP_Tools.Pages.List.NcProgram
                 ///重新检测坐标
                 ///清空listView
                 listView.Items.Clear();
-                string FilePath_A = null;
+                string XZPath = Cap.NCFileRoute;
+                string FullName = null;
                 string FileName = null;
-                string Tools = null;
-                string WCS2 = null;
-                DirectoryInfo d = new DirectoryInfo(FileRoute.Text);
+                string WCS_A = null;
+                DirectoryInfo d = new DirectoryInfo(XZPath);
                 FileInfo[] Files = d.GetFiles("*.nc");
                 List<string> lstr = new List<string>();
-                ///获取文件夹下文件名，将路径显示到listView
+                ///获取WCS坐标添加到listView
                 foreach (FileInfo file in Files)
                 {
                     ///获取文件夹下文件名
-                    FilePath_A = file.FullName;
+                    FullName = file.FullName;
                     FileName = file.Name;
-                    ///文件夹下所有文件的坐标系
-                    StreamReader Wcs_objReader = new StreamReader(FilePath_A);
-                    string WCS_A = string.Empty;
+                    ///获取文件夹下所有程序的坐标系
+                    StreamReader Wcs_objReader = new StreamReader(FullName);
                     int j = 0;
-                    while ((WCS2 = Wcs_objReader.ReadLine()) != null)
+                    while ((WCS_A = Wcs_objReader.ReadLine()) != null)
                     {
                         j++;
                         ///第二行
                         if (j == 2)
                         {
-                            WCS_A = WCS2;
-                            ///截取第七行字符中两个指定字符间的字符
-                            int k = WCS2.IndexOf("9");//找a的位置
-                            int l = WCS2.IndexOf("G8");//找b的位置
-                            WCS2 = (WCS2.Substring(k + 1)).Substring(0, l - k - 1);
+                            ///截取第二行字符中两个指定字符间的字符
+                            int k = WCS_A.IndexOf("9");//找a的位置
+                            int l = WCS_A.IndexOf("G8");//找b的位置
+                            WCS_A = (WCS_A.Substring(k + 1)).Substring(0, l - k - 1);
+                            WCS_A = WCS_A.Trim(); //去除首尾空格
                             break;
                         }
                     }
                     Wcs_objReader.Close();//关闭流
-                    ///文件夹下所有文件的刀具尺寸
-                    StreamReader Tools_objReader = new StreamReader(FilePath_A);
-                    string Tools_A = string.Empty;
-
-                    int i = 0;
-                    while ((Tools = Tools_objReader.ReadLine()) != null)
-                    {
-                        i++;
-                        ///第七行
-                        if (i == 7)
-                        {
-                            Tools_A = Tools;
-                            ///截取第七行字符中两个指定字符间的字符
-                            int s = Tools.IndexOf("(");//找a的位置
-                            int g = Tools.IndexOf("-");//找b的位置
-                            Tools = (Tools.Substring(s + 1)).Substring(0, g - s - 1);
-                            break;
-                        }
-                    }
-                    Tools_objReader.Close(); //关闭流
-                                             ///获取文件夹下文件名，将路径显示到listView
-                    listView.Items.Add(new { A = FileName, B = WCS2, C = Tools });
+                    ///重新检测坐标系添加到ListView
+                    listView.Items.Add(new { B = WCS_A });
+                    WCS.Text = WCS_A;
                 }
-                ///完成后检测文件夹中的值，并返回
-                string WCSA = WCS2;
-                ///去除字符首尾空格
-                WCSA = WCSA.Trim();
-                this.WCS.Text = WCSA;
             }
             else
             {

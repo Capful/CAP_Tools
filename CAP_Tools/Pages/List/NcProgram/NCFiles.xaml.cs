@@ -1,6 +1,7 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static CAP_Tools.MainWindow;
 
 namespace CAP_Tools.Pages.List.NcProgram
 {
@@ -25,49 +27,31 @@ namespace CAP_Tools.Pages.List.NcProgram
         public NCFiles()
         {
             InitializeComponent();
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "FileRoute.ini"))
-            {
-                FileStream fs = File.OpenRead(AppDomain.CurrentDomain.BaseDirectory + "FileRoute.ini");
-                StreamReader sr = new StreamReader(fs);
-                string s = sr.ReadLine();
-                this.FileRoute.Text = (System.IO.Path.GetDirectoryName(s)) + "\\程序串联";
-                ///如果存在，将替换按钮显示
-                this.XJ1.IsEnabled = true;
-                this.XJ2.IsEnabled = true;
-                this.XJ3.IsEnabled = true;
-                this.XJ4.IsEnabled = true;
-            }
-            else
-            {
-                ///如果存在，将替换按钮显示
-                this.XJ1.IsEnabled = false;
-                this.XJ2.IsEnabled = false;
-                this.XJ3.IsEnabled = false;
-                this.XJ4.IsEnabled = false;
-            }
         }
 
         private void SX_Click(object sender, RoutedEventArgs e)
         {
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "FileRoute.ini"))
-            {
-                FileStream fs = File.OpenRead(AppDomain.CurrentDomain.BaseDirectory + "FileRoute.ini");
-                StreamReader sr = new StreamReader(fs);
-                string s = sr.ReadLine();
-                this.FileRoute.Text = (System.IO.Path.GetDirectoryName(s)) + "\\程序串联";
+            if (Directory.Exists(Cap.NCFileRoute))
+                {
                 ///如果存在，将替换按钮显示
-                this.XJ1.IsEnabled = true;
-                this.XJ2.IsEnabled = true;
-                this.XJ3.IsEnabled = true;
-                this.XJ4.IsEnabled = true;
+                XJ1.IsEnabled = true;
+                XJ2.IsEnabled = true;
+                XJ3.IsEnabled = true;
+                XJ4.IsEnabled = true;
+                XJ5.IsEnabled = true;
+                OP.IsEnabled = true;
+                FileRoute.Text = System.IO.Path.GetDirectoryName(Cap.NCFileRoute) + "\\程序串联";
             }
             else
             {
-                ///如果存在，将替换按钮显示
-                this.XJ1.IsEnabled = false;
-                this.XJ2.IsEnabled = false;
-                this.XJ3.IsEnabled = false;
-                this.XJ4.IsEnabled = false;
+                ///如果不存在存在，将替换按钮显示
+                XJ1.IsEnabled = false;
+                XJ2.IsEnabled = false;
+                XJ3.IsEnabled = false;
+                XJ4.IsEnabled = false;
+                XJ5.IsEnabled = false;
+                OP.IsEnabled = false;
+                ModernDialog.ShowMessage("路径不存在                      ", "警告", MessageBoxButton.OK);
             }
         }
 
@@ -133,6 +117,21 @@ namespace CAP_Tools.Pages.List.NcProgram
             {
                 Directory.CreateDirectory(F1);
             }
+        }
+
+        private void OP_Click(object sender, RoutedEventArgs e)
+        {
+            if (Directory.Exists(FileRoute.Text))
+            {
+                ///如果存在
+                Process.Start("Explorer.exe", FileRoute.Text);
+            }
+            else
+            {
+                ///如果不存在存在
+                Process.Start("Explorer.exe", Cap.NCFileRoute);
+            }
+            
         }
     }
 }

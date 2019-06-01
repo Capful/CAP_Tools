@@ -40,7 +40,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                     ///清空listView
                     listView.Items.Clear();
                     string FilePath = null;
-                    string FileName = null;
+                    string FileName2 = null;
                     string Tools = null;
                     string WCS = null;
                     DirectoryInfo d = new DirectoryInfo(m_Dir);
@@ -51,7 +51,12 @@ namespace CAP_Tools.Pages.List.NcProgram
                     {
                         ///获取文件夹下文件名
                         FilePath = file.FullName;
-                        FileName = file.Name;
+                        FileName2 = file.Name;
+                        //删除文件名中的刀具名称和坐标
+                        string FileNames = FileName2;
+                        FileNames = FileNames.Replace("]-", "]");
+                        int index = FileNames.LastIndexOf(']'); //截取最后出现']'后面的所有字符
+                        FileNames = FileNames.Substring(index + 1); //结果
                         ///文件夹下所有文件的坐标系
                         StreamReader Wcs_objReader = new StreamReader(FilePath);
                         string WCS_A = string.Empty;
@@ -92,7 +97,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                         }
                         Tools_objReader.Close(); //关闭流
                                                  ///获取文件夹下文件名，将路径显示到listView
-                        listView.Items.Add(new { A = FileName, B = WCS, C = Tools });
+                        listView.Items.Add(new { A = FileNames, B = WCS, C = Tools });
                     }
                 }
                 else
@@ -383,15 +388,23 @@ namespace CAP_Tools.Pages.List.NcProgram
 
         private void JC_Click(object sender, RoutedEventArgs e)
         {
-            string A = AppDomain.CurrentDomain.BaseDirectory + "\\NCVIEWER\\NcViewer.exe";
-            if (true == this.copy.IsChecked)
+            string NcViewer = AppDomain.CurrentDomain.BaseDirectory + "\\NCVIEWER\\NcViewer.exe";
+            if (File.Exists(NcViewer))
             {
-                Process.Start(A, NCFIle.Text);
+                if (true == this.copy.IsChecked)
+                {
+                    Process.Start(NcViewer, NCFIle.Text);
+                }
+                else
+                {
+                    Process.Start(NcViewer, NCFIle2.Text);
+                }
             }
             else
             {
-                Process.Start(A, NCFIle2.Text);
+                ModernDialog.ShowMessage("NcViewer 软件不存在，请重新安装本软件", "警告", MessageBoxButton.OK);
             }
+            
         }
     }
 

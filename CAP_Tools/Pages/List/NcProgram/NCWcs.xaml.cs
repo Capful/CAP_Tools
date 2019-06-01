@@ -223,6 +223,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                     //判断是否复制串联好的文件到上级目录
                     if (true == this.copy.IsChecked)
                     {
+                        //将刀具名称和坐标系加入到文件名中
                         string NewFile = FilePath + "\\" + "[" + Tools + "]" + "[" + WCS_A + "]-" + FileName;
                         Directory.CreateDirectory(FilePath);
                         File.Copy(FullName,NewFile, true);

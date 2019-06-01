@@ -83,6 +83,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                                 int s = Tools.IndexOf("(");//找a的位置
                                 int g = Tools.IndexOf("-");//找b的位置
                                 Tools = (Tools.Substring(s + 1)).Substring(0, g - s - 1);
+                                Tools = Tools.Trim(); //去除首尾空格
                                 break;
                             }
                         }
@@ -146,12 +147,6 @@ namespace CAP_Tools.Pages.List.NcProgram
                     sw.Close();
                     fs2.Close();
                 }
-                //判断是否复制串联好的文件到上级目录
-                if (true == this.copy.IsChecked)
-                {
-                    Directory.CreateDirectory((System.IO.Path.GetDirectoryName(FileRoute.Text)) + "\\程序串联");
-                    CopyDirectory(FileRoute.Text, FilePath);
-                }
                 this.Dk.IsEnabled = true;
                 ModernDialog.ShowMessage("替换坐标成功                                ", "提示", MessageBoxButton.OK);
                 //判断是否修改完坐标后打开文件所在目录
@@ -174,6 +169,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                 string XZPath = Cap.NCFileRoute;
                 string FullName = null;
                 string FileName = null;
+                string Tools = null;
                 string WCS_A = null;
                 DirectoryInfo d = new DirectoryInfo(XZPath);
                 FileInfo[] Files = d.GetFiles("*.nc");
@@ -202,14 +198,40 @@ namespace CAP_Tools.Pages.List.NcProgram
                         }
                     }
                     Wcs_objReader.Close();//关闭流
+                                          ///获取文件夹下所有程序的刀具尺寸
+                    StreamReader Tools_objReader = new StreamReader(FullName);
+                    int i = 0;
+                    while ((Tools = Tools_objReader.ReadLine()) != null)
+                    {
+                        i++;
+                        ///第七行
+                        if (i == 7)
+                        {
+                            ///截取第七行字符中两个指定字符间的字符
+                            int s = Tools.IndexOf("(");//找a的位置
+                            int g = Tools.IndexOf("-");//找b的位置
+                            Tools = (Tools.Substring(s + 1)).Substring(0, g - s - 1);
+                            Tools = Tools.Trim(); //去除首尾空格
+                            break;
+                        }
+                    }
+                    Tools_objReader.Close(); //关闭流
+                    ///将文件名，坐标系，刀具名称添加到ListView
+                    listView.Items.Add(new { A = FileName, B = WCS_A, C = Tools });
                     ///重新检测坐标系添加到ListView
-                    listView.Items.Add(new { B = WCS_A });
                     WCS.Text = WCS_A;
+                    //判断是否复制串联好的文件到上级目录
+                    if (true == this.copy.IsChecked)
+                    {
+                        string NewFile = FilePath + "\\" + "[" + Tools + "]" + "[" + WCS_A + "]-" + FileName;
+                        Directory.CreateDirectory(FilePath);
+                        File.Copy(FullName,NewFile, true);
+                    }
                 }
             }
             else
             {
-                ModernDialog.ShowMessage("输入错误！！！，请输入坐标系！或检查大小写！", "警告", MessageBoxButton.OK);
+                ModernDialog.ShowMessage("输入错误！“"+ G54 +"” 不是坐标系"+"，请重新输入坐标系！或检查大小写！", "警告", MessageBoxButton.OK);
             }
             
         }
@@ -217,15 +239,22 @@ namespace CAP_Tools.Pages.List.NcProgram
         {
             if (true == this.copy.IsChecked)
             {
-                string Path = FileRoute.Text;
-                string SPath = (System.IO.Path.GetDirectoryName(Path)) + "\\程序串联";
-                Process.Start("Explorer.exe", SPath);
-                this.Dk.IsEnabled = true;
+                string SPath = Path.GetDirectoryName(FileRoute.Text) + "\\程序串联";
+                if (Directory.Exists(SPath))
+                {
+                    ///如果存在
+                    Process.Start("Explorer.exe", SPath);
+                }
+                else
+                {
+                    ///如果不存在
+                    ModernDialog.ShowMessage("路径不存在，请重新勾选复制按钮进行替换后重试", "警告", MessageBoxButton.OK);
+                }
+                
             }
             else
             {
-                string Path1 = FileRoute.Text;
-                Process.Start("Explorer.exe", Path1);
+                Process.Start("Explorer.exe", FileRoute.Text);
             }
         }
         public static void CopyDirectory(string srcPath, string destPath)

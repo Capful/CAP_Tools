@@ -128,7 +128,7 @@ namespace CAP_Tools.Pages.List.NcProgram
             }
             else
             {
-                ///如果不存在存在
+                ///如果不存在
                 Process.Start("Explorer.exe", Cap.NCFileRoute);
             }
             

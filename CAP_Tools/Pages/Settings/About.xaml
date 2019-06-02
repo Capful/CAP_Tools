@@ -10,6 +10,7 @@
             <StackPanel MinWidth="200">
                 <TextBlock Text="关于" Style="{StaticResource Heading2}" FontFamily="Microsoft YaHei"  />
                 <TextBlock Text="本工具用于NX软件的一些便捷操作，后续将添加更多功能" Margin="0,0,0,8" TextWrapping="Wrap" />
+                <Button Content="更新日志" Width="94" Click="Change_Click" FontSize="10.5" Margin="0,0,0,0" HorizontalAlignment="Left" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

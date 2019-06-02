@@ -13,11 +13,28 @@
             <Run Text="文件路径:" />
             <Run x:Name="FileRoute" Text="请点击'浏览'按钮选择NC程序文件夹"  />
         </TextBlock>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="21" Margin="0,5,0,0" Width="167"  >
-            <TextBlock Text="将" Height="20" Margin="0,3,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />
-            <TextBlock x:Name="WCS" Text="G54" Height="20" Margin="0,3,0,-2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="50"  FontSize="10.5" />
-            <TextBlock Text="替换为" Height="18" Margin="0,3,5,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />
-            <TextBox x:Name="AWCS" Text="G54" Margin="0,0,30,0" Width="62"  FontSize="10.5" />
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="21" Margin="0,5,0,0" Width="220"  >
+            <TextBlock Text="将 " Height="20" Margin="0,3,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />
+            <TextBlock x:Name="WCS" Text="G54" Height="20" Margin="0,3,0,-2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="45"  FontSize="10.5" />
+            <TextBlock Text=" 替换为" Height="18" Margin="0,3,5,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />
+            <ComboBox x:Name="AWCS" Width="74" FontSize="10.5">
+                <ComboBoxItem IsSelected="True">G54</ComboBoxItem>
+                <ComboBoxItem>G55</ComboBoxItem>
+                <ComboBoxItem>G56</ComboBoxItem>
+                <ComboBoxItem>G57</ComboBoxItem>
+                <ComboBoxItem>G58</ComboBoxItem>
+                <ComboBoxItem>G59</ComboBoxItem>
+                <ComboBoxItem>G54P01</ComboBoxItem>
+                <ComboBoxItem>G54P02</ComboBoxItem>
+                <ComboBoxItem>G54P03</ComboBoxItem>
+                <ComboBoxItem>G54P04</ComboBoxItem>
+                <ComboBoxItem>G54P05</ComboBoxItem>
+                <ComboBoxItem>G54P06</ComboBoxItem>
+                <ComboBoxItem>G54P07</ComboBoxItem>
+                <ComboBoxItem>G54P08</ComboBoxItem>
+                <ComboBoxItem>G54P09</ComboBoxItem>
+                <ComboBoxItem>G54P10</ComboBoxItem>
+            </ComboBox>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="161" Margin="0,3,0,0" Width="440" >
             <Rectangle Fill="#00000000" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Width="260" HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Margin="0,0,-320,0"/>
@@ -26,7 +43,7 @@
                     <!--设置列标签并将列成员与一个变量名称相绑定，以便后台链接修改-->
                     <GridView>
                         <GridViewColumn Header="程序名称" Width="100" DisplayMemberBinding="{Binding Path=A}"/>
-                        <GridViewColumn Header="坐标" Width="50" DisplayMemberBinding="{Binding Path=B}"/>
+                        <GridViewColumn Header="坐标" Width="70" DisplayMemberBinding="{Binding Path=B}"/>
                         <GridViewColumn Header="刀具" Width="70" DisplayMemberBinding="{Binding Path=C}"/>
                     </GridView>
                 </ListView.View>

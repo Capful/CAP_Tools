@@ -1,4 +1,9 @@
-﻿using System.Windows.Controls;
+﻿using FirstFloor.ModernUI.Windows.Controls;
+using System;
+using System.IO;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace CAP_Tools.Pages.Settings
 {
@@ -10,6 +15,13 @@ namespace CAP_Tools.Pages.Settings
         public About()
         {
             InitializeComponent();
+        }
+
+        private void Change_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            string changelog = AppDomain.CurrentDomain.BaseDirectory + "changelog.txt";
+            string str = File.ReadAllText(changelog,Encoding.Default);
+            ModernDialog.ShowMessage(str, "更新日志", MessageBoxButton.OK);
         }
     }
 }

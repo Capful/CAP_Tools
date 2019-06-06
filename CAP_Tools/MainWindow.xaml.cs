@@ -39,7 +39,7 @@ namespace CAP_Tools
         public sealed class Cap
         {
             public static string NCFileRoute;
-            public static string bb;
+            public static string IniFileName ="星创后处理";
 
         }
     }

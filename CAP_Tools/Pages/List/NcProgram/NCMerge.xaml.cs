@@ -23,8 +23,10 @@ namespace CAP_Tools.Pages.List.NcProgram
         private void Xz_Click(object sender, RoutedEventArgs e)
         {
             ///打开选择文件夹对话框
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-            dialog.IsFolderPicker = true;
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog
+            {
+                IsFolderPicker = true
+            };
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 string m_Dir = dialog.FileName;

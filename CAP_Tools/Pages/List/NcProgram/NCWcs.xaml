@@ -61,8 +61,12 @@
             <Run Text="缓存变量:" />
             <Run x:Name="WCSFIle" Text="修改完成的路径加名称-上级目录" />
             <Run x:Name="WCSFIle2" Text="串联完成的路径加名称" />
-            <Run x:Name="PJRoute" Text="破解文件路径" />
-            <Run x:Name="Version" Text="NX版本" />
+            <Run x:Name="WCS_Line" Text="破解文件路径" />
+            <Run x:Name="WCS_Start" Text="NX版本" />
+            <Run x:Name="WCS_End" Text="破解文件路径" />
+            <Run x:Name="T_Line" Text="破解文件路径" />
+            <Run x:Name="T_Start" Text="NX版本" />
+            <Run x:Name="T_End" Text="破解文件路径" />
         </TextBlock>
     </StackPanel>
 </UserControl>

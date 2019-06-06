@@ -23,8 +23,10 @@ namespace CAP_Tools.Pages.List.NcProgram
         private void Xz_Click(object sender, RoutedEventArgs e)
         {
             ///打开选择文件夹对话框
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-            dialog.IsFolderPicker = true;
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog
+            {
+                IsFolderPicker = true
+            };
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 Cap.NCFileRoute = dialog.FileName;
@@ -43,6 +45,28 @@ namespace CAP_Tools.Pages.List.NcProgram
                     string FileName = null;
                     string Tools = null;
                     string WCS = null;
+                    ///读取ini文件数据
+                    string inifilePath = AppDomain.CurrentDomain.BaseDirectory + "NC Config\\" + Cap.IniFileName + ".ini";  //设置路径
+                    IniFile iniFile = new IniFile(inifilePath);
+                    if (File.Exists(inifilePath))
+                    {
+                        ///读取ini文件数据
+
+                        WCS_Line.Text = iniFile.ReadIni("WCS_Config", "WCS_Line");
+                        WCS_Start.Text = iniFile.ReadIni("WCS_Config", "WCS_Start");
+                        WCS_End.Text = iniFile.ReadIni("WCS_Config", "WCS_End");
+
+                        T_Line.Text = iniFile.ReadIni("T_Config", "T_Line");
+                        T_Start.Text = iniFile.ReadIni("T_Config", "T_Start");
+                        T_End.Text = iniFile.ReadIni("T_Config", "T_End");
+
+                        //iniFile.writeIni("section1", "key1", "value11"); //写
+                    }
+                    else
+                    {
+                        ModernDialog.ShowMessage(Cap.IniFileName + " 配置文件不存在，请检查", "警告", MessageBoxButton.OK);
+                    }
+                    
                     DirectoryInfo d = new DirectoryInfo(XZPath);
                     FileInfo[] Files = d.GetFiles("*.nc");
                     List<string> lstr = new List<string>();
@@ -62,8 +86,8 @@ namespace CAP_Tools.Pages.List.NcProgram
                             if (j == 2)
                             {
                                 ///截取第二行字符中两个指定字符间的字符
-                                int k = WCS.IndexOf("9");//找a的位置
-                                int l = WCS.IndexOf("G8");//找b的位置
+                                int k = WCS.IndexOf(WCS_Start.Text);//找a的位置
+                                int l = WCS.IndexOf(WCS_End.Text);//找b的位置
                                 WCS = (WCS.Substring(k + 1)).Substring(0, l - k - 1);
                                 WCS = WCS.Trim(); //去除首尾空格
                                 break;
@@ -80,8 +104,8 @@ namespace CAP_Tools.Pages.List.NcProgram
                             if (i == 7)
                             {
                                 ///截取第七行字符中两个指定字符间的字符
-                                int s = Tools.IndexOf("(");//找a的位置
-                                int g = Tools.IndexOf("-");//找b的位置
+                                int s = Tools.IndexOf(T_Start.Text);//找a的位置
+                                int g = Tools.IndexOf(T_End.Text);//找b的位置
                                 Tools = (Tools.Substring(s + 1)).Substring(0, g - s - 1);
                                 Tools = Tools.Trim(); //去除首尾空格
                                 break;
@@ -271,7 +295,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 throw;
             }

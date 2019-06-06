@@ -34,7 +34,7 @@ namespace CAP_Tools
         /// <param name="Section">Section</param>  
         /// <param name="Key">键</param>  
         /// <param name="Value">值</param>  
-        public void writeIni(string Section, string Key, string Value)
+        public void WriteIni(string Section, string Key, string Value)
         {
             WritePrivateProfileString(Section, Key, Value, this.iniPath);
         }
@@ -67,7 +67,7 @@ namespace CAP_Tools
         /// </summary>  
         /// <param name="Key">键</param>  
         /// <returns>返回值</returns>  
-        public string readIni(string Key)
+        public string ReadIni(string Key)
         {
             return ReadIni("default", Key);
         }

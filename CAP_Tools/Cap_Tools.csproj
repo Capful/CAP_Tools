@@ -93,11 +93,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IniFile.cs" />
     <Compile Include="Pages\List\NcProgram\NCFiles.xaml.cs">
       <DependentUpon>NCFiles.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\List\NcProgram\NCMerge.xaml.cs">
       <DependentUpon>NCMerge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\List\NcProgram\NcConfig.xaml.cs">
+      <DependentUpon>NcConfig.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\List\NcProgram\NCWcs.xaml.cs">
       <DependentUpon>NCWcs.xaml</DependentUpon>
@@ -152,6 +156,10 @@
     <Page Include="Pages\List\NcProgram\NCMerge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\List\NcProgram\NcConfig.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\List\NcProgram\NCWcs.xaml">
       <SubType>Designer</SubType>

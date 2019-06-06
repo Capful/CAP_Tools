@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="360" d:DesignWidth="460">
     <Grid Style="{StaticResource ContentRoot}">
         <!-- TODO: set @SelectedSource -->
         <mui:ModernTab SelectedSource="/Pages/List/NcProgram/NCWcs.xaml" Layout="Tab">
@@ -14,6 +14,7 @@
                 <mui:Link DisplayName="更改坐标" Source="/Pages/List/NcProgram/NCWcs.xaml" />
                 <mui:Link DisplayName="文件夹" Source="/Pages/List/NcProgram/NCFiles.xaml" />
                 <mui:Link DisplayName="串联程序" Source="/Pages/List/NcProgram/NCMerge.xaml" />
+                <mui:Link DisplayName="配置文件" Source="/Pages/List/NcProgram/NcConfig.xaml" /> 
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

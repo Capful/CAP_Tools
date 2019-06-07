@@ -7,12 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="360" d:DesignWidth="460">
     <StackPanel MinWidth="200">
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,5,0,5" Width="470"  >
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,10,0,15" Width="470"  >
         <TextBlock Text="配置文件" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="14" />
-            <ComboBox x:Name="PZ" Width="115" FontSize="12" Margin="5,0,0,0" SelectionChanged="PZ_SelectionChanged">
-            <ComboBoxItem IsSelected="True">星创后处理</ComboBoxItem>
-            <ComboBoxItem>自定义</ComboBoxItem>
-            </ComboBox>
+        <ComboBox x:Name="Config" Width="115" FontSize="12" Margin="5,0,0,0" SelectionChanged="NcConfig_SelectionChanged">
+        </ComboBox>
+        <TextBox x:Name="NewConfigName" Text="自定义2" Margin="8,0,0,0"  FontSize="10.5" Width="126" />
+        <Button Content="新建配置" Click="NewConfig_Click" Margin="8,0,0,0" FontSize="10.5" />
+        <Button Content="保存" Click="Save_Click" Margin="8,0,0,0" FontSize="10.5" />
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="22" Margin="0,5,0,5" Width="470"  >
             <TextBlock Text="坐标系信息  " Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="12" />
@@ -45,6 +46,5 @@
             <Run x:Name="PJRoute" Text="破解文件路径" />
             <Run x:Name="Version" Text="NX版本" />
         </TextBlock>
-        <Button Content="Button" Click="Button_Click_1"/>
     </StackPanel>
 </UserControl>

@@ -19,6 +19,27 @@ namespace CAP_Tools.Pages.List.NcProgram
         public NCWcs()
         {
             InitializeComponent();
+
+            ///读取ini文件数据
+            string inifilePath = AppDomain.CurrentDomain.BaseDirectory + "NC Config\\" + Cap.IniFileName + ".ini";  //设置路径
+            IniFile iniFile = new IniFile(inifilePath);
+            if (File.Exists(inifilePath))
+            {
+                ///读取ini文件数据
+
+                Cap.WCS_Line = iniFile.ReadIni("WCS_Config", "WCS_Line");
+                Cap.WCS_Start = iniFile.ReadIni("WCS_Config", "WCS_Start");
+                Cap.WCS_End = iniFile.ReadIni("WCS_Config", "WCS_End");
+
+                Cap.T_Line = iniFile.ReadIni("T_Config", "T_Line");
+                Cap.T_Start = iniFile.ReadIni("T_Config", "T_Start");
+                Cap.T_End = iniFile.ReadIni("T_Config", "T_End");
+
+            }
+            else
+            {
+                ModernDialog.ShowMessage(Cap.IniFileName + " 配置文件不存在，请检查", "警告", MessageBoxButton.OK);
+            }
         }
         private void Xz_Click(object sender, RoutedEventArgs e)
         {
@@ -52,21 +73,19 @@ namespace CAP_Tools.Pages.List.NcProgram
                     {
                         ///读取ini文件数据
 
-                        WCS_Line.Text = iniFile.ReadIni("WCS_Config", "WCS_Line");
-                        WCS_Start.Text = iniFile.ReadIni("WCS_Config", "WCS_Start");
-                        WCS_End.Text = iniFile.ReadIni("WCS_Config", "WCS_End");
+                        Cap.WCS_Line = iniFile.ReadIni("WCS_Config", "WCS_Line");
+                        Cap.WCS_Start = iniFile.ReadIni("WCS_Config", "WCS_Start");
+                        Cap.WCS_End = iniFile.ReadIni("WCS_Config", "WCS_End");
 
-                        T_Line.Text = iniFile.ReadIni("T_Config", "T_Line");
-                        T_Start.Text = iniFile.ReadIni("T_Config", "T_Start");
-                        T_End.Text = iniFile.ReadIni("T_Config", "T_End");
-
-                        //iniFile.writeIni("section1", "key1", "value11"); //写
+                        Cap.T_Line = iniFile.ReadIni("T_Config", "T_Line");
+                        Cap.T_Start = iniFile.ReadIni("T_Config", "T_Start");
+                        Cap.T_End = iniFile.ReadIni("T_Config", "T_End");
                     }
                     else
                     {
                         ModernDialog.ShowMessage(Cap.IniFileName + " 配置文件不存在，请检查", "警告", MessageBoxButton.OK);
                     }
-                    
+
                     DirectoryInfo d = new DirectoryInfo(XZPath);
                     FileInfo[] Files = d.GetFiles("*.nc");
                     List<string> lstr = new List<string>();
@@ -83,12 +102,10 @@ namespace CAP_Tools.Pages.List.NcProgram
                         {
                             j++;
                             ///第二行
-                            if (j == 2)
+                            if (j == Int32.Parse(Cap.WCS_Line))
                             {
-                                ///截取第二行字符中两个指定字符间的字符
-                                int k = WCS.IndexOf(WCS_Start.Text);//找a的位置
-                                int l = WCS.IndexOf(WCS_End.Text);//找b的位置
-                                WCS = (WCS.Substring(k + 1)).Substring(0, l - k - 1);
+                                ///截取字符中两个指定字符间的字符
+                                WCS = InterceptStr(WCS, Cap.WCS_Start, Cap.WCS_End);
                                 WCS = WCS.Trim(); //去除首尾空格
                                 break;
                             }
@@ -101,12 +118,10 @@ namespace CAP_Tools.Pages.List.NcProgram
                         {
                             i++;
                             ///第七行
-                            if (i == 7)
+                            if (i == Int32.Parse(Cap.T_Line))
                             {
-                                ///截取第七行字符中两个指定字符间的字符
-                                int s = Tools.IndexOf(T_Start.Text);//找a的位置
-                                int g = Tools.IndexOf(T_End.Text);//找b的位置
-                                Tools = (Tools.Substring(s + 1)).Substring(0, g - s - 1);
+                                ///截取字符中两个指定字符间的字符
+                                Tools = InterceptStr(Tools, Cap.T_Start, Cap.T_End);
                                 Tools = Tools.Trim(); //去除首尾空格
                                 break;
                             }
@@ -124,7 +139,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                     }
                     else
                     {
-                        ModernDialog.ShowMessage("程序中不存在坐标系", "警告", MessageBoxButton.OK);
+                        ModernDialog.ShowMessage("程序中不存在坐标系，请检查程序或者配置文件", "警告", MessageBoxButton.OK);
                         ///不存在
                         this.Th.IsEnabled = false;
                     }
@@ -200,6 +215,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                 ///获取文件夹下文件名
                 FullName = file.FullName;
                 FileName = file.Name;
+
                 ///获取文件夹下所有程序的坐标系
                 StreamReader Wcs_objReader = new StreamReader(FullName);
                 int j = 0;
@@ -207,37 +223,36 @@ namespace CAP_Tools.Pages.List.NcProgram
                 {
                     j++;
                     ///第二行
-                    if (j == 2)
+                    if (j == Int32.Parse(Cap.WCS_Line))
                     {
-                        ///截取第二行字符中两个指定字符间的字符
-                        int k = WCS_A.IndexOf("9");//找a的位置
-                        int l = WCS_A.IndexOf("G8");//找b的位置
-                        WCS_A = (WCS_A.Substring(k + 1)).Substring(0, l - k - 1);
+                        ///截取字符中两个指定字符间的字符
+                        WCS_A = InterceptStr(WCS_A, Cap.WCS_Start, Cap.WCS_End);
                         WCS_A = WCS_A.Trim(); //去除首尾空格
                         break;
                     }
                 }
                 Wcs_objReader.Close();//关闭流
-                                      ///获取文件夹下所有程序的刀具尺寸
+
+                ///获取文件夹下所有程序的刀具尺寸
                 StreamReader Tools_objReader = new StreamReader(FullName);
                 int i = 0;
                 while ((Tools = Tools_objReader.ReadLine()) != null)
                 {
                     i++;
                     ///第七行
-                    if (i == 7)
+                    if (i == Int32.Parse(Cap.T_Line))
                     {
-                        ///截取第七行字符中两个指定字符间的字符
-                        int s = Tools.IndexOf("(");//找a的位置
-                        int g = Tools.IndexOf("-");//找b的位置
-                        Tools = (Tools.Substring(s + 1)).Substring(0, g - s - 1);
+                        ///截取字符中两个指定字符间的字符
+                        Tools = InterceptStr(Tools, Cap.T_Start, Cap.T_End);
                         Tools = Tools.Trim(); //去除首尾空格
                         break;
                     }
                 }
                 Tools_objReader.Close(); //关闭流
-                                         ///将文件名，坐标系，刀具名称添加到ListView
+
+                ///将文件名，坐标系，刀具名称添加到ListView
                 listView.Items.Add(new { A = FileName, B = WCS_A, C = Tools });
+
                 ///重新检测坐标系添加到ListView
                 WCS.Text = WCS_A;
                 //判断是否复制串联好的文件到上级目录
@@ -299,6 +314,18 @@ namespace CAP_Tools.Pages.List.NcProgram
             {
                 throw;
             }
+        }
+        private string InterceptStr(string s, string str_start, string str_end)
+        {
+            try
+            {
+                int i = s.IndexOf(str_start) + str_start.Length;
+                int j = s.IndexOf(str_end);
+                string str_value = s.Substring(i, j - i);
+                return str_value;
+            }
+            catch
+            { return "错误"; }
         }
     }
 }

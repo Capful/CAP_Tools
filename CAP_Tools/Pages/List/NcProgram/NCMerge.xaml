@@ -39,8 +39,6 @@
             <Run Text="缓存变量:" />
             <Run x:Name="NCFIle" Text="串联完成的路径加名称-上级目录" />
             <Run x:Name="NCFIle2" Text="串联完成的路径加名称" />
-            <Run x:Name="PJRoute" Text="破解文件路径" />
-            <Run x:Name="Version" Text="NX版本" />
         </TextBlock>
     </StackPanel>
 </UserControl>

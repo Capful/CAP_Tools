@@ -39,8 +39,13 @@ namespace CAP_Tools
         public sealed class Cap
         {
             public static string NCFileRoute;
-            public static string IniFileName;
-
+            public static string IniFileName = "星创后处理";
+            public static string WCS_Line;
+            public static string WCS_Start;
+            public static string WCS_End;
+            public static string T_Line;
+            public static string T_Start;
+            public static string T_End;
         }
     }
 }

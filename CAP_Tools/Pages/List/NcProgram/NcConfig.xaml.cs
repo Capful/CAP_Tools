@@ -36,8 +36,7 @@ namespace CAP_Tools.Pages.List
                         string Name = System.IO.Path.GetFileNameWithoutExtension(file.Name);
                         Config.Items.Add(Name);
                     }
-                    Config.SelectedItem = "星创后处理"; //默认选中
-                    Cap.IniFileName = Config.SelectedItem.ToString(); //选中值
+                    Config.SelectedItem = Cap.IniFileName; //默认选中
                 }
                 else
                 {

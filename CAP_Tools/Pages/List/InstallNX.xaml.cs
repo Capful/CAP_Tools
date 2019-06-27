@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace CAP_Tools.Pages
 {
@@ -40,7 +41,7 @@ namespace CAP_Tools.Pages
             this.label1.Visibility = Visibility.Hidden;
             this.label2.Visibility = Visibility.Hidden;
             //测试按钮隐藏
-            this.Test.Visibility = Visibility.Hidden;
+            //this.Test.Visibility = Visibility.Hidden;
             _saveDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NX License Servers");
         }
 
@@ -479,33 +480,22 @@ namespace CAP_Tools.Pages
 
         private void Test_Click(object sender, RoutedEventArgs e)
         {
-            string Str = "G40 G17 G49 G54 G80";
-            string Start = "G49";
-            string End = "G80";
-            string StrResult = GetValue(Str, Start, End);
-            string WCS = StrResult;
-            ///判断程序是否有坐标系
-            if (WCS.Contains("G5"))
-            {
-                ModernDialog.ShowMessage(StrResult, "提示", MessageBoxButton.OK);
-            }
-            else
-            {
-                ModernDialog.ShowMessage("未获取坐标系", "警告", MessageBoxButton.OK);
-            }
+            RunBat ("D:\\test.bat");
+            ModernDialog.ShowMessage("完成", "警告", MessageBoxButton.OK);
 
         }
-        /// <summary>
-        /// 获得字符串中开始和结束字符串中间得值
-        /// </summary>
-        /// <param name="str">字符串</param>
-        /// <param name="s">开始</param>
-        /// <param name="e">结束</param>
-        /// <returns></returns> 
-        public static string GetValue(string str, string s, string e)
+        private void RunBat(string filename)
         {
-            Regex rg = new Regex("(?<=(" + s + "))[.\\s\\S]*?(?=(" + e + "))", RegexOptions.Multiline | RegexOptions.Singleline);
-            return rg.Match(str).Value;
+            Process pro = new Process();
+            FileInfo file = new FileInfo(filename);
+            pro.StartInfo.WorkingDirectory = file.Directory.FullName;
+            pro.StartInfo.FileName = filename;
+            pro.StartInfo.CreateNoWindow = false;
+            pro.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            pro.Start();
+            pro.WaitForExit();
+
+
         }
     }
 }

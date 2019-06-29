@@ -161,11 +161,11 @@ namespace CAP_Tools.Pages.List.NcProgram
         private void Th_Click(object sender, RoutedEventArgs e)
         {
             ///批量替换文本中的值
-            string FilePath = (Path.GetDirectoryName(FileRoute.Text)) + "\\程序串联";
+            string FilePath = Path.GetDirectoryName(FileRoute.Text) + "\\程序串联";
             string WcsPath = WCS.Text; //文件中的坐标值
             string AWcsPath = AWCS.Text; //输入的坐标值
             string[] pathFile = Directory.GetFiles(FileRoute.Text);
-            string Th = "";
+            string Th = null;
             foreach (string str in pathFile)
             {
                 FileStream fs = new FileStream(str, FileMode.Open, FileAccess.Read);

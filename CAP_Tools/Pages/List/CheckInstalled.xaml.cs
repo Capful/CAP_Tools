@@ -20,118 +20,136 @@ namespace CAP_Tools.Pages.List
             RegistryKey NX = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
             if (NX == null)
             {
-                this.NX1847.IsEnabled = false;
-                this.NX1847.Content = "未安装";
-                this.NX12.IsEnabled = false;
-                this.NX12.Content = "未安装";
-                this.NX11.IsEnabled = false;
-                this.NX11.Content = "未安装";
-                this.NX10.IsEnabled = false;
-                this.NX10.Content = "未安装";
+                NX1847.IsEnabled = false;
+                NX1847.Content = "未安装";
+                NX12.IsEnabled = false;
+                NX12.Content = "未安装";
+                NX11.IsEnabled = false;
+                NX11.Content = "未安装";
+                NX10.IsEnabled = false;
+                NX10.Content = "未安装";
             }
             else
             {
-                if (CheckNX1847() == true)
+                if (CheckNX1872() == true)
                 {
-                    RegistryKey driverKey = NXregistry();
-                    string NX1847EXE = (String)driverKey.GetValue("Unigraphics V31.0");
-                    string NX1847 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX1847EXE)));
-                    this.NX1847.IsEnabled = true;
-                    this.NX1847.Content = NX1847.ToString();
+                    string NXEXE = GetNXEXE("Unigraphics V32.0");
+                    string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+                    NX1847.IsEnabled = true;
+                    NX1847.Content = NXPath.ToString();
                 }
                 else
                 {
-                    this.NX1847.IsEnabled = false;
-                    this.NX1847.Content = "未安装";
+                    NX1872.IsEnabled = false;
+                    NX1872.Content = "未安装";
+                }
+                if (CheckNX1847() == true)
+                {
+                    string NXEXE = GetNXEXE("Unigraphics V31.0");
+                    string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+                    NX1847.IsEnabled = true;
+                    NX1847.Content = NXPath.ToString();
+                }
+                else
+                {
+                    NX1847.IsEnabled = false;
+                    NX1847.Content = "未安装";
                 }
                 if (CheckNX12() == true)
                 {
-                    RegistryKey driverKey = NXregistry();
-                    string NX12EXE = (String)driverKey.GetValue("Unigraphics V30.0");
-                    string NX12 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX12EXE)));
-                    this.NX12.IsEnabled = true;
-                    this.NX12.Content = NX12.ToString();
+                    string NXEXE = GetNXEXE("Unigraphics V30.0");
+                    string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+                    NX12.IsEnabled = true;
+                    NX12.Content = NXPath.ToString();
                 }
                 else
                 {
-                    this.NX12.IsEnabled = false;
-                    this.NX12.Content = "未安装";
+                    NX12.IsEnabled = false;
+                    NX12.Content = "未安装";
                 }
 
                 if (CheckNX11() == true)
                 {
-                    RegistryKey driverKey = NXregistry();
-                    string NX11EXE = (String)driverKey.GetValue("Unigraphics V29.0");
-                    string NX11 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX11EXE)));
-                    this.NX11.IsEnabled = true;
-                    this.NX11.Content = NX11.ToString();
+                    string NXEXE = GetNXEXE("Unigraphics V29.0");
+                    string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+                    NX11.IsEnabled = true;
+                    NX11.Content = NXPath.ToString();
                 }
                 else
                 {
-                    this.NX11.IsEnabled = false;
-                    this.NX11.Content = "未安装";
+                    NX11.IsEnabled = false;
+                    NX11.Content = "未安装";
                 }
 
                 if (CheckNX10() == true)
                 {
-                    RegistryKey driverKey = NXregistry();
-                    string NX10EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-                    string NX10 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX10EXE)));
-                    this.NX10.IsEnabled = true;
-                    this.NX10.Content = NX10.ToString();
+                    string NXEXE = GetNXEXE("Unigraphics V28.0");
+                    string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+                    NX10.IsEnabled = true;
+                    NX10.Content = NXPath.ToString();
                 }
                 else
                 {
-                    this.NX10.IsEnabled = false;
-                    this.NX10.Content = "未安装";
+                    NX10.IsEnabled = false;
+                    NX10.Content = "未安装";
                 }
             }
             
         }
 
-        private static RegistryKey NXregistry()
-        {
-            return Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
-        }
-
-
         private void NX10_Click(object sender, RoutedEventArgs e)
         {
             ///System.Diagnostics.Process.Start(@"D:\Program Files\Siemens\NX 12.0");
             ///获取NX安装路径
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V28.0");
+            string NXEXE = GetNXEXE("Unigraphics V28.0");
             System.Diagnostics.Process.Start(NXEXE);
         }
 
         private void NX11_Click(object sender, RoutedEventArgs e)
         {
             ///获取NX安装路径
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V29.0");
+            string NXEXE = GetNXEXE("Unigraphics V29.0");
             System.Diagnostics.Process.Start(NXEXE);
         }
 
         private void NX12_Click(object sender, RoutedEventArgs e)
         {
             ///获取NX安装路径
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V30.0");
+            string NXEXE = GetNXEXE("Unigraphics V30.0");
             System.Diagnostics.Process.Start(NXEXE);
         }
 
         private void NX1847_Click(object sender, RoutedEventArgs e)
         {
             ///获取NX安装路径
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V31.0");
+            string NXEXE = GetNXEXE("Unigraphics V31.0");
             System.Diagnostics.Process.Start(NXEXE);
+        }
+
+        private void NX1872_Click(object sender, RoutedEventArgs e)
+        {
+            ///获取NX安装路径
+            string NXEXE = GetNXEXE("Unigraphics V32.0");
+            System.Diagnostics.Process.Start(NXEXE);
+        }
+
+        private bool CheckNX1872()
+        {
+            string NXEXE = GetNXEXE("Unigraphics V32.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            if (NXPath != null)
+            {
+                if (File.Exists(NXEXE))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private bool CheckNX1847()
         {
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V31.0");
+            string NXEXE = GetNXEXE("Unigraphics V31.0");
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             if (NXPath != null)
             {
@@ -145,8 +163,7 @@ namespace CAP_Tools.Pages.List
 
         private bool CheckNX12()
         {
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V30.0");
+            string NXEXE = GetNXEXE("Unigraphics V30.0");
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             if (NXPath != null)
             {
@@ -160,8 +177,7 @@ namespace CAP_Tools.Pages.List
 
         private bool CheckNX11()
         {
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V29.0");
+            string NXEXE = GetNXEXE("Unigraphics V29.0");
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             if (NXPath != null)
             {
@@ -175,8 +191,7 @@ namespace CAP_Tools.Pages.List
 
         private bool CheckNX10()
         {
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V28.0");
+            string NXEXE = GetNXEXE("Unigraphics V28.0");
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             if (NXPath != null)
             {
@@ -186,6 +201,15 @@ namespace CAP_Tools.Pages.List
                 }
             }
             return false;
+        }
+
+        private string GetNXEXE(string Versions)
+        {
+            ///获取NX安装路径
+            RegistryKey driverKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
+            ///指定对应版本
+            string EXE = (String)driverKey.GetValue(Versions);
+            return EXE;
         }
     }
 }

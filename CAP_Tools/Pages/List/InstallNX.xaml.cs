@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Windows.Threading;
 
 namespace CAP_Tools.Pages
 {
@@ -41,14 +42,11 @@ namespace CAP_Tools.Pages
             this.label1.Visibility = Visibility.Hidden;
             this.label2.Visibility = Visibility.Hidden;
             //测试按钮隐藏
-            //this.Test.Visibility = Visibility.Hidden;
+            this.Test.Visibility = Visibility.Hidden;
             _saveDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NX License Servers");
         }
 
-        private static RegistryKey NXregistry()
-        {
-            return Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
-        }
+
 
         public object DialogResult { get; private set; }
 
@@ -86,7 +84,7 @@ namespace CAP_Tools.Pages
                 string nx12 = route + "\\nx120";
                 string nx121 = route + "\\nx1201";
                 string nx122 = route + "\\nx1202";
-                string nx = route + "\\nx";
+                string nx1847 = route + "\\nx";
 
                 if (Directory.Exists(nx10))
                 {
@@ -131,17 +129,26 @@ namespace CAP_Tools.Pages
                                 }
                                 else
                                 {
-                                    if (Directory.Exists(nx))
+                                    if (Directory.Exists(nx1847))
                                     {
-                                        this.a.Text = "- 正在安装 NX(2019)";
-                                        this.Version.Text = "NX(2019)";
-                                        this.NXInstall.IsEnabled = true;
+                                        if (nx1847.Contains("1872"))
+                                        {
+                                            this.a.Text = "- 正在安装 NX(1872系列)";
+                                            this.Version.Text = "NX(1872系列)";
+                                            this.NXInstall.IsEnabled = true;
+                                        }
+                                        else
+                                        {
+                                            this.a.Text = "- 正在安装 NX(1847系列)";
+                                            this.Version.Text = "NX(1847系列)";
+                                            this.NXInstall.IsEnabled = true;
+                                        }
                                     }
                                     else
                                     {
                                         this.NXInstall.IsEnabled = false;
                                         this.NXCrack.IsEnabled = false;
-                                        this.a.Text = "- 支持NX(2019)";
+                                        this.a.Text = "- 最新支持NX1872系列";
                                         ModernDialog.ShowMessage("NX安装主程序不存在，请重新选择文件夹或检测安装程序完整性！\n\r或者选择的安装包为NX10.0以下版本", "警告", MessageBoxButton.OK);
                                     }
                                 }
@@ -182,21 +189,23 @@ namespace CAP_Tools.Pages
         {
             string version = Version.Text;
             string pjfile = PJRoute.Text;
-            MessageBoxResult result = ModernDialog.ShowMessage("确定要破解" + version + "吗？请确保NX软件都己经关闭。", "提示", MessageBoxButton.YesNo);
+            MessageBoxResult result = ModernDialog.ShowMessage("确定要破解" + version + " 吗？请确保NX软件都己经关闭。", "提示", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 if (version == "NX10")
                 {
                     if (CheckNX10() == true)
                     {
-                        ///获取NX安装路径
-                        RegistryKey driverKey = NXregistry();
-                        string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-                        ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                        string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                        ///复制文件
-                        Copy(pjfile, Home);
-                        ModernDialog.ShowMessage(version + "破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
+                        string NXPath = GetNXPath("Unigraphics V28.0");
+                        ///创建bat批处理文件
+                        string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + "/e /y /i /s";
+                        File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path);
+                        ///采用多线程运行bat复制文件
+                        Prog.Visibility = Visibility.Visible;  //进度条显示
+                        Prog.IsIndeterminate = true;  //切换进度条显示模式
+                        NXCrack.IsEnabled = false; //破解按钮不可选
+                        ThreadDelegate backWorkDel = new ThreadDelegate(CopyFile); //创建一个ThreadDelegate的实例，调用准备在后台运行的函数
+                        backWorkDel.BeginInvoke(null, null);//使用异步的形式开始执行这个委托
                     }
                     else
                     {
@@ -209,14 +218,16 @@ namespace CAP_Tools.Pages
                     {
                         if (CheckNX11() == true)
                         {
-                            ///获取NX安装路径
-                            RegistryKey driverKey = NXregistry();
-                            string EXE = (String)driverKey.GetValue("Unigraphics V29.0");
-                            ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                            string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                            ///复制文件
-                            Copy(pjfile, Home);
-                            ModernDialog.ShowMessage(version + "破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
+                            string NXPath = GetNXPath("Unigraphics V29.0");
+                            ///创建bat批处理文件
+                            string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + "/e /y /i /s";
+                            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path);
+                            ///采用多线程运行bat复制文件
+                            Prog.Visibility = Visibility.Visible;  //进度条显示
+                            Prog.IsIndeterminate = true;  //切换进度条显示模式
+                            NXCrack.IsEnabled = false; //破解按钮不可选
+                            ThreadDelegate backWorkDel = new ThreadDelegate(CopyFile); //创建一个ThreadDelegate的实例，调用准备在后台运行的函数
+                            backWorkDel.BeginInvoke(null, null);//使用异步的形式开始执行这个委托
                         }
                         else
                         {
@@ -229,14 +240,16 @@ namespace CAP_Tools.Pages
                         {
                             if (CheckNX12() == true)
                             {
-                                ///获取NX安装路径
-                                RegistryKey driverKey = NXregistry();
-                                string EXE = (String)driverKey.GetValue("Unigraphics V30.0");
-                                ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                                string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                                ///复制文件
-                                Copy(pjfile, Home);
-                                ModernDialog.ShowMessage(version + "破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
+                                string NXPath = GetNXPath("Unigraphics V30.0");
+                                ///创建bat批处理文件
+                                string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + "/e /y /i /s";
+                                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path);
+                                ///采用多线程运行bat复制文件
+                                Prog.Visibility = Visibility.Visible;  //进度条显示
+                                Prog.IsIndeterminate = true;  //切换进度条显示模式
+                                NXCrack.IsEnabled = false; //破解按钮不可选
+                                ThreadDelegate backWorkDel = new ThreadDelegate(CopyFile); //创建一个ThreadDelegate的实例，调用准备在后台运行的函数
+                                backWorkDel.BeginInvoke(null, null);//使用异步的形式开始执行这个委托
                             }
                             else
                             {
@@ -245,18 +258,20 @@ namespace CAP_Tools.Pages
                         }
                         else
                         {
-                            if (version == "NX(2019)")
+                            if (version == "NX(1847系列)")
                             {
                                 if (CheckNX1847() == true)
                                 {
-                                    ///获取NX安装路径
-                                    RegistryKey driverKey = NXregistry();
-                                    string EXE = (String)driverKey.GetValue("Unigraphics V31.0");
-                                    ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
-                                    string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                                    ///复制文件
-                                    Copy(pjfile, Home);
-                                    ModernDialog.ShowMessage(version + "破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
+                                    string NXPath = GetNXPath("Unigraphics V31.0");
+                                    ///创建bat批处理文件
+                                    string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + "/e /y /i /s";
+                                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path);
+                                    ///采用多线程运行bat复制文件
+                                    Prog.Visibility = Visibility.Visible;  //进度条显示
+                                    Prog.IsIndeterminate = true;  //切换进度条显示模式
+                                    NXCrack.IsEnabled = false; //破解按钮不可选
+                                    ThreadDelegate backWorkDel = new ThreadDelegate(CopyFile); //创建一个ThreadDelegate的实例，调用准备在后台运行的函数
+                                    backWorkDel.BeginInvoke(null, null);//使用异步的形式开始执行这个委托
                                 }
                                 else
                                 {
@@ -265,7 +280,30 @@ namespace CAP_Tools.Pages
                             }
                             else
                             {
-                                ModernDialog.ShowMessage("抱歉，您未安装" + version + "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                                if (version == "NX(1872系列)")
+                                {
+                                    if (CheckNX1872() == true)
+                                    {
+                                        string NXPath = GetNXPath("Unigraphics V32.0");
+                                        ///创建bat批处理文件
+                                        string Path = "xcopy "+ "\"" + pjfile + "\"" + " " + "\"" + NXPath+ "\"" + " " + "/e /y /i /s";
+                                        File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path);
+                                        ///采用多线程运行bat复制文件
+                                        Prog.Visibility = Visibility.Visible;  //进度条显示
+                                        Prog.IsIndeterminate = true;  //切换进度条显示模式
+                                        NXCrack.IsEnabled = false; //破解按钮不可选
+                                        ThreadDelegate backWorkDel = new ThreadDelegate(CopyFile); //创建一个ThreadDelegate的实例，调用准备在后台运行的函数
+                                        backWorkDel.BeginInvoke(null, null);//使用异步的形式开始执行这个委托
+                                    }
+                                    else
+                                    {
+                                        ModernDialog.ShowMessage("抱歉，您未安装" + version + "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                                    }
+                                }
+                                else
+                                {
+                                    ModernDialog.ShowMessage("抱歉，您未安装" + version + "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                                }
                             }
                         }
                     }
@@ -273,44 +311,20 @@ namespace CAP_Tools.Pages
             }
         }
 
-        /// <summary>
-        /// 复制文件夹中的所有内容
-        /// </summary>
-        public static void Copy(string sourceDirectory, string targetDirectory)
+
+        private bool CheckNX1872()
         {
-            DirectoryInfo diSource = new DirectoryInfo(sourceDirectory);
-            DirectoryInfo diTarget = new DirectoryInfo(targetDirectory);
-
-            CopyAll(diSource, diTarget);
-        }
-
-        public static void CopyAll(DirectoryInfo source, DirectoryInfo target)
-        {
-
-            Directory.CreateDirectory(target.FullName);
-
-            // Copy each file into the new directory.
-            foreach (FileInfo fi in source.GetFiles())
+            string NXPath = GetNXPath("Unigraphics V32.0");
+            if (NXPath != null)
             {
-                
-                Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
-                fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                return true;
             }
-
-            // Copy each subdirectory using recursion.
-            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
-            {
-                DirectoryInfo nextTargetSubDir =
-                    target.CreateSubdirectory(diSourceSubDir.Name);
-                CopyAll(diSourceSubDir, nextTargetSubDir);
-            }
+            return false;
         }
 
         private bool CheckNX1847()
         {
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V31.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            string NXPath = GetNXPath("Unigraphics V31.0");
             if (NXPath != null)
             {
                 return true;
@@ -320,9 +334,7 @@ namespace CAP_Tools.Pages
 
         private bool CheckNX12()
         {
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V30.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            string NXPath = GetNXPath("Unigraphics V30.0");
             if (NXPath != null)
             {
                 return true;
@@ -332,9 +344,7 @@ namespace CAP_Tools.Pages
 
         private bool CheckNX11()
         {
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V29.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            string NXPath = GetNXPath("Unigraphics V29.0");
             if (NXPath != null)
             {
                 return true;
@@ -344,9 +354,7 @@ namespace CAP_Tools.Pages
 
         private bool CheckNX10()
         {
-            RegistryKey driverKey = NXregistry();
-            string NXEXE = (String)driverKey.GetValue("Unigraphics V28.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NXEXE)));
+            string NXPath = GetNXPath("Unigraphics V28.0");
             if (NXPath != null)
             {
                 return true;
@@ -357,11 +365,11 @@ namespace CAP_Tools.Pages
 
         private void NXLicence_Click(object sender, RoutedEventArgs e)
         {
-            if (HttpFileExist("https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Servers%20v%202.2.1902.exe"))
+            if (HttpFileExist("https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Servers%20v%202.3.1906.exe"))
             {
-                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers v 2.2.1902.exe"))
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers v 2.3.1906.exe"))
                 {
-                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers v 2.2.1902.exe");
+                    System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers v 2.3.1906.exe");
                 }
                 else
                 {
@@ -374,7 +382,7 @@ namespace CAP_Tools.Pages
                     this.label1.Visibility = Visibility.Visible;
                     this.label2.Visibility = Visibility.Visible;
                     //远程文件路径
-                    string imageUrl = "https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Servers%20v%202.2.1902.exe";
+                    string imageUrl = "https://capful.oss-cn-beijing.aliyuncs.com/NX/NX%20License%20Servers%20v%202.3.1906.exe";
                     string fileExt = Path.GetExtension(imageUrl);
                     string fileNewName = Guid.NewGuid() + fileExt;
                     bool isDownLoad = false;
@@ -452,7 +460,7 @@ namespace CAP_Tools.Pages
                 //下载完成
                 this.label1.Content = "许可证下载完成";
                 //重命名文件
-                File.Move(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers v 2.2.1902.exe");
+                File.Move(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers v 2.3.1906.exe");
                 //解压文件
                 //ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\" + e.UserState.ToString(), AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\");
                 //删除ZIP文件
@@ -460,7 +468,7 @@ namespace CAP_Tools.Pages
                 //按钮可用
                 this.NXLicence.IsEnabled = true;
                 //运行许可证文件
-                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers v 2.2.1902.exe");
+                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "NX License Servers\\NX License Servers v 2.3.1906.exe");
                 //进度条隐藏
                 this.Prog.Visibility = Visibility.Hidden;
                 //百分比隐藏
@@ -480,10 +488,42 @@ namespace CAP_Tools.Pages
 
         private void Test_Click(object sender, RoutedEventArgs e)
         {
-            RunBat ("D:\\test.bat");
-            ModernDialog.ShowMessage("完成", "警告", MessageBoxButton.OK);
+            Prog.Visibility = Visibility.Visible;
+            Prog.IsIndeterminate = true;
+            NXCrack.IsEnabled = false;
+            ThreadDelegate backWorkDel = new ThreadDelegate(CopyFile); //创建一个ThreadDelegate的实例，调用准备在后台运行的函数
+            backWorkDel.BeginInvoke(null, null);//使用异步的形式开始执行这个委托
 
         }
+
+
+        private delegate void ThreadDelegate(); //申明一个专用来调用更改线程函数的委托
+
+        private void CopyFile()
+        {
+            RunBat(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat"); //运行Bat文件
+            ThreadDelegate changeTetBoxDel = delegate ()  //后台中要更改主线程中的UI，于是我们还是用委托来实现，再创建一个实例
+            {
+                Prog.IsIndeterminate = false;
+                Prog.Visibility = Visibility.Hidden;
+                NXCrack.IsEnabled = true;
+                ModernDialog.ShowMessage(Version.Text + " 破解完成，请继续安装许可证！", "提示", MessageBoxButton.OK);
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat");
+            };//要调用的过程
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Send, changeTetBoxDel); //使用分发器让这个委托等待执行
+        }
+
+        private string GetNXPath(string Versions)
+        {
+            ///获取NX安装路径
+            RegistryKey driverKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
+            ///指定对应版本
+            string EXE = (String)driverKey.GetValue(Versions);
+            ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
+            string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+            return Home;
+        }
+
         private void RunBat(string filename)
         {
             Process pro = new Process();
@@ -494,8 +534,6 @@ namespace CAP_Tools.Pages
             pro.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             pro.Start();
             pro.WaitForExit();
-
-
         }
     }
 }

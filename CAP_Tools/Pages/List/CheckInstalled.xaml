@@ -22,10 +22,14 @@
             <Button Name="NX12"  ToolTip="单击运行NX12" Width="320" Height="25"   Margin="20,0,0,0" Click="NX12_Click" FontSize="10.5"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,20" Width="460">
-            <Label Content="NX(2019):" Height="20" Width="60" Margin="0,2,10,3" />
+            <Label Content="NX(1847):" Height="20" Width="60" Margin="0,2,10,3" />
             <Button Name="NX1847"  ToolTip="单击运行NX1847" Width="320" Height="25"   Margin="20,0,0,0" Click="NX1847_Click" FontSize="10.5"/>
         </StackPanel>
-        <Label Content="暂时只支持NX10.0以上版本检测，支持NX1847，点击按钮运行软件" Margin="10,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="395" FontSize="12"/>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,20" Width="460">
+            <Label Content="NX(1872):" Height="20" Width="60" Margin="0,2,10,3" />
+            <Button Name="NX1872"  ToolTip="单击运行NX1872" Width="320" Height="25"   Margin="20,0,0,0" Click="NX1872_Click" FontSize="10.5"/>
+        </StackPanel>
+        <Label Content="暂时只支持NX10.0以上版本检测，支持NX1872，点击按钮运行软件" Margin="10,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="395" FontSize="12"/>
         <Label Content="如果您刚使用本软件'安装NX'功能安装NX，请重启本软件再试。" Margin="10,5,0,20" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="390" FontSize="12"/>
     </StackPanel>
 </UserControl>

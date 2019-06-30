@@ -20,6 +20,8 @@ namespace CAP_Tools.Pages.List
             RegistryKey NX = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
             if (NX == null)
             {
+                NX1872.IsEnabled = false;
+                NX1872.Content = "未安装";
                 NX1847.IsEnabled = false;
                 NX1847.Content = "未安装";
                 NX12.IsEnabled = false;
@@ -35,8 +37,8 @@ namespace CAP_Tools.Pages.List
                 {
                     string NXEXE = GetNXEXE("Unigraphics V32.0");
                     string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
-                    NX1847.IsEnabled = true;
-                    NX1847.Content = NXPath.ToString();
+                    NX1872.IsEnabled = true;
+                    NX1872.Content = NXPath.ToString();
                 }
                 else
                 {

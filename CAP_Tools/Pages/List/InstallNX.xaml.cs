@@ -14,6 +14,7 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Windows.Threading;
+using System.Text;
 
 namespace CAP_Tools.Pages
 {
@@ -198,8 +199,8 @@ namespace CAP_Tools.Pages
                     {
                         string NXPath = GetNXPath("Unigraphics V28.0");
                         ///创建bat批处理文件
-                        string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + "/e /y /i /s";
-                        File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path);
+                        string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " /c /e /r /y";
+                        File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path, Encoding.Default);
                         ///采用多线程运行bat复制文件
                         Prog.Visibility = Visibility.Visible;  //进度条显示
                         Prog.IsIndeterminate = true;  //切换进度条显示模式
@@ -220,8 +221,8 @@ namespace CAP_Tools.Pages
                         {
                             string NXPath = GetNXPath("Unigraphics V29.0");
                             ///创建bat批处理文件
-                            string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + "/e /y /i /s";
-                            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path);
+                            string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + " /c /e /r /y";
+                            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path, Encoding.Default);
                             ///采用多线程运行bat复制文件
                             Prog.Visibility = Visibility.Visible;  //进度条显示
                             Prog.IsIndeterminate = true;  //切换进度条显示模式
@@ -242,8 +243,8 @@ namespace CAP_Tools.Pages
                             {
                                 string NXPath = GetNXPath("Unigraphics V30.0");
                                 ///创建bat批处理文件
-                                string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + "/e /y /i /s";
-                                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path);
+                                string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + " /c /e /r /y";
+                                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path, Encoding.Default);
                                 ///采用多线程运行bat复制文件
                                 Prog.Visibility = Visibility.Visible;  //进度条显示
                                 Prog.IsIndeterminate = true;  //切换进度条显示模式
@@ -264,8 +265,8 @@ namespace CAP_Tools.Pages
                                 {
                                     string NXPath = GetNXPath("Unigraphics V31.0");
                                     ///创建bat批处理文件
-                                    string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + "/e /y /i /s";
-                                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path);
+                                    string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + " /c /e /r /y";
+                                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path, Encoding.Default);
                                     ///采用多线程运行bat复制文件
                                     Prog.Visibility = Visibility.Visible;  //进度条显示
                                     Prog.IsIndeterminate = true;  //切换进度条显示模式
@@ -286,8 +287,8 @@ namespace CAP_Tools.Pages
                                     {
                                         string NXPath = GetNXPath("Unigraphics V32.0");
                                         ///创建bat批处理文件
-                                        string Path = "xcopy "+ "\"" + pjfile + "\"" + " " + "\"" + NXPath+ "\"" + " " + "/e /y /i /s";
-                                        File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path);
+                                        string Path = "xcopy "+ "\"" + pjfile + "\"" + " " + "\"" + NXPath+ "\"" + " " + " /c /e /r /y";
+                                        File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path, Encoding.Default);
                                         ///采用多线程运行bat复制文件
                                         Prog.Visibility = Visibility.Visible;  //进度条显示
                                         Prog.IsIndeterminate = true;  //切换进度条显示模式

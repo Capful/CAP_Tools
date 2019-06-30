@@ -60,7 +60,7 @@ namespace CAP_Tools.Pages
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 string m_Dir = dialog.FileName;
-                this.XZRoute.Text = m_Dir;
+                XZRoute.Text = m_Dir;
                 this.NXRoute.Text = m_Dir;
                 DirectoryInfo dir = new DirectoryInfo(m_Dir);
                 foreach (FileInfo file in dir.GetFiles("UGII.cab", SearchOption.AllDirectories))//在文件夹中搜索UGII.cab；
@@ -75,7 +75,8 @@ namespace CAP_Tools.Pages
                 {
                     ///截取路径添加到变量
                     string PJNXRoute = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName((System.IO.Path.GetDirectoryName(file.FullName)))));
-                    this.PJRoute.Text = PJNXRoute;
+                    PJRoute.Text = PJNXRoute;
+                    PRoute.Text = PJNXRoute;
                     break;
                 }
                 ///判断安装哪个版本
@@ -163,11 +164,12 @@ namespace CAP_Tools.Pages
                 {
                     if (Directory.Exists(pjfile))
                     {
-                        this.NXCrack.IsEnabled = true;
+                        NXCrack.IsEnabled = true;
                     }
                     else
                     {
-                        this.NXCrack.IsEnabled = false;
+                        NXCrack.IsEnabled = false;
+                        PRoute.Text = "未检测到破解文件，请解压到主程序目录后重试";
                         ModernDialog.ShowMessage("未在安装目录找到破解文件，请检查安装包是否包含破解文件。\n\r请将破解文件整个文件夹复制到安装目录后重试！", "警告", MessageBoxButton.OK);
                     }
                 }

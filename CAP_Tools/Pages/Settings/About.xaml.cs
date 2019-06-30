@@ -20,8 +20,15 @@ namespace CAP_Tools.Pages.Settings
         private void Change_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             string changelog = AppDomain.CurrentDomain.BaseDirectory + "changelog.txt";
-            string str = File.ReadAllText(changelog,Encoding.Default);
-            ModernDialog.ShowMessage(str, "更新日志", MessageBoxButton.OK);
+            string str = File.ReadAllText(changelog, Encoding.Default);
+            var dlg = new ModernDialog
+            {
+                Title = "更新日志",
+                Content = str
+            };
+            dlg.Buttons = new Button[] { dlg.OkButton, dlg.CancelButton };
+            dlg.ShowDialog();
+            
         }
     }
 }

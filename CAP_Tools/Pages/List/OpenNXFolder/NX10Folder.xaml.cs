@@ -27,7 +27,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
                 this.Template_Part.IsEnabled = false;
                 this.Postprocessor.IsEnabled = false;
                 ///定义提示文字
-                this.Tip.Text = "抱歉，您未安装NX10";
+                this.Tip.Text = "抱歉，您未安装NX";
             }
             else
             {
@@ -36,23 +36,19 @@ namespace CAP_Tools.Pages.List.OpenFolder
                 {
                     ///已安装
                     ///指定路径
-                    RegistryKey driverKey = NXregistry();
-                    string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-                    string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-                    string UGII_LJ = @"UGII";
-                    string ModelTemplates_LJ = @"LOCALIZATION\prc\simpl_chinese\startup";
-                    string Template_Part_LJ = @"MACH\resource\template_part\metric";
-                    string Postprocessor_LJ = @"MACH\resource\postprocessor";
-                    ///合并路径
-                    string UGII = System.IO.Path.Combine(Home, UGII_LJ);
-                    string ModelTemplates = System.IO.Path.Combine(Home, ModelTemplates_LJ);
-                    string Template_Part = System.IO.Path.Combine(Home, Template_Part_LJ);
-                    string Postprocessor = System.IO.Path.Combine(Home, Postprocessor_LJ);
+                    string NXEXE = GetNXEXE("Unigraphics V28.0");
+                    string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+                    string UGII = NXPath + @"\UGII";
+                    string ModelTemplates = NXPath + @"\LOCALIZATION\prc\simpl_chinese\startup";
+                    string Template_Part = NXPath + @"\MACH\resource\template_part\metric";
+                    string Template_CAM = NXPath + @"\MACH\resource\template_set";
+                    string Postprocessor = NXPath + @"\MACH\resource\postprocessor";
                     ///指定鼠标悬停提示
-                    this.Home.ToolTip = Home.ToString();
+                    this.Home.ToolTip = NXPath.ToString();
                     this.UGII.ToolTip = UGII.ToString();
                     this.ModelTemplates.ToolTip = ModelTemplates.ToString();
                     this.Template_Part.ToolTip = Template_Part.ToString();
+                    this.Template_CAM.ToolTip = Template_CAM.ToString();
                     this.Postprocessor.ToolTip = Postprocessor.ToString();
                 }
                 else
@@ -63,6 +59,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
                     this.UGII.IsEnabled = false;
                     this.ModelTemplates.IsEnabled = false;
                     this.Template_Part.IsEnabled = false;
+                    this.Template_CAM.IsEnabled = false;
                     this.Postprocessor.IsEnabled = false;
                     ///定义提示文字
                     this.Tip.Text = "抱歉，您未安装NX10";
@@ -70,19 +67,14 @@ namespace CAP_Tools.Pages.List.OpenFolder
             }
         }
 
-        private static RegistryKey NXregistry()
-        {
-            return Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
-        }
 
         private bool CheckNX10()
         {
-            RegistryKey driverKey = NXregistry();
-            string NX10EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-            string NX10 = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@NX10EXE)));
-            if (NX10 != null)
+            string NXEXE = GetNXEXE("Unigraphics V28.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            if (NXPath != null)
             {
-                if (File.Exists(NX10EXE))
+                if (File.Exists(NXEXE))
                 {
                     return true;
                 }
@@ -93,56 +85,70 @@ namespace CAP_Tools.Pages.List.OpenFolder
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             ///获取NX安装路径
-            RegistryKey driverKey = NXregistry();
-            string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-            string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
+            string NXEXE = GetNXEXE("Unigraphics V28.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
             ///打开主目录
-            System.Diagnostics.Process.Start(@Home);
+            System.Diagnostics.Process.Start(NXPath);
         }
 
         private void UGII_Click(object sender, RoutedEventArgs e)
         {
-            RegistryKey driverKey = NXregistry();
-            string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-            string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-            string UGII_LJ = @"UGII";
-            string Path = System.IO.Path.Combine(Home, UGII_LJ);
+            string NXEXE = GetNXEXE("Unigraphics V28.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            string UGII = NXPath + @"\UGII";
             ///打开UGII目录
-            System.Diagnostics.Process.Start(@Path);
+            System.Diagnostics.Process.Start(UGII);
         }
 
         private void ModelTemplates_Click(object sender, RoutedEventArgs e)
         {
-            RegistryKey driverKey = NXregistry();
-            string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-            string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-            string ModelTemplates_LJ = @"LOCALIZATION\prc\simpl_chinese\startup";
-            string Path = System.IO.Path.Combine(Home, ModelTemplates_LJ);
+            string NXEXE = GetNXEXE("Unigraphics V28.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            string ModelTemplates = NXPath + @"\LOCALIZATION\prc\simpl_chinese\startup";
+            
             ///打开默认模板目录
-            System.Diagnostics.Process.Start(@Path);
+            System.Diagnostics.Process.Start(ModelTemplates);
         }
 
         private void Template_Part_Click(object sender, RoutedEventArgs e)
         {
-            RegistryKey driverKey = NXregistry();
-            string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-            string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-            string Template_Part_LJ = @"MACH\resource\template_part\metric";
-            string Path = System.IO.Path.Combine(Home, Template_Part_LJ);
+            string NXEXE = GetNXEXE("Unigraphics V28.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            string Template_Part = NXPath + @"\MACH\resource\template_part\metric";
+            
             ///打开加工模板目录
-            System.Diagnostics.Process.Start(@Path);
+            System.Diagnostics.Process.Start(Template_Part);
         }
 
+        private void Template_CAM_Click(object sender, RoutedEventArgs e)
+        {
+            string NXEXE = GetNXEXE("Unigraphics V28.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            string Template_CAM = NXPath + @"\MACH\resource\template_set";
+
+            ///打开加工模板目录
+            System.Diagnostics.Process.Start(Template_CAM);
+        }
+
+        
         private void Postprocessor_Click(object sender, RoutedEventArgs e)
         {
-            RegistryKey driverKey = NXregistry();
-            string EXE = (String)driverKey.GetValue("Unigraphics V28.0");
-            string Home = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@EXE)));
-            string Postprocessor_LJ = @"MACH\resource\postprocessor";
-            string Path = System.IO.Path.Combine(Home, Postprocessor_LJ);
+            string NXEXE = GetNXEXE("Unigraphics V28.0");
+            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            string Postprocessor = NXPath + @"\MACH\resource\postprocessor";
+
             ///打开机床后处理目录
-            System.Diagnostics.Process.Start(@Path);
+            System.Diagnostics.Process.Start(Postprocessor);
+        }
+
+        private string GetNXEXE(string Versions)
+        {
+            ///获取NX安装路径
+            RegistryKey driverKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
+            ///指定对应版本
+            string EXE = (String)driverKey.GetValue(Versions);
+            return EXE;
         }
     }
 }

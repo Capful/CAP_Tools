@@ -71,6 +71,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -94,6 +95,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IniFile.cs" />
+    <Compile Include="Pages\List\CheckLicence.xaml.cs">
+      <DependentUpon>CheckLicence.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\List\NcProgram\NCFiles.xaml.cs">
       <DependentUpon>NCFiles.xaml</DependentUpon>
     </Compile>
@@ -111,6 +115,9 @@
     </Compile>
     <Compile Include="Pages\List\OpenNXFolder.xaml.cs">
       <DependentUpon>OpenNXFolder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\List\OpenNXFolder\NX1872Folder.xaml.cs">
+      <DependentUpon>NX1872Folder.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\List\OpenNXFolder\NX1847Folder.xaml.cs">
       <DependentUpon>NX1847Folder.xaml</DependentUpon>
@@ -141,6 +148,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\List\CheckLicence.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\List\Collection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -168,6 +179,10 @@
     <Page Include="Pages\List\NcTabPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\List\OpenNXFolder\NX1872Folder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\List\OpenNXFolder\NX1847Folder.xaml">
       <Generator>MSBuild:Compile</Generator>

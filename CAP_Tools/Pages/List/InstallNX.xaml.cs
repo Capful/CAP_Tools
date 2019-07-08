@@ -491,11 +491,6 @@ namespace CAP_Tools.Pages
 
         private void Test_Click(object sender, RoutedEventArgs e)
         {
-            Prog.Visibility = Visibility.Visible;
-            Prog.IsIndeterminate = true;
-            NXCrack.IsEnabled = false;
-            ThreadDelegate backWorkDel = new ThreadDelegate(CopyFile); //创建一个ThreadDelegate的实例，调用准备在后台运行的函数
-            backWorkDel.BeginInvoke(null, null);//使用异步的形式开始执行这个委托
 
         }
 

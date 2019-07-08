@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="CAP_Tools.Pages.List.CheckLicence"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="360" d:DesignWidth="460">
+    <StackPanel HorizontalAlignment="Left" Width="460">
+        <TextBlock Text="检测许可证服务"  Margin="0,0,0,8" FontWeight="Bold" FontSize="14" />
+        <TextBlock Width="460" FontSize="13" HorizontalAlignment="Left" Margin="5,0,0,5">
+            <Run Text="许可证名称:" />
+            <Run x:Name="Licence_Name" Text="未知" />
+        </TextBlock>
+        <TextBlock Width="460" FontSize="13" HorizontalAlignment="Left" Margin="5,0,0,5">
+            <Run Text="许可证状态:" />
+            <Run x:Name="Licence_Status" Text="未知" />
+        </TextBlock>
+        <TextBlock Width="460" FontSize="13" HorizontalAlignment="Left" Margin="5,0,0,5">
+            <Run Text="许可证路径:" />
+            <Run x:Name="Licence_Path" Text="未知" />
+        </TextBlock>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,15,0,0" Width="355">
+            <Button Name="Open" Content="启动服务" Width="90" Margin="0,0,25,0"  Click="Open_Click" IsEnabled="True" FontSize="10.5" />
+            <Button Name="Close" Content="关闭服务" Width="90" Margin="0,0,25,0"  Click="Close_Click" IsEnabled="True" FontSize="10.5" />
+            <Button Name="ReStart" Content="重启服务" ToolTip="在线下载许可证文件" Width="90" Margin="0,0,20,0"  Click="ReStart_Click" IsEnabled="True" FontSize="10.5" Height="25" VerticalAlignment="Top" />
+        </StackPanel>
+        <Label Content="暂时只支持NX10.0以上版本检测，支持NX1872，点击按钮运行软件" Margin="10,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="395" FontSize="12"/>
+        <Label Content="如果您刚使用本软件'安装NX'功能安装NX，请重启本软件再试。" Margin="10,5,0,20" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="390" FontSize="12"/>
+    </StackPanel>
+</UserControl>

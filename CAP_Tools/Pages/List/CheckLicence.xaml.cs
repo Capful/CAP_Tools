@@ -1,8 +1,14 @@
-﻿using Microsoft.Win32;
+﻿using FirstFloor.ModernUI.Windows.Controls;
+using Microsoft.Win32;
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.ServiceProcess;
+using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CAP_Tools.Pages.List
 {
@@ -19,16 +25,11 @@ namespace CAP_Tools.Pages.List
 
             Licence_Status.Text = GetSystemServiceStatusString(Licence_Name.Text);
 
-            RegistryKey driverKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\FLEXlm License Manager\Siemens PLM License Server");
-
-            if (driverKey != null)
-            {
-                Licence_Path.Text = (String)driverKey.GetValue("Lmgrd");
-            }
-            else
-            {
-                Licence_Path.Text = "未识别";
-            }
+            ///创建bat批处理文件
+            string Path = "for /f \"tokens=1,2,* \"%%i in ('REG QUERY \"HKEY_LOCAL_MACHINE\\SOFTWARE\\FLEXlm License Manager\\Siemens PLM License Server\" ^| find /i \"Lmgrd\"') do echo %%k>LicencePath.txt";
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "LicencePath.bat", Path, Encoding.Default);
+            ThreadDelegate backWorkDel = new ThreadDelegate(LicencePath); //创建一个ThreadDelegate的实例，调用准备在后台运行的函数
+            backWorkDel.BeginInvoke(null, null);//使用异步的形式开始执行这个委托
             
             System.Timers.Timer Check = new System.Timers.Timer(1000);//每隔2秒执行一次，没用winfrom自带的
             Check.Elapsed += Check_Elapsed;//委托，要执行的方法
@@ -49,33 +50,11 @@ namespace CAP_Tools.Pages.List
 
         private void ReStart_Click(object sender, RoutedEventArgs e)
         {
-            SystemServiceReStart(Licence_Name.Text);
-            Licence_Status.Text = GetSystemServiceStatusString(Licence_Name.Text);
+            SystemServiceClose(Licence_Name.Text);
+            Thread.Sleep(100);
+            SystemServiceOpen(Licence_Name.Text);
         }
 
-        /// <summary>
-        /// 重启系统服务
-        /// </summary>
-        /// <param name="serviceName">系统服务名称</param>
-        /// <returns></returns>
-        public static bool SystemServiceReStart(string serviceName)
-        {
-            try
-            {
-                using (var control = new ServiceController(serviceName))
-                {
-                    if (control.Status == System.ServiceProcess.ServiceControllerStatus.Running)
-                    {
-                        control.Continue();
-                    }
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
         /// <summary>
         /// 关闭系统服务
         /// </summary>
@@ -182,6 +161,38 @@ namespace CAP_Tools.Pages.List
                     }
                )
          );
+        }
+
+        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RunBat(string filename)
+        {
+            Process pro = new Process();
+            FileInfo file = new FileInfo(filename);
+            pro.StartInfo.WorkingDirectory = file.Directory.FullName;
+            pro.StartInfo.FileName = filename;
+            pro.StartInfo.CreateNoWindow = false;
+            pro.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            pro.Start();
+            pro.WaitForExit();
+        }
+
+        private delegate void ThreadDelegate(); //申明一个专用来调用更改线程函数的委托
+
+        private void LicencePath()
+        {
+            RunBat(AppDomain.CurrentDomain.BaseDirectory + "LicencePath.bat"); //运行Bat文件
+            ThreadDelegate changeTetBoxDel = delegate ()  //后台中要更改主线程中的UI，于是我们还是用委托来实现，再创建一个实例
+            {
+                Licence_Path.Text = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "LicencePath.txt");
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory + "LicencePath.txt");
+                File.Delete(AppDomain.CurrentDomain.BaseDirectory + "LicencePath.bat");
+            };//要调用的过程
+            Dispatcher.BeginInvoke(DispatcherPriority.Send, changeTetBoxDel); //使用分发器让这个委托等待执行
         }
     }
 }

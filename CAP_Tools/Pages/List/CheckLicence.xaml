@@ -27,5 +27,7 @@
         </StackPanel>
         <Label Content="暂时只支持NX10.0以上版本检测，支持NX1872，点击按钮运行软件" Margin="10,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="395" FontSize="12"/>
         <Label Content="如果您刚使用本软件'安装NX'功能安装NX，请重启本软件再试。" Margin="10,5,0,20" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" Width="390" FontSize="12"/>
+        <Button Content="Button" Click="Button_Click"/>
+        <ListBox x:Name="listBox1" Height="100"/>
     </StackPanel>
 </UserControl>

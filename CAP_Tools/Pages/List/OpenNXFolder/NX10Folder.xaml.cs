@@ -31,7 +31,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
             }
             else
             {
-                ///判断NX10是否安装
+                ///判断NX是否安装
                 if (CheckNX10() == true)
                 {
                     ///已安装

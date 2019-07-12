@@ -7,11 +7,11 @@ using System.Windows.Controls;
 namespace CAP_Tools.Pages.List.OpenFolder
 {
     /// <summary>
-    /// Interaction logic for NX10Folder.xaml
+    /// Interaction logic for NX1872Folder.xaml
     /// </summary>
-    public partial class NX12Folder : UserControl
+    public partial class NX1872Folder : UserControl
     {
-        public NX12Folder()
+        public NX1872Folder()
         {
             InitializeComponent();
             ///判断NX是否安装，如果有安装再判断详细版本
@@ -32,11 +32,11 @@ namespace CAP_Tools.Pages.List.OpenFolder
             else
             {
                 ///判断NX是否安装
-                if (CheckNX12() == true)
+                if (CheckNX1872() == true)
                 {
                     ///已安装
                     ///指定路径
-                    string NXEXE = GetNXEXE("Unigraphics V30.0");
+                    string NXEXE = GetNXEXE("Unigraphics V32.0");
                     string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
                     string UGII = NXPath + @"\UGII";
                     string ModelTemplates = NXPath + @"\LOCALIZATION\prc\simpl_chinese\startup";
@@ -62,15 +62,15 @@ namespace CAP_Tools.Pages.List.OpenFolder
                     this.Template_CAM.IsEnabled = false;
                     this.Postprocessor.IsEnabled = false;
                     ///定义提示文字
-                    this.Tip.Text = "抱歉，您未安装NX12";
+                    this.Tip.Text = "抱歉，您未安装NX1872";
                 }
             }
         }
 
 
-        private bool CheckNX12()
+        private bool CheckNX1872()
         {
-            string NXEXE = GetNXEXE("Unigraphics V30.0");
+            string NXEXE = GetNXEXE("Unigraphics V32.0");
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             if (NXPath != null)
             {
@@ -85,7 +85,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             ///获取NX安装路径
-            string NXEXE = GetNXEXE("Unigraphics V30.0");
+            string NXEXE = GetNXEXE("Unigraphics V32.0");
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
             ///打开主目录
@@ -94,7 +94,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
 
         private void UGII_Click(object sender, RoutedEventArgs e)
         {
-            string NXEXE = GetNXEXE("Unigraphics V30.0");
+            string NXEXE = GetNXEXE("Unigraphics V32.0");
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             string UGII = NXPath + @"\UGII";
             ///打开UGII目录
@@ -103,7 +103,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
 
         private void ModelTemplates_Click(object sender, RoutedEventArgs e)
         {
-            string NXEXE = GetNXEXE("Unigraphics V30.0");
+            string NXEXE = GetNXEXE("Unigraphics V32.0");
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             string ModelTemplates = NXPath + @"\LOCALIZATION\prc\simpl_chinese\startup";
             
@@ -113,7 +113,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
 
         private void Template_Part_Click(object sender, RoutedEventArgs e)
         {
-            string NXEXE = GetNXEXE("Unigraphics V30.0");
+            string NXEXE = GetNXEXE("Unigraphics V32.0");
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             string Template_Part = NXPath + @"\MACH\resource\template_part\metric";
             
@@ -123,7 +123,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
 
         private void Template_CAM_Click(object sender, RoutedEventArgs e)
         {
-            string NXEXE = GetNXEXE("Unigraphics V30.0");
+            string NXEXE = GetNXEXE("Unigraphics V32.0");
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             string Template_CAM = NXPath + @"\MACH\resource\template_set";
 
@@ -134,7 +134,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
         
         private void Postprocessor_Click(object sender, RoutedEventArgs e)
         {
-            string NXEXE = GetNXEXE("Unigraphics V30.0");
+            string NXEXE = GetNXEXE("Unigraphics V32.0");
             string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
             string Postprocessor = NXPath + @"\MACH\resource\postprocessor";
 

@@ -122,14 +122,14 @@
     <Compile Include="Pages\List\OpenNXFolder\NX1847Folder.xaml.cs">
       <DependentUpon>NX1847Folder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\List\OpenNXFolder\NX10Folder.xaml.cs">
-      <DependentUpon>NX10Folder.xaml</DependentUpon>
+    <Compile Include="Pages\List\OpenNXFolder\NX12Folder.xaml.cs">
+      <DependentUpon>NX12Folder.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\List\OpenNXFolder\NX11Folder.xaml.cs">
       <DependentUpon>NX11Folder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\List\OpenNXFolder\NX12Folder.xaml.cs">
-      <DependentUpon>NX12Folder.xaml</DependentUpon>
+    <Compile Include="Pages\List\OpenNXFolder\NX10Folder.xaml.cs">
+      <DependentUpon>NX10Folder.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -188,6 +188,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\List\OpenNXFolder\NX12Folder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\List\OpenNXFolder\NX11Folder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\NCListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -201,14 +209,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\List\OpenNXFolder\NX10Folder.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\List\OpenNXFolder\NX11Folder.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\List\OpenNXFolder\NX12Folder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

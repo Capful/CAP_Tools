@@ -21,23 +21,22 @@ namespace CAP_Tools.Pages.List.OpenFolder
             {
                 ///未安装
                 ///定义按钮为灰色不可选
-                this.Home.IsEnabled = false;
-                this.UGII.IsEnabled = false;
-                this.ModelTemplates.IsEnabled = false;
-                this.Template_Part.IsEnabled = false;
-                this.Postprocessor.IsEnabled = false;
+                Home.IsEnabled = false;
+                UGII.IsEnabled = false;
+                ModelTemplates.IsEnabled = false;
+                Template_Part.IsEnabled = false;
+                Postprocessor.IsEnabled = false;
                 ///定义提示文字
-                this.Tip.Text = "抱歉，您未安装NX";
+                Tip.Text = "抱歉，您未安装NX";
             }
             else
             {
                 ///判断NX是否安装
-                if (CheckNX11() == true)
+                if (CheckNX() == true)
                 {
                     ///已安装
                     ///指定路径
-                    string NXEXE = GetNXEXE("Unigraphics V29.0");
-                    string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+                    string NXPath = Path.GetDirectoryName(Path.GetDirectoryName(GetNXEXE()));
                     string UGII = NXPath + @"\UGII";
                     string ModelTemplates = NXPath + @"\LOCALIZATION\prc\simpl_chinese\startup";
                     string Template_Part = NXPath + @"\MACH\resource\template_part\metric";
@@ -67,14 +66,21 @@ namespace CAP_Tools.Pages.List.OpenFolder
             }
         }
 
-
-        private bool CheckNX11()
+        private string GetNXEXE()
         {
-            string NXEXE = GetNXEXE("Unigraphics V29.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            ///获取NX安装路径
+            RegistryKey driverKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
+            ///指定对应版本
+            string EXE = (string)driverKey.GetValue("Unigraphics V29.0");
+            return EXE;
+        }
+
+        private bool CheckNX()
+        {
+            string NXPath = Path.GetDirectoryName(Path.GetDirectoryName(GetNXEXE()));
             if (NXPath != null)
             {
-                if (File.Exists(NXEXE))
+                if (File.Exists(GetNXEXE()))
                 {
                     return true;
                 }
@@ -85,8 +91,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             ///获取NX安装路径
-            string NXEXE = GetNXEXE("Unigraphics V29.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            string NXPath = Path.GetDirectoryName(Path.GetDirectoryName(GetNXEXE()));
             ///回退2级目录(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(@"C:\ABC\Temp\DC\")))得到"C:\ABC\Temp"
             ///打开主目录
             System.Diagnostics.Process.Start(NXPath);
@@ -94,8 +99,7 @@ namespace CAP_Tools.Pages.List.OpenFolder
 
         private void UGII_Click(object sender, RoutedEventArgs e)
         {
-            string NXEXE = GetNXEXE("Unigraphics V29.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            string NXPath = Path.GetDirectoryName(Path.GetDirectoryName(GetNXEXE()));
             string UGII = NXPath + @"\UGII";
             ///打开UGII目录
             System.Diagnostics.Process.Start(UGII);
@@ -103,52 +107,39 @@ namespace CAP_Tools.Pages.List.OpenFolder
 
         private void ModelTemplates_Click(object sender, RoutedEventArgs e)
         {
-            string NXEXE = GetNXEXE("Unigraphics V29.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            string NXPath = Path.GetDirectoryName(Path.GetDirectoryName(GetNXEXE()));
             string ModelTemplates = NXPath + @"\LOCALIZATION\prc\simpl_chinese\startup";
-            
+
             ///打开默认模板目录
             System.Diagnostics.Process.Start(ModelTemplates);
         }
 
         private void Template_Part_Click(object sender, RoutedEventArgs e)
         {
-            string NXEXE = GetNXEXE("Unigraphics V29.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            string NXPath = Path.GetDirectoryName(Path.GetDirectoryName(GetNXEXE()));
             string Template_Part = NXPath + @"\MACH\resource\template_part\metric";
-            
+
             ///打开加工模板目录
             System.Diagnostics.Process.Start(Template_Part);
         }
 
         private void Template_CAM_Click(object sender, RoutedEventArgs e)
         {
-            string NXEXE = GetNXEXE("Unigraphics V29.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            string NXPath = Path.GetDirectoryName(Path.GetDirectoryName(GetNXEXE()));
             string Template_CAM = NXPath + @"\MACH\resource\template_set";
 
             ///打开加工模板目录
             System.Diagnostics.Process.Start(Template_CAM);
         }
 
-        
+
         private void Postprocessor_Click(object sender, RoutedEventArgs e)
         {
-            string NXEXE = GetNXEXE("Unigraphics V29.0");
-            string NXPath = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(NXEXE)));
+            string NXPath = Path.GetDirectoryName(Path.GetDirectoryName(GetNXEXE()));
             string Postprocessor = NXPath + @"\MACH\resource\postprocessor";
 
             ///打开机床后处理目录
             System.Diagnostics.Process.Start(Postprocessor);
-        }
-
-        private string GetNXEXE(string Versions)
-        {
-            ///获取NX安装路径
-            RegistryKey driverKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Unigraphics Solutions\Installed Applications");
-            ///指定对应版本
-            string EXE = (String)driverKey.GetValue(Versions);
-            return EXE;
         }
     }
 }

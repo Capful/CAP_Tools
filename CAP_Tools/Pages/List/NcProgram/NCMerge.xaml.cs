@@ -19,6 +19,24 @@ namespace CAP_Tools.Pages.List.NcProgram
         public NCMerge()
         {
             InitializeComponent();
+
+            string inifilePath = AppDomain.CurrentDomain.BaseDirectory + "NC Config\\" + Cap.IniFileName + ".ini";  //设置路径
+            if (File.Exists(inifilePath))
+            {
+                Cap.WCS_Line = ReadIni("WCS_Config", "WCS_Line");
+                Cap.WCS_Start = ReadIni("WCS_Config", "WCS_Start");
+                Cap.WCS_End = ReadIni("WCS_Config", "WCS_End");
+
+                Cap.T_Line = ReadIni("T_Config", "T_Line");
+                Cap.T_Start = ReadIni("T_Config", "T_Start");
+                Cap.T_End = ReadIni("T_Config", "T_End");
+
+            }
+            else
+            {
+                ModernDialog.ShowMessage(Cap.IniFileName + " 配置文件不存在，请检查", "警告", MessageBoxButton.OK);
+            }
+            
         }
 
         private void Xz_Click(object sender, RoutedEventArgs e)
@@ -46,28 +64,6 @@ namespace CAP_Tools.Pages.List.NcProgram
                     string FileName2 = null;
                     string Tools = null;
                     string WCS = null;
-                    ///读取ini文件数据
-                    string inifilePath = AppDomain.CurrentDomain.BaseDirectory + "NC Config\\" + Cap.IniFileName + ".ini";  //设置路径
-                    IniFile iniFile = new IniFile(inifilePath);
-                    if (File.Exists(inifilePath))
-                    {
-                        ///读取ini文件数据
-
-                        Cap.WCS_Line = iniFile.ReadIni("WCS_Config", "WCS_Line");
-                        Cap.WCS_Start = iniFile.ReadIni("WCS_Config", "WCS_Start");
-                        Cap.WCS_End = iniFile.ReadIni("WCS_Config", "WCS_End");
-
-                        Cap.T_Line = iniFile.ReadIni("T_Config", "T_Line");
-                        Cap.T_Start = iniFile.ReadIni("T_Config", "T_Start");
-                        Cap.T_End = iniFile.ReadIni("T_Config", "T_End");
-
-                        //iniFile.writeIni("section1", "key1", "value11"); //写
-                    }
-                    else
-                    {
-                        ModernDialog.ShowMessage(Cap.IniFileName + " 配置文件不存在，请检查", "警告", MessageBoxButton.OK);
-                    }
-
                     DirectoryInfo d = new DirectoryInfo(m_Dir);
                     FileInfo[] Files = d.GetFiles("*.nc");
                     List<string> lstr = new List<string>();
@@ -327,11 +323,8 @@ namespace CAP_Tools.Pages.List.NcProgram
             StreamWriter sw = new StreamWriter(fs2, Encoding.Default);
             sw.WriteLine("%");
             sw.Write(line);                                                           //释放Line
-            sw.WriteLine("M05");
-            sw.WriteLine("M09");
-            sw.WriteLine("G28 Y0.0");
-            sw.WriteLine("M30");
-            sw.WriteLine("%");
+            string Program_End = ReadIni("Program_End", "End_Line");
+            sw.WriteLine(Program_End.Replace("-/-", "\r\n"));
             sw.Close();
             fs2.Close();
             File.Delete(TempFile);                                                    //删除Temp文件
@@ -437,5 +430,25 @@ namespace CAP_Tools.Pages.List.NcProgram
             catch
             { return "错误"; }
         }
+
+        private void FileRoute_Click(object sender, RoutedEventArgs e)
+        {
+            if (Directory.Exists(FileRoute.Text))
+            {
+                ///如果存在
+                Process.Start(FileRoute.Text);
+            }
+        }
+
+        private string ReadIni(string section, string name)
+        {
+            string inifilePath = AppDomain.CurrentDomain.BaseDirectory + "NC Config\\" + Cap.IniFileName + ".ini";  //设置路径
+            IniFile iniFile = new IniFile(inifilePath);
+            string Ini = "";
+            Ini = iniFile.ReadIni(section, name);
+            return Ini;
+
+        }
+        
     }  
 }

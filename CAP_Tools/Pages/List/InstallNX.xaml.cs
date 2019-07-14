@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Windows.Threading;
 using System.Text;
+using System.ServiceProcess;
 
 namespace CAP_Tools.Pages
 {
@@ -33,6 +34,7 @@ namespace CAP_Tools.Pages
             public bool IsDownLoad { get; set; }
             public string SavePath { get; set; }
         }
+
         public InstallNX()
         {
             InitializeComponent();
@@ -44,90 +46,97 @@ namespace CAP_Tools.Pages
             this.label2.Visibility = Visibility.Hidden;
             //测试按钮隐藏
             this.Test.Visibility = Visibility.Hidden;
+            //许可证文件
             _saveDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NX License Servers");
+            //许可证状态
+            Licence_Status.Text = GetSystemServiceStatusString("Siemens PLM License Server");
+            System.Timers.Timer Check = new System.Timers.Timer(1000);//每隔2秒执行一次，没用winfrom自带的
+            Check.Elapsed += Check_Licence;//委托，要执行的方法
+            Check.AutoReset = true;//获取该定时器自动执行
+            Check.Enabled = true;//这个一定要写，要不然定时器不会执行的
         }
 
 
 
         public object DialogResult { get; private set; }
+        private delegate void ThreadDelegate(); //申明一个专用来调用更改线程函数的委托
 
         private void XZ_Click(object sender, RoutedEventArgs e)
         {
-            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-            //string dir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);   //获取桌面路径
-            //dialog.InitialDirectory = dir;      //默认打开桌面
-            dialog.IsFolderPicker = true;
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog
+            {
+                //string dir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);   //获取桌面路径
+                //dialog.InitialDirectory = dir;      //默认打开桌面
+                IsFolderPicker = true
+            };
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 string m_Dir = dialog.FileName;
                 XZRoute.Text = m_Dir;
-                this.NXRoute.Text = m_Dir;
+                NXRoute.Text = m_Dir;
                 DirectoryInfo dir = new DirectoryInfo(m_Dir);
                 foreach (FileInfo file in dir.GetFiles("UGII.cab", SearchOption.AllDirectories))//在文件夹中搜索UGII.cab；
                 {
                     ///截取路径添加到变量
-                    string NXRoute = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(file.FullName)));
-                    this.NXRoute.Text = NXRoute;
+                    NXRoute.Text = Path.GetDirectoryName(Path.GetDirectoryName(file.FullName));
                     break;
                 }
                 DirectoryInfo dir2 = new DirectoryInfo(m_Dir);
                 foreach (FileInfo file in dir.GetFiles("jt_catiav5.exe", SearchOption.AllDirectories))//在文件夹中搜索jt_catiav5.exe；
                 {
                     ///截取路径添加到变量
-                    string PJNXRoute = (System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName((System.IO.Path.GetDirectoryName(file.FullName)))));
-                    PJRoute.Text = PJNXRoute;
-                    PRoute.Text = PJNXRoute;
+                    PJRoute.Text = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(file.FullName))); ;
+                    PRoute.Text = PJRoute.Text;
                     break;
                 }
                 ///判断安装哪个版本
-                string route = NXRoute.Text;
-                string nx10 = route + "\\nx100";
-                string nx11 = route + "\\nx110";
-                string nx12 = route + "\\nx120";
-                string nx121 = route + "\\nx1201";
-                string nx122 = route + "\\nx1202";
-                string nx1847 = route + "\\nx";
+                string nx10 = NXRoute.Text + "\\nx100";
+                string nx11 = NXRoute.Text + "\\nx110";
+                string nx12 = NXRoute.Text + "\\nx120";
+                string nx121 = NXRoute.Text + "\\nx1201";
+                string nx122 = NXRoute.Text + "\\nx1202";
+                string nx1847 = NXRoute.Text + "\\nx";
 
                 if (Directory.Exists(nx10))
                 {
-                    this.a.Text = "- 正在安装 NX10.0";
-                    this.Version.Text = "NX10";
-                    this.NXInstall.IsEnabled = true;
-                    this.NXCrack.IsEnabled = true;
+                    Title.Text = "- 正在安装 NX10.0";
+                    Version.Text = "NX10";
+                    NXInstall.IsEnabled = true;
+                    NXCrack.IsEnabled = true;
                 }
                 else
                 {
                     if (Directory.Exists(nx11))
                     {
-                        this.a.Text = "- 正在安装 NX11.0";
-                        this.Version.Text = "NX11";
-                        this.NXInstall.IsEnabled = true;
+                        Title.Text = "- 正在安装 NX11.0";
+                        Version.Text = "NX11";
+                        NXInstall.IsEnabled = true;
                     }
                     else
                     {
                         if (Directory.Exists(nx12))
                         {
-                            this.a.Text = "- 正在安装 NX12.0";
-                            this.Version.Text = "NX12";
-                            this.NXInstall.IsEnabled = true;
+                            Title.Text = "- 正在安装 NX12.0";
+                            Version.Text = "NX12";
+                            NXInstall.IsEnabled = true;
                         }
                         else
                         {
                             if (Directory.Exists(nx122))
                             {
 
-                                this.a.Text = "- 正在安装 NX12.0.2";
-                                this.Version.Text = "NX12";
-                                this.NXInstall.IsEnabled = true;
+                                Title.Text = "- 正在安装 NX12.0.2";
+                                Version.Text = "NX12";
+                                NXInstall.IsEnabled = true;
                             }
                             else
                             {
                                 if (Directory.Exists(nx121))
                                 {
 
-                                    this.a.Text = "- 正在安装 NX12.0.1";
-                                    this.Version.Text = "NX12";
-                                    this.NXInstall.IsEnabled = true;
+                                    Title.Text = "- 正在安装 NX12.0.1";
+                                    Version.Text = "NX12";
+                                    NXInstall.IsEnabled = true;
                                 }
                                 else
                                 {
@@ -135,22 +144,22 @@ namespace CAP_Tools.Pages
                                     {
                                         if (nx1847.Contains("1872"))
                                         {
-                                            this.a.Text = "- 正在安装 NX(1872系列)";
-                                            this.Version.Text = "NX(1872系列)";
-                                            this.NXInstall.IsEnabled = true;
+                                            Title.Text = "- 正在安装 NX(1872系列)";
+                                            Version.Text = "NX(1872系列)";
+                                            NXInstall.IsEnabled = true;
                                         }
                                         else
                                         {
-                                            this.a.Text = "- 正在安装 NX(1847系列)";
-                                            this.Version.Text = "NX(1847系列)";
-                                            this.NXInstall.IsEnabled = true;
+                                            Title.Text = "- 正在安装 NX(1847系列)";
+                                            Version.Text = "NX(1847系列)";
+                                            NXInstall.IsEnabled = true;
                                         }
                                     }
                                     else
                                     {
-                                        this.NXInstall.IsEnabled = false;
-                                        this.NXCrack.IsEnabled = false;
-                                        this.a.Text = "- 最新支持NX1872系列";
+                                        NXInstall.IsEnabled = false;
+                                        NXCrack.IsEnabled = false;
+                                        Title.Text = "- 最新支持NX1872系列";
                                         ModernDialog.ShowMessage("NX安装主程序不存在，请重新选择文件夹或检测安装程序完整性！\n\r或者选择的安装包为NX10.0以下版本", "警告", MessageBoxButton.OK);
                                     }
                                 }
@@ -159,10 +168,9 @@ namespace CAP_Tools.Pages
                     }
                 }
                 ///判断破解文件是否存在
-                string pjfile = PJRoute.Text;
                 if (NXInstall.IsEnabled == true)
                 {
-                    if (Directory.Exists(pjfile))
+                    if (Directory.Exists(PJRoute.Text))
                     {
                         NXCrack.IsEnabled = true;
                     }
@@ -179,133 +187,92 @@ namespace CAP_Tools.Pages
 
         private void NXInstall_Click(object sender, RoutedEventArgs e)
         {
-            string path1 = NXRoute.Text;
-            DirectoryInfo dir = new DirectoryInfo(path1);
+            DirectoryInfo dir = new DirectoryInfo(NXRoute.Text);
             foreach (FileInfo file in dir.GetFiles("UGII.cab", SearchOption.AllDirectories))//在文件夹中搜索setup.exe；
             {
-                System.Diagnostics.Process.Start((System.IO.Path.GetDirectoryName(file.FullName)) + "\\setup.exe");//运行setup.exe
+                Process.Start(Path.GetDirectoryName(file.FullName) + "\\setup.exe");//运行setup.exe
                 break;
             }
         }
 
         private void NXCrack_Click(object sender, RoutedEventArgs e)
         {
-            string version = Version.Text;
-            string pjfile = PJRoute.Text;
-            MessageBoxResult result = ModernDialog.ShowMessage("确定要破解" + version + " 吗？请确保NX软件都己经关闭。", "提示", MessageBoxButton.YesNo);
+            string Warning = "抱歉，您未安装" + Version.Text + "！请先安装" + Version.Text + "主程序后再进行破解文件";
+
+            MessageBoxResult result = ModernDialog.ShowMessage("确定要破解" + Version.Text + " 吗？请确保NX软件都己经关闭。", "提示", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                if (version == "NX10")
+                if (Version.Text == "NX10")
                 {
                     if (CheckNX10() == true)
                     {
-                        string NXPath = GetNXPath("Unigraphics V28.0");
-                        ///创建bat批处理文件
-                        string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " /c /e /r /y";
-                        File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path, Encoding.Default);
-                        ///采用多线程运行bat复制文件
-                        Prog.Visibility = Visibility.Visible;  //进度条显示
-                        Prog.IsIndeterminate = true;  //切换进度条显示模式
-                        NXCrack.IsEnabled = false; //破解按钮不可选
-                        ThreadDelegate backWorkDel = new ThreadDelegate(CopyFile); //创建一个ThreadDelegate的实例，调用准备在后台运行的函数
-                        backWorkDel.BeginInvoke(null, null);//使用异步的形式开始执行这个委托
+                        ///使用BAT复制破解文件
+                        PJFile("Unigraphics V28.0");
                     }
                     else
                     {
-                        ModernDialog.ShowMessage("抱歉，您未安装" + version+ "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                        ModernDialog.ShowMessage(Warning, "警告", MessageBoxButton.OK);
                     }
                 }
                 else
                 {
-                    if (version == "NX11")
+                    if (Version.Text == "NX11")
                     {
                         if (CheckNX11() == true)
                         {
-                            string NXPath = GetNXPath("Unigraphics V29.0");
-                            ///创建bat批处理文件
-                            string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + " /c /e /r /y";
-                            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path, Encoding.Default);
-                            ///采用多线程运行bat复制文件
-                            Prog.Visibility = Visibility.Visible;  //进度条显示
-                            Prog.IsIndeterminate = true;  //切换进度条显示模式
-                            NXCrack.IsEnabled = false; //破解按钮不可选
-                            ThreadDelegate backWorkDel = new ThreadDelegate(CopyFile); //创建一个ThreadDelegate的实例，调用准备在后台运行的函数
-                            backWorkDel.BeginInvoke(null, null);//使用异步的形式开始执行这个委托
+                            ///使用BAT复制破解文件
+                            PJFile("Unigraphics V29.0");
                         }
                         else
                         {
-                            ModernDialog.ShowMessage("抱歉，您未安装" + version + "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                            ModernDialog.ShowMessage(Warning, "警告", MessageBoxButton.OK);
                         }
                     }
                     else
                     {
-                        if (version == "NX12")
+                        if (Version.Text == "NX12")
                         {
                             if (CheckNX12() == true)
                             {
-                                string NXPath = GetNXPath("Unigraphics V30.0");
-                                ///创建bat批处理文件
-                                string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + " /c /e /r /y";
-                                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path, Encoding.Default);
-                                ///采用多线程运行bat复制文件
-                                Prog.Visibility = Visibility.Visible;  //进度条显示
-                                Prog.IsIndeterminate = true;  //切换进度条显示模式
-                                NXCrack.IsEnabled = false; //破解按钮不可选
-                                ThreadDelegate backWorkDel = new ThreadDelegate(CopyFile); //创建一个ThreadDelegate的实例，调用准备在后台运行的函数
-                                backWorkDel.BeginInvoke(null, null);//使用异步的形式开始执行这个委托
+                                ///使用BAT复制破解文件
+                                PJFile("Unigraphics V30.0");
                             }
                             else
                             {
-                                ModernDialog.ShowMessage("抱歉，您未安装" + version + "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                                ModernDialog.ShowMessage(Warning, "警告", MessageBoxButton.OK);
                             }
                         }
                         else
                         {
-                            if (version == "NX(1847系列)")
+                            if (Version.Text == "NX(1847系列)")
                             {
                                 if (CheckNX1847() == true)
                                 {
-                                    string NXPath = GetNXPath("Unigraphics V31.0");
-                                    ///创建bat批处理文件
-                                    string Path = "xcopy " + "\"" + pjfile + "\"" + " " + "\"" + NXPath + "\"" + " " + " /c /e /r /y";
-                                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path, Encoding.Default);
-                                    ///采用多线程运行bat复制文件
-                                    Prog.Visibility = Visibility.Visible;  //进度条显示
-                                    Prog.IsIndeterminate = true;  //切换进度条显示模式
-                                    NXCrack.IsEnabled = false; //破解按钮不可选
-                                    ThreadDelegate backWorkDel = new ThreadDelegate(CopyFile); //创建一个ThreadDelegate的实例，调用准备在后台运行的函数
-                                    backWorkDel.BeginInvoke(null, null);//使用异步的形式开始执行这个委托
+                                    ///使用BAT复制破解文件
+                                    PJFile("Unigraphics V31.0");
                                 }
                                 else
                                 {
-                                    ModernDialog.ShowMessage("抱歉，您未安装" + version + "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                                    ModernDialog.ShowMessage(Warning, "警告", MessageBoxButton.OK);
                                 }
                             }
                             else
                             {
-                                if (version == "NX(1872系列)")
+                                if (Version.Text == "NX(1872系列)")
                                 {
                                     if (CheckNX1872() == true)
                                     {
-                                        string NXPath = GetNXPath("Unigraphics V32.0");
-                                        ///创建bat批处理文件
-                                        string Path = "xcopy "+ "\"" + pjfile + "\"" + " " + "\"" + NXPath+ "\"" + " " + " /c /e /r /y";
-                                        File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path, Encoding.Default);
-                                        ///采用多线程运行bat复制文件
-                                        Prog.Visibility = Visibility.Visible;  //进度条显示
-                                        Prog.IsIndeterminate = true;  //切换进度条显示模式
-                                        NXCrack.IsEnabled = false; //破解按钮不可选
-                                        ThreadDelegate backWorkDel = new ThreadDelegate(CopyFile); //创建一个ThreadDelegate的实例，调用准备在后台运行的函数
-                                        backWorkDel.BeginInvoke(null, null);//使用异步的形式开始执行这个委托
+                                        ///使用BAT复制破解文件
+                                        PJFile("Unigraphics V32.0");
                                     }
                                     else
                                     {
-                                        ModernDialog.ShowMessage("抱歉，您未安装" + version + "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                                        ModernDialog.ShowMessage(Warning, "警告", MessageBoxButton.OK);
                                     }
                                 }
                                 else
                                 {
-                                    ModernDialog.ShowMessage("抱歉，您未安装" + version + "！请先安装" + version + "主程序后再进行破解文件", "警告", MessageBoxButton.OK);
+                                    ModernDialog.ShowMessage(Warning, "警告", MessageBoxButton.OK);
                                 }
                             }
                         }
@@ -314,6 +281,27 @@ namespace CAP_Tools.Pages
             }
         }
 
+        /// <summary>
+        ///  破解NX文件
+        /// </summary>
+        /// <param name="Versions">NX注册表版本,如"Unigraphics V28.0"</param>
+        private void PJFile(string Version)
+        {
+            ///创建bat批处理文件
+            string Path = "xcopy " + "\"" + PJRoute.Text + "\"" + " " + "\"" + GetNXPath(Version) + "\"" + " /c /e /r /y";
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat", Path, Encoding.Default);
+
+            ///采用多线程运行bat复制文件
+            Prog.Visibility = Visibility.Visible;  //进度条显示
+            Prog.IsIndeterminate = true;  //切换进度条显示模式
+            NXCrack.IsEnabled = false; //破解按钮不可选
+
+            ///创建一个ThreadDelegate的实例，调用准备在后台运行的函数
+            ThreadDelegate backWorkDel = new ThreadDelegate(CopyFile);
+
+            ///使用异步的形式开始执行这个委托
+            backWorkDel.BeginInvoke(null, null);
+        }
 
         private bool CheckNX1872()
         {
@@ -412,8 +400,8 @@ namespace CAP_Tools.Pages
                         try
                         {
                             WebClient client = new WebClient();
-                            client.DownloadFileCompleted += client_DownloadFileCompleted;
-                            client.DownloadProgressChanged += client_DownloadProgressChanged;
+                            client.DownloadFileCompleted += Client_DownloadFileCompleted;
+                            client.DownloadProgressChanged += Client_DownloadProgressChanged;
                             client.DownloadFileAsync(new Uri(file.Url), file.SavePath, file.FileName);
                         }
                         catch
@@ -456,7 +444,7 @@ namespace CAP_Tools.Pages
             return result;
         }
 
-        void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (e.UserState != null)
             {
@@ -480,7 +468,7 @@ namespace CAP_Tools.Pages
             }
         }
 
-        void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             this.Prog.Minimum = 0;
             this.Prog.Maximum = (int)e.TotalBytesToReceive;
@@ -489,14 +477,9 @@ namespace CAP_Tools.Pages
             this.label2.Content = String.Format("{0}M/{1}M", Math.Round((double)e.BytesReceived / 1024 / 1024, 2), Math.Round((double)e.TotalBytesToReceive / 1024 / 1024, 2));
         }
 
-        private void Test_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-        private delegate void ThreadDelegate(); //申明一个专用来调用更改线程函数的委托
-
+        /// <summary>
+        ///  利用BAT复制文件
+        /// </summary>
         private void CopyFile()
         {
             RunBat(AppDomain.CurrentDomain.BaseDirectory + "CopyFile.bat"); //运行Bat文件
@@ -511,6 +494,10 @@ namespace CAP_Tools.Pages
             this.Dispatcher.BeginInvoke(DispatcherPriority.Send, changeTetBoxDel); //使用分发器让这个委托等待执行
         }
 
+        /// <summary>
+        ///  获取NX安装路径
+        /// </summary>
+        /// <param name="Versions">NX注册表版本,如"Unigraphics V28.0"</param>
         private string GetNXPath(string Versions)
         {
             ///获取NX安装路径
@@ -522,6 +509,10 @@ namespace CAP_Tools.Pages
             return Home;
         }
 
+        /// <summary>
+        ///  运行BAT批处理文件
+        /// </summary>
+        /// <param name="filename">BAT文件名</param>
         private void RunBat(string filename)
         {
             Process pro = new Process();
@@ -533,6 +524,94 @@ namespace CAP_Tools.Pages
             pro.Start();
             pro.WaitForExit();
         }
+
+        private void NXRoute_Click(object sender, RoutedEventArgs e)
+        {
+            if (Directory.Exists(NXRoute.Text))
+            {
+                ///如果存在
+                Process.Start(NXRoute.Text);
+            }
+        }
+
+        private void PRoute_Click(object sender, RoutedEventArgs e)
+        {
+            if (Directory.Exists(PRoute.Text))
+            {
+                ///如果存在
+                Process.Start(PRoute.Text);
+            }
+        }
+
+        /// <summary>
+        /// 返回服务状态
+        /// </summary>
+        /// <param name="serviceName">系统服务名称</param>
+        /// <returns>1:服务未运行 2:服务正在启动 3:服务正在停止 4:服务正在运行 5:服务即将继续 6:服务即将暂停 7:服务已暂停 0:未知状态</returns>
+        public static string GetSystemServiceStatusString(string serviceName)
+        {
+            try
+            {
+                using (var control = new ServiceController(serviceName))
+                {
+                    var status = string.Empty;
+                    switch ((int)control.Status)
+                    {
+                        case 1:
+                            status = "服务未运行";
+                            break;
+                        case 2:
+                            status = "服务正在启动...";
+                            break;
+                        case 3:
+                            status = "服务正在停止...";
+                            break;
+                        case 4:
+                            status = "服务正在运行";
+                            break;
+                        case 5:
+                            status = "服务即将继续";
+                            break;
+                        case 6:
+                            status = "服务即将暂停";
+                            break;
+                        case 7:
+                            status = "服务已暂停";
+                            break;
+                        case 0:
+                            status = "未知状态";
+                            break;
+                    }
+                    return status;
+                }
+            }
+            catch
+            {
+                return "未知状态";
+            }
+        }
+
+        /// <summary>
+        ///  多线程检查许可证状态并更新
+        /// </summary>
+        private void Check_Licence(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Licence_Status.Dispatcher.Invoke(
+               new Action(
+                    delegate
+                    {
+                        Licence_Status.Text = GetSystemServiceStatusString("Siemens PLM License Server");
+                    }
+               )
+         );
+        }
+
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
     }
 }
 

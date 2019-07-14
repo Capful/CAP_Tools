@@ -9,23 +9,31 @@
     <StackPanel HorizontalAlignment="Left" Width="460" Height="360" VerticalAlignment="Top">
         <TextBlock Width="300" Margin="0,0,0,8" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left">
             <Run Text="NX快捷安装" />
-            <Run x:Name="a" Text="- 最新支持NX1872系列" />
+            <Run x:Name="Title" Text="- 最新支持NX1872系列" />
         </TextBlock>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,8" Width="320">
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,0,0,5" Width="320">
             <Label Content="选择NX安装包解压路径" Height="20" Width="140" Margin="0,0,0,0" HorizontalAlignment="Left" />
             <Button x:Name="Xz" Content="浏览" Click="XZ_Click" FontSize="10.5" Margin="15,0,0,0" Width="90" />
             <Button x:Name="Test" Content="Test" Click="Test_Click" FontSize="10.5" Margin="15,0,0,0" Width="60"  Visibility="Visible" />
         </StackPanel>
-        <TextBlock Width="460" FontSize="10" HorizontalAlignment="Left" Margin="0,5,0,0">
-            <Run Text="已选择路径:" />
-            <Run x:Name="NXRoute" Text="请点击'浏览'按钮选择安装包文件夹" />
+        <TextBlock Width="460" FontSize="11" HorizontalAlignment="Left" Margin="0,0,0,2">
+            <Run Text="许可证状态:" />
+            <Run x:Name="Licence_Status" Text="未检测到许可证" />
         </TextBlock>
-        <TextBlock Width="455" FontSize="10" HorizontalAlignment="Left" Margin="0,5,0,0">
+        <TextBlock Width="460" FontSize="11" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <Run Text="已选择路径:" />
+            <Hyperlink  Click="NXRoute_Click" >
+            <Run x:Name="NXRoute" Text="请点击'浏览'按钮选择安装包文件夹" />
+            </Hyperlink>
+        </TextBlock>
+        <TextBlock Width="455" FontSize="11" HorizontalAlignment="Left" Margin="0,3,0,0">
             <Run Text="破解文件路径:" />
+            <Hyperlink  Click="PRoute_Click" >
             <Run x:Name="PRoute" Text="请点击'浏览'按钮选择安装包文件夹" />
+            </Hyperlink>
         </TextBlock>
 
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,15,0,0" Width="355">
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,10,0,0" Width="355">
             <Button Name="NXInstall" Content="安装主程序" Width="90" Margin="0,0,25,0"  Click="NXInstall_Click" IsEnabled="False" FontSize="10.5" />
             <Button Name="NXCrack" Content="破解文件" Width="90" Margin="0,0,25,0"  Click="NXCrack_Click" IsEnabled="False" FontSize="10.5" />
             <Button Name="NXLicence" Content="安装许可证" ToolTip="在线下载许可证文件" Width="90" Margin="0,0,20,0"  Click="NXLicence_Click" IsEnabled="True" FontSize="10.5" />

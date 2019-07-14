@@ -9,9 +9,11 @@
     <StackPanel MinWidth="200">
         <TextBlock Text="多程序串联" Style="{StaticResource Heading2}" Width="99" HorizontalAlignment="Left" />
         <Label Content="请把要串联的程序放在一个文件夹" Height="17" Width="274" Margin="0,2,0,3" HorizontalAlignment="Left" FontSize="12" />
-        <TextBlock Width="455" FontSize="10" HorizontalAlignment="Left" Margin="0">
+        <TextBlock Width="455" FontSize="11" HorizontalAlignment="Left" Margin="0">
             <Run Text="文件路径:" />
+            <Hyperlink  Click="FileRoute_Click" >
             <Run x:Name="FileRoute" Text="请点击'浏览'按钮选择需要串联的NC程序文件夹"  />
+            </Hyperlink>
         </TextBlock>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="161" Margin="0,3,0,0" Width="440" >
             <Rectangle Fill="#00000000" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Width="260" HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Margin="0,0,-320,0"/>

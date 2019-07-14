@@ -9,9 +9,11 @@
     <StackPanel MinWidth="200">
         <TextBlock Text="批量坐标替换" Style="{StaticResource Heading2}" Width="99" HorizontalAlignment="Left" />
         <Label Content="选择需要替换坐标的程序文件夹" Height="20" Width="228" Margin="0,2,0,3" HorizontalAlignment="Left" FontSize="12" />
-        <TextBlock Width="460" FontSize="10" HorizontalAlignment="Left" Margin="0">
+        <TextBlock Width="460" FontSize="11" HorizontalAlignment="Left" Margin="0">
             <Run Text="文件路径:" />
+            <Hyperlink  Click="FileRoute_Click" >
             <Run x:Name="FileRoute" Text="请点击'浏览'按钮选择NC程序文件夹"  />
+            </Hyperlink>
         </TextBlock>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="21" Margin="0,5,0,0" Width="220"  >
             <TextBlock Text="将 " Height="20" Margin="0,3,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="10.5" />

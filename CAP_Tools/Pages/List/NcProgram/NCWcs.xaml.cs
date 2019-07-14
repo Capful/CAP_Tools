@@ -53,7 +53,7 @@ namespace CAP_Tools.Pages.List.NcProgram
                 Cap.NCFileRoute = dialog.FileName;
                 string XZPath = Cap.NCFileRoute;
                 ///判断选择的文件夹中是否含有后缀名为NC的文件
-                if (System.IO.Directory.GetFiles(XZPath, "*.nc").Length > 0)
+                if (Directory.GetFiles(XZPath, "*.nc").Length > 0)
                 {
                     FileRoute.Text = XZPath;
                     ///如果存在，将替换按钮显示
@@ -327,5 +327,15 @@ namespace CAP_Tools.Pages.List.NcProgram
             catch
             { return "错误"; }
         }
+
+        private void FileRoute_Click(object sender, RoutedEventArgs e)
+        {
+            if (Directory.Exists(FileRoute.Text))
+            {
+                ///如果存在
+                Process.Start(FileRoute.Text);
+            }
+        }
+
     }
 }

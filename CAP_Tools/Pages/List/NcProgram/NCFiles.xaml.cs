@@ -39,7 +39,6 @@ namespace CAP_Tools.Pages.List.NcProgram
                 XJ3.IsEnabled = true;
                 XJ4.IsEnabled = true;
                 XJ5.IsEnabled = true;
-                OP.IsEnabled = true;
                 FileRoute.Text = System.IO.Path.GetDirectoryName(Cap.NCFileRoute) + "\\程序串联";
             }
             else
@@ -50,7 +49,6 @@ namespace CAP_Tools.Pages.List.NcProgram
                 XJ3.IsEnabled = false;
                 XJ4.IsEnabled = false;
                 XJ5.IsEnabled = false;
-                OP.IsEnabled = false;
                 ModernDialog.ShowMessage("路径不存在                      ", "警告", MessageBoxButton.OK);
             }
         }
@@ -119,19 +117,19 @@ namespace CAP_Tools.Pages.List.NcProgram
             }
         }
 
-        private void OP_Click(object sender, RoutedEventArgs e)
+        private void FileRoute_Click(object sender, RoutedEventArgs e)
         {
             if (Directory.Exists(FileRoute.Text))
             {
                 ///如果存在
-                Process.Start("Explorer.exe", FileRoute.Text);
+                Process.Start(FileRoute.Text);
             }
             else
             {
                 ///如果不存在
-                Process.Start("Explorer.exe", Cap.NCFileRoute);
+                Process.Start(Cap.NCFileRoute);
             }
-            
         }
+
     }
 }

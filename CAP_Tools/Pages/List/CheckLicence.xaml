@@ -18,8 +18,11 @@
         </TextBlock>
         <TextBlock Width="460" FontSize="13" HorizontalAlignment="Left" Margin="5,0,0,5">
             <Run Text="许可证路径:" />
+            <Hyperlink  Click="Licence_Path_Click" >
             <Run x:Name="Licence_Path" Text="未知" />
+            </Hyperlink>
         </TextBlock>
+
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,15,0,0" Width="355">
             <Button Name="Open" Content="启动服务" Width="90" Margin="0,0,25,0"  Click="Open_Click" IsEnabled="True" FontSize="10.5" />
             <Button Name="Close" Content="关闭服务" Width="90" Margin="0,0,25,0"  Click="Close_Click" IsEnabled="True" FontSize="10.5" />

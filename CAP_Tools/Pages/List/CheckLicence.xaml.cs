@@ -27,7 +27,7 @@ namespace CAP_Tools.Pages.List
 
             
             Licence_Path.Text = GetWindowsServiceInstallPath(Licence_Name.Text);
-      
+
 
             System.Timers.Timer Check = new System.Timers.Timer(1000);//每隔2秒执行一次，没用winfrom自带的
             Check.Elapsed += Check_Elapsed;//委托，要执行的方法
@@ -178,6 +178,15 @@ namespace CAP_Tools.Pages.List
                 path = "获取失败";
             }
             return path;
+        }
+
+        private void Licence_Path_Click(object sender, RoutedEventArgs e)
+        {
+            if (Directory.Exists(Licence_Path.Text))
+            {
+                ///如果存在
+                Process.Start(Licence_Path.Text);
+            }
         }
     }
 }

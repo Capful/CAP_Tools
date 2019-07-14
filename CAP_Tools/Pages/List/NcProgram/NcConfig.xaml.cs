@@ -69,6 +69,12 @@ namespace CAP_Tools.Pages.List
                 T_Line.Text = iniFile.ReadIni("T_Config", "T_Line");
                 T_Start.Text = iniFile.ReadIni("T_Config", "T_Start");
                 T_End.Text = iniFile.ReadIni("T_Config", "T_End");
+
+                string T_Program_Start= iniFile.ReadIni("Program_Start", "Start_Line");
+                Program_Start.Text = T_Program_Start.Replace("-/-","\r\n");
+
+                string T_Program_End = iniFile.ReadIni("Program_End", "End_Line");
+                Program_End.Text = T_Program_End.Replace("-/-", "\r\n");
             }
             else
             {
@@ -83,7 +89,6 @@ namespace CAP_Tools.Pages.List
             string inifilePath = AppDomain.CurrentDomain.BaseDirectory + "NC Config\\" + Cap.IniFileName + ".ini";  //设置路径
             IniFile iniFile = new IniFile(inifilePath);
             ///读取ini文件数据
-
             iniFile.WriteIni("WCS_Config", "WCS_Line", WCS_Line.Text);
             iniFile.WriteIni("WCS_Config", "WCS_Start", WCS_Start.Text);
             iniFile.WriteIni("WCS_Config", "WCS_End", WCS_End.Text);
@@ -91,6 +96,10 @@ namespace CAP_Tools.Pages.List
             iniFile.WriteIni("T_Config", "T_Line", T_Line.Text);
             iniFile.WriteIni("T_Config", "T_Start", T_Start.Text);
             iniFile.WriteIni("T_Config", "T_End", T_End.Text);
+
+            iniFile.WriteIni("Program_Start", "Start_Line", Program_Start.Text.Replace("\r\n", "-/-"));
+
+            iniFile.WriteIni("Program_End", "End_Line", Program_End.Text.Replace("\r\n", "-/-"));
 
             ModernDialog.ShowMessage(Cap.IniFileName + " 配置文件保存成功", "提示", MessageBoxButton.OK);
         }

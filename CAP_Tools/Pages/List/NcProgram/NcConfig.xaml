@@ -8,21 +8,21 @@
              d:DesignHeight="360" d:DesignWidth="460">
     <StackPanel MinWidth="200">
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="25" Margin="0,10,0,15" Width="470"  >
-        <TextBlock Text="配置文件" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="14" />
-        <ComboBox x:Name="Config" Width="115" FontSize="12" Margin="5,0,0,0" SelectionChanged="NcConfig_SelectionChanged">
-        </ComboBox>
-        <TextBox x:Name="NewConfigName" Text="自定义2" Margin="8,0,0,0"  FontSize="10.5" Width="126" />
-        <Button Content="新建配置" Click="NewConfig_Click" Margin="8,0,0,0" FontSize="10.5" />
-        <Button Content="保存" Click="Save_Click" Margin="8,0,0,0" FontSize="10.5" />
+            <TextBlock Text="配置文件" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="14" />
+            <ComboBox x:Name="Config" Width="115" FontSize="12" Margin="5,0,0,0" SelectionChanged="NcConfig_SelectionChanged">
+            </ComboBox>
+            <TextBox x:Name="NewConfigName" Text="自定义2" Margin="8,0,0,0"  FontSize="10.5" Width="126" />
+            <Button Content="新建配置" Click="NewConfig_Click" Margin="8,0,0,0" FontSize="10.5" />
+            <Button Content="保存" Click="Save_Click" Margin="8,0,0,0" FontSize="10.5" />
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="22" Margin="0,5,0,5" Width="470"  >
             <TextBlock Text="坐标系信息  " Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="12" />
             <TextBlock Text="行数：" Height="20" Margin="0,2,2,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="12" />
-            <TextBox x:Name="WCS_Line" Text="2" Margin="0,0,5,0" Width="29"  FontSize="10.5" />
+            <TextBox x:Name="WCS_Line" Text="" Margin="0,0,5,0" Width="29"  FontSize="10.5" />
             <TextBlock Text="坐标字符前为" Height="20" Margin="0,2,2,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="12" />
-            <TextBox x:Name="WCS_Start" Text="G49" Margin="2,0,5,0" Width="38"  FontSize="10.5" />
+            <TextBox x:Name="WCS_Start" Text="" Margin="2,0,5,0" Width="38"  FontSize="10.5" />
             <TextBlock Text="坐标字符后为" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="12"  />
-            <TextBox x:Name="WCS_End" Text="G80" Margin="2,0,5,0" Width="33"  FontSize="10.5" />
+            <TextBox x:Name="WCS_End" Text="" Margin="2,0,5,0" Width="33"  FontSize="10.5" />
             <TextBlock Text="最后得：" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"   />
             <TextBlock x:Name="WCS_R" Text="G54" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"   />
         </StackPanel>
@@ -30,11 +30,11 @@
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="22" Margin="0,5,0,5" Width="470"  >
             <TextBlock Text="刀具信息  " Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="12" />
             <TextBlock Text="行数：" Height="20" Margin="0,2,2,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="12" />
-            <TextBox x:Name="T_Line" Text="7" Margin="0,0,5,0" Width="29"  FontSize="10.5" />
+            <TextBox x:Name="T_Line" Text="" Margin="0,0,5,0" Width="29"  FontSize="10.5" />
             <TextBlock Text="刀具字符前为" Height="20" Margin="0,2,2,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="12" />
-            <TextBox x:Name="T_Start" Text="(" Margin="2,0,5,0" Width="38"  FontSize="10.5" />
+            <TextBox x:Name="T_Start" Text="" Margin="2,0,5,0" Width="38"  FontSize="10.5" />
             <TextBlock Text="刀具字符后为" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"  FontSize="12"  />
-            <TextBox x:Name="T_End" Text="-" Margin="2,0,5,0" Width="33"  FontSize="10.5" />
+            <TextBox x:Name="T_End" Text="" Margin="2,0,5,0" Width="33"  FontSize="10.5" />
             <TextBlock Text="最后得：" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"   />
             <TextBlock x:Name="T_R" Text="D6R0.5" Height="20" Margin="0,2,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"   />
         </StackPanel>
@@ -46,5 +46,7 @@
             <Run x:Name="PJRoute" Text="破解文件路径" />
             <Run x:Name="Version" Text="NX版本" />
         </TextBlock>
+        <TextBox x:Name="Program_Start" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"  AcceptsReturn="True" FontSize="10.5" Height="79" HorizontalAlignment="Left" Width="235"/>
+        <TextBox x:Name="Program_End" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"  AcceptsReturn="True"  FontSize="10.5" Height="85" HorizontalAlignment="Left" Width="235"/>
     </StackPanel>
 </UserControl>

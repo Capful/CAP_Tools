@@ -126,8 +126,11 @@ namespace CAP_Tools.Pages.List.NcProgram
             }
             else
             {
-                ///如果不存在
-                Process.Start(Cap.NCFileRoute);
+                if (Directory.Exists(Cap.NCFileRoute))
+                {
+                    ///如果存在
+                    Process.Start(Cap.NCFileRoute);
+                }
             }
         }
 

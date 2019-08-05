@@ -312,6 +312,40 @@ namespace CAP_Tools.Pages.List.NcProgram
             lines.Remove("%");
             lines.Remove("%");
             lines.Remove("%");
+            ///删除%
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
+            lines.Remove("T01 M06");
             File.WriteAllLines(TempFile, lines.ToArray(), Encoding.Default);          //将删除完指定字符的文件写入Temp文件
             ///创建串联程序
             FileStream fs = new FileStream(TempFile, FileMode.Open);

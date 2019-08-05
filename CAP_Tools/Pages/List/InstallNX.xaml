@@ -19,6 +19,7 @@
         <TextBlock Width="460" FontSize="11" HorizontalAlignment="Left" Margin="0,0,0,2">
             <Run Text="许可证状态:" />
             <Run x:Name="Licence_Status" Text="未检测到许可证" />
+            <mui:BBCodeBlock BBCode="[url=/Pages/CheckLicence.xaml|_top]前往检查许可证界面[/url]." />
         </TextBlock>
         <TextBlock Width="460" FontSize="11" HorizontalAlignment="Left" Margin="0,0,0,0">
             <Run Text="已选择路径:" />

@@ -36,6 +36,16 @@
                 <ComboBoxItem>G54P08</ComboBoxItem>
                 <ComboBoxItem>G54P09</ComboBoxItem>
                 <ComboBoxItem>G54P10</ComboBoxItem>
+                <ComboBoxItem>G54P11</ComboBoxItem>
+                <ComboBoxItem>G54P12</ComboBoxItem>
+                <ComboBoxItem>G54P13</ComboBoxItem>
+                <ComboBoxItem>G54P14</ComboBoxItem>
+                <ComboBoxItem>G54P15</ComboBoxItem>
+                <ComboBoxItem>G54P16</ComboBoxItem>
+                <ComboBoxItem>G54P17</ComboBoxItem>
+                <ComboBoxItem>G54P18</ComboBoxItem>
+                <ComboBoxItem>G54P19</ComboBoxItem>
+                <ComboBoxItem>G54P20</ComboBoxItem>
             </ComboBox>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="161" Margin="0,3,0,0" Width="440" >

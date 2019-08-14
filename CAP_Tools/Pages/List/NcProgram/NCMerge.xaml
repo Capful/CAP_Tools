@@ -16,12 +16,12 @@
             </Hyperlink>
         </TextBlock>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Height="161" Margin="0,3,0,0" Width="440" >
-            <Rectangle Fill="#00000000" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Width="260" HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Margin="0,0,-320,0"/>
-            <ListView x:Name="listView" Height="160" VerticalAlignment="Center" HorizontalAlignment="Left" Width="260">
+            <Rectangle Fill="#00000000" Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Width="350" HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Margin="0,0,-320,0"/>
+            <ListView x:Name="listView" Height="160" VerticalAlignment="Center" HorizontalAlignment="Left" Width="350" Margin="-30,0,0,1">
                 <ListView.View>
                     <!--设置列标签并将列成员与一个变量名称相绑定，以便后台链接修改-->
                     <GridView>
-                        <GridViewColumn Header="程序名称" Width="100" DisplayMemberBinding="{Binding Path=A}"/>
+                        <GridViewColumn Header="程序名称" Width="200" DisplayMemberBinding="{Binding Path=A}"/>
                         <GridViewColumn Header="坐标" Width="70" DisplayMemberBinding="{Binding Path=B}"/>
                         <GridViewColumn Header="刀具" Width="70" DisplayMemberBinding="{Binding Path=C}"/>
                     </GridView>

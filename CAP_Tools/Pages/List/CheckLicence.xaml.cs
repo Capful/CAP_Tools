@@ -54,7 +54,7 @@ namespace CAP_Tools.Pages.List
             }
 
             ///定时检查服务
-            //CheckLicence1();
+            CheckLicence1();
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)
@@ -303,45 +303,43 @@ namespace CAP_Tools.Pages.List
                         }
                    )
              );
+                ///打开按钮
+                Open.Dispatcher.Invoke(
+                       new Action(
+                            delegate
+                            {
+                                Open.IsEnabled = false;
+                            }
+                       )
+                 );
+                //停止按钮
+                Stop.Dispatcher.Invoke(
+                       new Action(
+                            delegate
+                            {
+                                Stop.IsEnabled = false;
+                            }
+                       )
+                 );
+                //重启按钮
+                ReStart.Dispatcher.Invoke(
+                       new Action(
+                            delegate
+                            {
+                                ReStart.IsEnabled = false;
+                            }
+                       )
+                 );
+                //卸载按钮
+                UnService.Dispatcher.Invoke(
+                       new Action(
+                            delegate
+                            {
+                                UnService.IsEnabled = false;
+                            }
+                       )
+                 );
             }
-
-            ///打开按钮
-            Open.Dispatcher.Invoke(
-                   new Action(
-                        delegate
-                        {
-                            Open.IsEnabled = false;
-                        }
-                   )
-             );
-            //停止按钮
-            Stop.Dispatcher.Invoke(
-                   new Action(
-                        delegate
-                        {
-                            Stop.IsEnabled = false;
-                        }
-                   )
-             );
-            //重启按钮
-            ReStart.Dispatcher.Invoke(
-                   new Action(
-                        delegate
-                        {
-                            ReStart.IsEnabled = false;
-                        }
-                   )
-             );
-            //卸载按钮
-            UnService.Dispatcher.Invoke(
-                   new Action(
-                        delegate
-                        {
-                            UnService.IsEnabled = false;
-                        }
-                   )
-             );
-
         }
         #endregion
 

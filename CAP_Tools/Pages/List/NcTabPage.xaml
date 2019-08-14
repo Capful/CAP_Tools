@@ -12,7 +12,7 @@
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
                 <mui:Link DisplayName="更改坐标" Source="/Pages/List/NcProgram/NCWcs.xaml" />
-                <mui:Link DisplayName="文件夹" Source="/Pages/List/NcProgram/NCFiles.xaml" />
+                <mui:Link DisplayName="程序归类" Source="/Pages/List/NcProgram/NCFiles.xaml" />
                 <mui:Link DisplayName="串联程序" Source="/Pages/List/NcProgram/NCMerge.xaml" />
                 <mui:Link DisplayName="配置文件" Source="/Pages/List/NcProgram/NcConfig.xaml" /> 
             </mui:ModernTab.Links>

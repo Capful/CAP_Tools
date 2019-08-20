@@ -21,9 +21,9 @@
                 <ListView.View>
                     <!--设置列标签并将列成员与一个变量名称相绑定，以便后台链接修改-->
                     <GridView>
-                        <GridViewColumn Header="程序名称" Width="200" DisplayMemberBinding="{Binding Path=A}"/>
-                        <GridViewColumn Header="坐标" Width="70" DisplayMemberBinding="{Binding Path=B}"/>
-                        <GridViewColumn Header="刀具" Width="70" DisplayMemberBinding="{Binding Path=C}"/>
+                        <GridViewColumn Header="程序名称" Width="175" DisplayMemberBinding="{Binding Path=A}"/>
+                        <GridViewColumn Header="坐标系     " Width="70" DisplayMemberBinding="{Binding Path=B}"/>
+                        <GridViewColumn Header="刀具       " Width="70" DisplayMemberBinding="{Binding Path=C}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

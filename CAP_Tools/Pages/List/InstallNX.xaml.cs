@@ -45,7 +45,7 @@ namespace CAP_Tools.Pages
             this.label1.Visibility = Visibility.Hidden;
             this.label2.Visibility = Visibility.Hidden;
             //测试按钮隐藏
-            this.Test.Visibility = Visibility.Hidden;
+            //this.Test.Visibility = Visibility.Hidden;
             //许可证文件
             _saveDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NX License Servers");
             //许可证状态
@@ -95,7 +95,9 @@ namespace CAP_Tools.Pages
                 string nx12 = NXRoute.Text + "\\nx120";
                 string nx121 = NXRoute.Text + "\\nx1201";
                 string nx122 = NXRoute.Text + "\\nx1202";
-                string nx1847 = NXRoute.Text + "\\nx";
+                string nx = NXRoute.Text + "\\nx";
+                string nx1847 = "NX1847、NX1851、NX1855、NX1859、NX1863、NX1867";
+                string nx1872 = "NX1872、NX1876、NX1880";
 
                 if (Directory.Exists(nx10))
                 {
@@ -124,7 +126,6 @@ namespace CAP_Tools.Pages
                         {
                             if (Directory.Exists(nx122))
                             {
-
                                 Title.Text = "- 正在安装 NX12.0.2";
                                 Version.Text = "NX12";
                                 NXInstall.IsEnabled = true;
@@ -133,26 +134,30 @@ namespace CAP_Tools.Pages
                             {
                                 if (Directory.Exists(nx121))
                                 {
-
                                     Title.Text = "- 正在安装 NX12.0.1";
                                     Version.Text = "NX12";
                                     NXInstall.IsEnabled = true;
                                 }
                                 else
                                 {
-                                    if (Directory.Exists(nx1847))
+                                    if (Directory.Exists(nx))
                                     {
-                                        if (nx1847.Contains("1872"))
+                                        ///获取NX版本
+                                        GetVersiong();
+                                        if (nx1847.Contains(Version.Text))
                                         {
-                                            Title.Text = "- 正在安装 NX(1872系列)";
-                                            Version.Text = "NX(1872系列)";
+                                            Title.Text = "- 正在安装"+ Version.Text;
+                                            Version.Text = "NX(1847系列)";
                                             NXInstall.IsEnabled = true;
                                         }
                                         else
                                         {
-                                            Title.Text = "- 正在安装 NX(1847系列)";
-                                            Version.Text = "NX(1847系列)";
-                                            NXInstall.IsEnabled = true;
+                                            if (nx1872.Contains(Version.Text))
+                                            {
+                                                Title.Text = "- 正在安装" + Version.Text;
+                                                Version.Text = "NX(1872系列)";
+                                                NXInstall.IsEnabled = true;
+                                            }
                                         }
                                     }
                                     else
@@ -606,8 +611,51 @@ namespace CAP_Tools.Pages
          );
         }
 
+        /// <summary>
+        ///  获取版本
+        /// </summary>
+        private void GetVersiong()
+        {
+            string nx = NXRoute.Text + "\\README.TXT";
+            string A = "";
+            StreamReader Wcs_objReader = new StreamReader(nx);
+            int j = 0;
+            while ((A = Wcs_objReader.ReadLine()) != null)
+            {
+                j++;
+                ///第二行
+                if (j == 2)
+                {
+                    if (A.Contains("VERSION"))
+                    {
+                        ///指定字符后的数值
+                        A = A.Substring(A.LastIndexOf('N') + 1);
+                        Version.Text = "NX" + A.Trim(); //去除首尾空格
+                    }
+                    else
+                    {
+                        if (A.Contains("Version"))
+                        {
+                            ///指定字符后的数值
+                            A = A.Substring(A.LastIndexOf('n') + 1);
+                            Version.Text ="NX" + A.Trim(); //去除首尾空格
+                        }
+                        else
+                        {
+                            ModernDialog.ShowMessage("未识别版本号！", "警告", MessageBoxButton.OK);
+                        }
+                    }
+                }
+            }
+            Wcs_objReader.Close();//关闭流
+            //ModernDialog.ShowMessage(Version.Text, "提示", MessageBoxButton.OK);
+        }
+
+
         private void Test_Click(object sender, RoutedEventArgs e)
         {
+
+ 
 
         }
 
